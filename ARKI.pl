@@ -8,9 +8,10 @@ use File::Find::Rule;
 # ARKI - scrape archive.org pdfs ##########
 ###########################################
 my ($target, $dump) = @ARGV;
+my $target = '/MINION/ARKI/ARKI_Q';
+my $dump = '/MINION/ARKI/ARKI_POOL';
 die "not a target dir" unless -d $target;
 die "not a dump dir" unless -d $dump;
-my $file = 'tmp';
 my $base = "http://archive.org/download";
 # DAEMONIZE ##############################
 $daemon = Proc::Daemon->new(
@@ -23,7 +24,7 @@ $daemon = Proc::Daemon->new(
 # USER AGENT #############################
 my $ua = LWP::UserAgent->new();
 my $cookies = HTTP::Cookies->new(
-	file=>"$dump/cookies.txt",
+	file=>"/MINION/ARKI/ARKI_cookies",
 	autosave => 1,
 );
 $ua->cookie_jar($cookies);
@@ -36,7 +37,7 @@ while (defined(my $file = $rule->match)){
 	my @list = readline $ifh; chomp @list;
 	foreach my $i (@list) {
 # PAUSE ##################################
-		if (-e "/tmp/PGET_PAUSE")
+		if (-e "/MINION/ARKI/ARKI_PAUSE")
 			{ pause; }
 		print $lfh "$i  started\n"; # LOG #########
 		my $url = "$base/$i/$i.pdf";7
