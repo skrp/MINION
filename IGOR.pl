@@ -16,13 +16,17 @@ $daemon = Proc::Daemon->new(
 # SUB ####################################
 sub countoff {
   my $target = '/MINION/';
+  my @workn;
   my @minions = File::Find::Rule->new
     ->directory($target)
     ->in($root)
     ->maxdepth(1)
   foreach $minion (@minions) {
     if (-e $target$minion/$minion'_DOWN') 
-        { next; } 
+        { next; }
+    else 
+        { push @workn $minion; }
+  return @workn;
 }
 sub pause {
   my ($minion) = @_;
