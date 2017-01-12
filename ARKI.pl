@@ -4,7 +4,7 @@ use Proc::Daemon;
 use LWP::UserAgent;
 use HTTP::Cookies;
 use File::Find::Rule;
-# use MKRX::XS;
+use MKRX::XS;
 ###########################################
 # ARKI - scrape archive.org pdfs ##########
 ###########################################
