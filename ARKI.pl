@@ -43,4 +43,4 @@ while (defined(my $file = $rule->match)){
 } 
 # SUB ###################################
 sub pause 
-	{ sleep(500); }	
+	{ sleep(8000); }	
