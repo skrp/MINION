@@ -1,5 +1,6 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
+use Proc::Daemon;
 use LWP::UserAgent;
 use HTTP::Cookies;
 use File::Find::Rule;
@@ -11,6 +12,14 @@ die "not a target dir" unless -d $target;
 die "not a dump dir" unless -d $dump;
 my $file = 'tmp';
 my $base = "http://archive.org/download";
+# DAEMONIZE ##############################
+$daemon = Proc::Daemon->new(
+    work_dir     => '/MINION/ARKI',
+    child_STDOUT => '/MINION/ARKI/ARKI_log',
+    child_STDERR => '+>>/MINION/ARKI/ARKI_debug',
+    pid_file     => '/MINION/ARKI/pid',
+    exec_command => 'perl /MINION/ARKI/ARKI.pl',
+);
 # USER AGENT #############################
 my $ua = LWP::UserAgent->new();
 my $cookies = HTTP::Cookies->new(
