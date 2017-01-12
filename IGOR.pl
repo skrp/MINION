@@ -1,6 +1,7 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
 use Proc::Daemon;
+use File::Find::Rule;
 ##########################################
 # IGOR - minion slavemaster
 my @cmds = qw(pause stat errchk dive countoff);
@@ -13,6 +14,16 @@ $daemon = Proc::Daemon->new(
     exec_command => 'perl IGOR.pl',
 );
 # SUB ####################################
+sub countoff {
+  my $target = '/MINION/';
+  my @minions = File::Find::Rule->new
+    ->directory($target)
+    ->in($root)
+    ->maxdepth(1)
+  foreach $minion (@minions) {
+    if (-e $target$minion/$minion'_DOWN') 
+        { next; } 
+}
 sub pause {
   my ($minion) = @_;
   my ($duration) = @_; # HOURS
@@ -23,4 +34,13 @@ sub pause {
   print $mfh "$duration";
   close $mfh;
   print "$minion_path successful\n";
+}
+sub dive {
+  my ($m_target) = @_;
+  my $target = "/MINION/$m_target/$m_target'_pool'";
+  my $count = 0;
+  my $rule = File::Find::Rule->file()->start($target);
+  while (defined(my $file = $rule->match)) 
+    { $count++; }
+  return $count;
 }
