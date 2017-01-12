@@ -39,7 +39,7 @@ while (defined(my $file = $rule->match)){
 # PAUSE ##################################
 		if (-e "/MINION/ARKI/ARKI_PAUSE")
 			{ pause; }
-		print $lfh "$i  started\n"; # LOG #########
+		print "$i  started\n";
 		my $url = "$base/$i/$i.pdf";7
 		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
     my $url = "$base/$i/$i.pdf";7
