@@ -6,6 +6,15 @@ use HTTP::Cookies;
 #################################
 # RUSKY - scrape golibgen.io pdfs
 
+# DAEMONIZE ##############################
+$daemon = Proc::Daemon->new(
+    work_dir     => '/MINION/RUSKY',
+    child_STDOUT => 'RUSKY_log',
+    child_STDERR => '+>>RUSKY_debug',
+    pid_file     => 'RUSKY_pid',
+    exec_command => 'perl RUSKY.pl',
+);
+# USER AGENT ####################
 my $ua = LWP::UserAgent->new();
 my $cookies = HTTP::Cookies->new(
 	file => "cookies.txt",
