@@ -19,6 +19,7 @@ sub pause {
   
   my $minion_path = "/MINION/$minion/$minion'_PAUSE'";
   open(my $mfh, '>', $minion_path) or print "cant open $minion_path\n";
+  $duration = $duartion*3600;
   print $mfh "$duration";
   close $mfh;
   print "$minion_path successful\n";
