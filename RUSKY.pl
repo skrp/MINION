@@ -51,5 +51,5 @@ while ($ttl > 0) {
 	print $finfh "$ttl\n";
 	print "stored $url\n";
 	close $unfh; unlink $un;
-	open(my $unfh, '>', $up) or die "can't reopen $up";
+	open(my $unfh, '>', $up) or die "can't reopen $up"; close $unfh;
 }
