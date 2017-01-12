@@ -1,9 +1,10 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
-# scrape http://golibgen.io
 use LWP::UserAgent;
 use WWW::Mechanize;
 use HTTP::Cookies;
+#################################
+# RUSKY - scrape golibgen.io pdfs
 
 my $ua = LWP::UserAgent->new();
 my $cookies = HTTP::Cookies->new(
