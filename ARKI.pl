@@ -4,14 +4,15 @@ use Proc::Daemon;
 use LWP::UserAgent;
 use HTTP::Cookies;
 use File::Find::Rule;
+# use MKRX::XS;
 ###########################################
 # ARKI - scrape archive.org pdfs ##########
 ###########################################
 my ($target, $dump) = @ARGV;
-my $target = '/MINION/ARKI/ARKI_Q';
-my $dump = '/MINION/ARKI/ARKI_POOL';
+my $target = '/MINION/ARKI/ARKI_Q'; my $dump = 'MINION/ARKI/ARKI_dump';
+my $pool = '/MINION/ARKI/ARKI_pool'; my $g '/MINION/ARKI/ARKI_g';
 die "not a target dir" unless -d $target;
-die "not a dump dir" unless -d $dump;
+die "not a pool dir" unless -d $pool; die "not a g dir" unless -d $g;
 my $base = "http://archive.org/download";
 # DAEMONIZE ##############################
 $daemon = Proc::Daemon->new(
@@ -40,12 +41,11 @@ while (defined(my $file = $rule->match)){
 		if (-e "ARKI_PAUSE")
 			{ pause; }
 		print "$i  started\n";
-		my $url = "$base/$i/$i.pdf";7
+		my $url = "$base/$i/$i.pdf";
 		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
-    my $url = "$base/$i/$i.pdf";7
-		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
-    my $murl = "$base"/"$i"_meta.xml;
-    my $mresponse = $ua->get($url, ':content_file'=>"$dump"/"$i"_meta.xml);
+   		my $murl = "$base/$i'_meta.xml'";
+    		my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i'_meta.xml'");
+		XS($dump $pool $g) or die "cant XS $i";
 		print "$i  ended\n";
 	}
 	close $ifh;
