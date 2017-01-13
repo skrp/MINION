@@ -23,7 +23,8 @@ done
 trans () {
 while read -r line
 do
-  mv "$path_to_minion"/"$line" dump/"$line";
+  minion=${line%/}
+  mv "$path_to_minion"/"$minion"/dump/* dump/"$minion"/;
 done < VULT_init
 rm VULT_init;
 } 
