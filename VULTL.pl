@@ -3,6 +3,7 @@
 #######################################
 # VULTL - vulture to archive data bones
 # -------------------------skrp of MKRX
+path_to_minion="$1"
 # FUNCTIONS ###########################
 list () {
 index=0
@@ -28,7 +29,6 @@ do
 done < VULT_init
 rm VULT_init;
 } 
-path_to_minion="$1"
 # ACTION  #######################
 while true
 do
