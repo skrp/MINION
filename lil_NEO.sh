@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash
 #############################
 # NEO - scrape searchcode.com
-# -------------- skrp of MKRX
+#   (<>..<>) --- skrp of MKRX
 # BEGIN #####################
 init=$( cat init )
 base="http://searchcode.com/codesearch/raw/";
