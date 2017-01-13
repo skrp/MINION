@@ -6,14 +6,14 @@
 scrape () {
 sub="$1"
 wget -e robots=off --no-check-certificate --mirror \
---convert-links --continue $sub \
+--directory-prefix=/OPN/MINION/BOTO/dump/ --convert-links --continue $sub \
 || printf "%s failed\n" "$sub" >> BOTO_log;
 }
 init () {
 index=0
 while read -r line
 do
-	TASKLIST[$index] = $line;
+	TASKLIST[$index]=$line;
 	((index++));
 done < BOTO_target 
 rm BOTO_target;
@@ -22,7 +22,7 @@ task () {
 for i in "${TASKLIST[@]}"
 do
 	sub="$i"
-	scrape($sub);
+	scrape "$sub";
 done
 }
 # ACTION  #######################
@@ -36,3 +36,4 @@ do
 		sleep 1000;
 	fi
 done
+
