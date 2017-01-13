@@ -40,6 +40,6 @@ do
 		d=$( date +%d%m_%H%M%S )
 		XS "dump/" "." || printf "%s failed\n" "$d" >> VULTL_log;
 	else
-		sleep 1000;
+		sleep 3600;
 	fi
 done
