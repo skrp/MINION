@@ -5,9 +5,10 @@ use LWP::UserAgent;
 use WWW::Mechanize;
 use HTTP::Cookies;
 use MKRX::XS;
-######################################
+#################################
 # RUSKY - scrape golibgen.io pdfs
-# DAEMONIZE ##########################
+#     (__!__)     ---skrp of MKRX
+# DAEMONIZE #####################
 $daemon = Proc::Daemon->new(
     work_dir     => '/MINION/RUSKY',
     child_STDOUT => 'RUSKY_log',
@@ -15,16 +16,16 @@ $daemon = Proc::Daemon->new(
     pid_file     => 'RUSKY_pid',
     exec_command => 'perl RUSKY.pl',
 );
-# SETUP ##############################
+# SETUP #########################
 my $base = "http://golibgen.io/view.php?id=";
 my $dump = "RUSKY_dump";
 my $pool = "RUSKY_pool";
 my $g = "RUSKY_g";
 my $inital = "RUSKY_init";
-# INITIALIZE #########################
+# INITIALIZE ####################
 open(my $ifh, '<', $inital) or die "cant open $inital";
 my $ttl = readline $ifh; chomp $ttl; close $ifh;
-# USER AGENT #########################
+# USER AGENT ####################
 my $ua = LWP::UserAgent->new();
 my $cookies = HTTP::Cookies->new(
 	file => "cookies.txt",
@@ -32,7 +33,7 @@ my $cookies = HTTP::Cookies->new(
 );
 $ua->cookie_jar($cookies);
 $ua->agent("Windows IE 7");
-# MECH ###############################
+# MECH ##########################
 while ($ttl > 0) {
 	my $iter = $ttl;
 	my $mech = WWW::Mechanize->new($ua);
