@@ -1,8 +1,20 @@
-##########################
-# MINION - scraper clones
+###########################
+# MINION - summoning spells
+critters daemonized to short lives as burden-bearers
 
-Workhorses daemonized to specific tasks
+# CAVES ##################
+dump - gutters of the wayside
+pool - processed den
+g - hunting grounds
 
-Batch Dumps - locations dameon scans to find files full of iterations
+# SIGNS ###################
+target - prey
+log - call
+init - urine-marking
 
-Pause - 133min '/tmp/"$MINION"_PAUSE'
+# SPELLS #################
+pause - sleep an hour
+hibernate - end iterations
+
+# VULTURES ###############
+carion birds to process data bones
