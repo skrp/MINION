@@ -2,10 +2,11 @@
 use strict; use warnings;
 use Proc::Daemon;
 use File::Find::Rule;
-##########################################
-# IGOR - minion slavemaster
+##########################
+# IGOR - minion taskmaster
+#   ($.$)  ---skrp of MKRX
 my @cmds = qw(pause stat errchk dive countoff);
-# DAEMONIZE ##############################
+# DAEMONIZE ##############
 $daemon = Proc::Daemon->new(
     work_dir     => '/MINION/IGOR',
     child_STDOUT => 'IGOR_log',
@@ -13,7 +14,7 @@ $daemon = Proc::Daemon->new(
     pid_file     => 'IGOR_pid',
     exec_command => 'perl IGOR.pl',
 );
-# SUB ####################################
+# SUB ####################
 sub countoff {
   my $target = '/MINION/';
   my @workn;
