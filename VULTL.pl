@@ -34,8 +34,8 @@ do
 	then
 		list;
 		task "$path_to_minion";
-		trans;
 		sleep 43200;
+		trans;
 		d=$( date +%d%m_%H%M%S )
 		XS "dump/" "." || printf "%s failed\n" "$d" >> VULTL_log;
 	else
