@@ -30,7 +30,7 @@ path_to_minion="$1"
 # ACTION  #######################
 while true
 do
-	if [ -f BOTO_target ] 
+	if [ -f VULTL_target ] 
 	then
 		list;
 		task "$path_to_minion";
