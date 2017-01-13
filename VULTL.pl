@@ -40,6 +40,7 @@ do
 		trans;
 		d=$( date +%d%m_%H%M%S )
 		XS "dump/" "." || printf "%s failed\n" "$d" >> VULTL_log;
+		# pool/ & g/ are the final dump dirs
 	else
 		sleep 3600;
 	fi
