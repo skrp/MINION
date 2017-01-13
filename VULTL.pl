@@ -3,10 +3,8 @@
 #######################################
 # VULTL - vulture to archive data bones
 # -------------------------skrp of MKRX
+# FUNCTIONS ###########################
 scrape () {
-sub="$1"
-XS "dump/" ".";
-|| printf "%s failed\n" "$sub" >> VULTL_log;
 }
 list () {
 index=0
@@ -26,9 +24,22 @@ done
 trans () {
 while read -r line
 do
-  mv "$path_to_minion"/"$line >> dump/"$i";
-done 
+  mv "$path_to_minion"/"$line" dump/"$line";
+done < VULT_init
+rm VULT_init;
 } 
-sub="$i"
-scrape "$sub";
-}
+# ACTION  #######################
+while true
+do
+	if [ -f BOTO_target ] 
+	then
+		list;
+		task;
+		trans;
+		sleep 2000;
+		d=$( date +%d%m_%H%M%S )
+		XS "dump/" "." || printf "%s failed\n" "$d" >> VULTL_log;
+	else
+		sleep 1000;
+	fi
+done
