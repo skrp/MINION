@@ -28,15 +28,16 @@ do
 done < VULT_init
 rm VULT_init;
 } 
+path_to_minion="$1"
 # ACTION  #######################
 while true
 do
 	if [ -f BOTO_target ] 
 	then
 		list;
-		task;
+		task "$path_to_minion";
 		trans;
-		sleep 2000;
+		sleep 43200;
 		d=$( date +%d%m_%H%M%S )
 		XS "dump/" "." || printf "%s failed\n" "$d" >> VULTL_log;
 	else
