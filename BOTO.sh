@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash
 ###############################
 # BOTO - website mirror scraper
-# -----------------skrp of MKRX
+#   {-_-}       ---skrp of MKRX
 # FUNCTION ####################
 scrape () {
 sub="$1"
