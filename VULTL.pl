@@ -17,14 +17,14 @@ task () {
 path_to_minion=${1%/}
 for i in "${TASKLIST[@]}"
 do
-  ls "$path_to_minion"/"$i" >> VULTL_init;
+  readlink -f "$path_to_minion"/"$i"/dump/* >> VULTL_init;
 done
 }
 trans () {
 while read -r line
 do
   minion=${line%/}
-  mv "$path_to_minion"/"$minion"/dump/* dump/"$minion"/;
+  mv $minion dump/;
 done < VULT_init
 rm VULT_init;
 } 
