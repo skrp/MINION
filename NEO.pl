@@ -3,10 +3,10 @@ use strict; use warnings;
 use LWP::UserAgent;
 use HTTP::Cookies;
 use File::Find::Rule;
-########################################
+#############################
 # NEO - scrape searchcode.com
-# --------------------------skrp of MKRX
-# USER AGENT ###########################
+#   (<>..<>)  ---skrp of MKRX
+# USER AGENT ################
 my ($dump) = @ARGV;
 die "not a dump dir" unless -d $dump;
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 1 });
@@ -17,13 +17,13 @@ my $cookies = HTTP::Cookies->new(
 $ua->cookie_jar($cookies);
 $ua->agent("Windows IE 7");
 $ua->timeout(60);
-# SET UP ##############################
+# SET UP ####################
 my $res = $ua->get("https://searchcode.com");
 my $base = "https://searchcode.com/codesearch/raw/";
 my $init = "init";
 open(my $ifh, '<', $init) or die "Couldn't read $init\n";
 my $point = readline $ifh; chomp $point; close $ifh;
-# LOOP ################################
+# LOOP ######################
 while ($point < 127100000) {
 	$point++;
 	print "$point  started\n";
@@ -33,4 +33,3 @@ while ($point < 127100000) {
 	open(my $fifh, '>', $init) or die "Couldn't read $init\n";
 	print $fifh "$point\n"; close $fifh;
 }
-
