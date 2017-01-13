@@ -5,9 +5,9 @@ use LWP::UserAgent;
 use HTTP::Cookies;
 use File::Find::Rule;
 use MKRX::XS;
-###########################################
-# ARKI - scrape archive.org pdfs ##########
-###########################################
+################################
+# ARKI - scrape archive.org pdfs 
+#       <:3 )~   ---skrp of MKRX
 my ($target, $dump) = @ARGV;
 my $target = '/MINION/ARKI/ARKI_Q'; my $dump = 'MINION/ARKI/ARKI_dump';
 my $pool = '/MINION/ARKI/ARKI_pool'; my $g '/MINION/ARKI/ARKI_g';
@@ -15,7 +15,7 @@ die "not a target dir" unless -d $target;
 die "not a pool dir" unless -d $pool; 
 die "not a g dir" unless -d $g;
 my $base = "http://archive.org/download";
-# DAEMONIZE ##############################
+# DAEMONIZE #####################
 $daemon = Proc::Daemon->new(
     work_dir     => '/MINION/ARKI',
     child_STDOUT => 'ARKI_log',
@@ -23,7 +23,7 @@ $daemon = Proc::Daemon->new(
     pid_file     => 'ARKI_pid',
     exec_command => 'perl ARKI.pl',
 );
-# USER AGENT #############################
+# USER AGENT ####################
 my $ua = LWP::UserAgent->new();
 my $cookies = HTTP::Cookies->new(
 	file=>"ARKI_cookies",
@@ -32,13 +32,13 @@ my $cookies = HTTP::Cookies->new(
 $ua->cookie_jar($cookies);
 $ua->agent("Windows IE 7");
 $ua->timeout(60);
-# BATCH PROC #############################
+# BATCH PROC ###################
 my $rule = File::Find::Rule->file()->start($target);
 while (defined(my $file = $rule->match)){
 	open(my $ifh, '<', $file) or die "Couldn't read $file\n";
 	my @list = readline $ifh; chomp @list;
-	foreach my $i (@list) {
-# PAUSE ##################################
+	foreach my $i (@list);
+# PAUSE #######################
 		if (-e "ARKI_PAUSE")
 			{ pause; }
 		print "$i  started\n";
@@ -52,6 +52,6 @@ while (defined(my $file = $rule->match)){
 	close $ifh;
 	unlink $file or die "Cant delete after use: $file";
 } 
-# SUB ###################################
+# SUB ########################
 sub pause 
 	{ sleep(8000); }	
