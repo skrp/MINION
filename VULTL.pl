@@ -2,7 +2,7 @@
 # requires https://github.com/skrp/MKRX
 #######################################
 # VULTL - vulture to archive data bones
-# -------------------------skrp of MKRX
+#       >++('>        -----skrp of MKRX
 path_to_minion="$1"
 # FUNCTIONS ###########################
 list () {
