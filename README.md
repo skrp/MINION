@@ -1,20 +1,21 @@
-###########################
-# MINION - summoning spells
+
+#MINION 
+summoning spells
 critters daemonized to short lives as burden-bearers
 
-# CAVES ##################
+# CAVES 
 dump - gutters of the wayside
 pool - processed den
 g - hunting grounds
 
-# SIGNS ###################
+# SIGNS
 target - prey
 log - call
 init - urine-marking
 
-# SPELLS #################
+# SPELLS
 pause - sleep an hour
 hibernate - end iterations
 
-# VULTURES ###############
+# VULTURES
 carion birds to process data bones
