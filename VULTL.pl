@@ -11,6 +11,7 @@ do
   TASKLIST[$index]=$line;
 	((index++));
 done < VULTL_target # list minions
+rm VULT_target;
 }
 task () {
 path_to_minion=${1%/}
