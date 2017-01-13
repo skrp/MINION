@@ -4,8 +4,6 @@
 # VULTL - vulture to archive data bones
 # -------------------------skrp of MKRX
 # FUNCTIONS ###########################
-scrape () {
-}
 list () {
 index=0
 while read -r line
