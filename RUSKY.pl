@@ -21,7 +21,6 @@ my $dump = "RUSKY_dump";
 my $pool = "RUSKY_pool";
 my $g = "RUSKY_g";
 my $inital = "RUSKY_init";
-my $un = "RUSKY_uncertain"; my $up = "RUSKY_up";
 # INITIALIZE #########################
 open(my $ifh, '<', $inital) or die "cant open $inital";
 my $ttl = readline $ifh; chomp $ttl; close $ifh;
@@ -35,21 +34,17 @@ $ua->cookie_jar($cookies);
 $ua->agent("Windows IE 7");
 # MECH ###############################
 while ($ttl > 0) {
-	if (-e $up) 
-		{ unlink $up; }
-	open(my $unfh, '>', $un) or die "can't reopen $inital";
 	my $iter = $ttl;
 	my $mech = WWW::Mechanize->new($ua);
 	my $url = $base.$iter;
-    print "scraping $url\n";
+	print "scraping $url\n";
 	$mech->get($url);
 	$mech->click('submit');
 	$mech->save_content("$dump/$iter");
 	XS($dump $pool $g) or die "can't XS $dump/$iter";
 	$ttl--;
-	open(my $finfh, '>', $initial) or die "can't reopen $un";
+	open(my $finfh, '>', $initial) or die "can't reopen $initial";
 	print $finfh "$ttl\n";
 	print "stored $url\n";
-	close $unfh; unlink $un;
-	open(my $unfh, '>', $up) or die "can't reopen $up"; close $unfh;
+	close $finfh;
 }
