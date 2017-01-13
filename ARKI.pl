@@ -12,7 +12,8 @@ my ($target, $dump) = @ARGV;
 my $target = '/MINION/ARKI/ARKI_Q'; my $dump = 'MINION/ARKI/ARKI_dump';
 my $pool = '/MINION/ARKI/ARKI_pool'; my $g '/MINION/ARKI/ARKI_g';
 die "not a target dir" unless -d $target;
-die "not a pool dir" unless -d $pool; die "not a g dir" unless -d $g;
+die "not a pool dir" unless -d $pool; 
+die "not a g dir" unless -d $g;
 my $base = "http://archive.org/download";
 # DAEMONIZE ##############################
 $daemon = Proc::Daemon->new(
