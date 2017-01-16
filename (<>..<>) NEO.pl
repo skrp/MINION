@@ -19,9 +19,11 @@ while ($point < 127100000) {
 	print "$point  started\n";
 	my $url = "$base$point";
 	my $mech = WWW::Mechanize->new();
-	$mech->get($url);
-	$mech->save_content("$dump/$point");
-	print "$point  ended\n";
+	if (eval {$mech->get($url)}) {
+		$mech->save_content("$dump/$point");
+		print "$point  ended\n";
+	}
+	else { next; }
 # ACCOUNTING ################
 	if ($point % 10 == 0) {
 		open(my $fifh, '>', $init);
