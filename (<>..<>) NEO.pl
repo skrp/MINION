@@ -1,24 +1,14 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
-use LWP::UserAgent;
-use HTTP::Cookies;
 use File::Find::Rule;
+use WWW::Mechanize;
 #############################
 # NEO - scrape searchcode.com
-#   (<>..<>)  ---skrp of MKRX
+#   (<>..<>)  ---skry of MKRX
 # USER AGENT ################
-my ($dump) = @ARGV;
+my ($dump) = @ARGV; $dump =~ s%/\z%%;
 die "not a dump dir" unless -d $dump;
-my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 1 });
-my $cookies = HTTP::Cookies->new(
-	file=>"$dump/cookies.txt",
-	autosave => 1,
-);
-$ua->cookie_jar($cookies);
-$ua->agent("Windows IE 7");
-$ua->timeout(60);
 # SET UP ####################
-my $res = $ua->get("https://searchcode.com");
 my $base = "https://searchcode.com/codesearch/raw/";
 my $init = "init";
 open(my $ifh, '<', $init) or die "Couldn't read $init\n";
@@ -27,9 +17,14 @@ my $point = readline $ifh; chomp $point; close $ifh;
 while ($point < 127100000) {
 	$point++;
 	print "$point  started\n";
-	my $url = "$base$point/";
-	my $response = $ua->get($url, ':content_file'=>"$dump/$point") or die "cant get $point";
+	my $url = "$base$point";
+	my $mech = WWW::Mechanize->new();
+	$mech->get($url);
+	$mech->save_content("$dump/$point");
 	print "$point  ended\n";
-	open(my $fifh, '>', $init) or die "Couldn't read $init\n";
-	print $fifh "$point\n"; close $fifh;
+# ACCOUNTING ################
+	if ($point % 10 == 0) {
+		open(my $fifh, '>', $init);
+		print $fifh "$point\n"; close $fifh;
+	}
 }
