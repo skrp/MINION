@@ -25,7 +25,7 @@ while ($point < 127100000) {
 	}
 	else { next; }
 # ACCOUNTING ################
-	if ($point % 10 == 0) {
+	if ($point % 100 == 0) {
 		open(my $fifh, '>', $init);
 		print $fifh "$point\n"; close $fifh;
 	}
