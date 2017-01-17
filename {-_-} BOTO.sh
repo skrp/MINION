@@ -5,8 +5,7 @@
 # FUNCTION ####################
 scrape () {
 sub="$1"
-wget -e robots=off --no-check-certificate --mirror \
---convert-links --continue $sub \
+wget -e robots=off --no-check-certificate --mirror --continue $sub \
 || printf "%s failed\n" "$sub" >> BOTO_log;
 }
 init () {
