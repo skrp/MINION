@@ -7,7 +7,7 @@ use MKRX::XS;
 # ARKI - scrape archive.org pdfs
 #       <:3 )~   ---skrp of MKRX
 my $target = '/MINION/ARKI/ARKI_QUEUE'; my $dump = 'MINION/ARKI/ARKI_dump';
-my $pool = '/MINION/ARKI/ARKI_pool'; my $g '/MINION/ARKI/ARKI_g';
+my $pool = '/MINION/ARKI/ARKI_pool'; my $g = '/MINION/ARKI/ARKI_g';
 my $init = '/MINION/ARKI/ARKI_init';
 die "not a $target" unless -e $target; die "not a target dir" unless -d $dump;
 die "not a pool dir" unless -d $pool; die "not a g dir" unless -d $g;
