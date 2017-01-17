@@ -53,5 +53,9 @@ while (defined(my $file = $rule->match)){
 	unlink $file or die "Cant delete after use: $file";
 } 
 # SUB ########################
-sub pause 
-	{ sleep(8000); }	
+sub pause { 
+	my $pausefile = "ARKI_PAUSE";
+	open(my $pfh, '<', $pausefile) or die "no $pausefile";
+	my $timeout = readline $pfh; chomp $timeout;
+	print "sleeping for $timeout\n"; sleep $timeout;
+}	
