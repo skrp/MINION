@@ -50,5 +50,12 @@ sub pause {
 	my $timeout = readline $pfh; chomp $timeout;
 	print "sleeping for $timeout\n"; sleep $timeout;
 }	
-
-LWP::UserAgent->new(
+sub uagent {
+	LWP::UserAgent->new(
+	my $ua = LWP::UserAgent->new(
+		agent => "Mozilla/50.0.2",
+		from => 'punknotdead@wikiark.org',
+		timeout => 45,
+	);
+	return $ua;
+}
