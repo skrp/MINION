@@ -6,8 +6,9 @@ use MKRX::XS;
 ################################
 # ARKI - scrape archive.org pdfs 
 #       <:3 )~   ---skrp of MKRX
-my $target = '/MINION/ARKI/ARKI_que'; my $dump = 'MINION/ARKI/ARKI_dump';
+my $target = '/MINION/ARKI/ARKI_QUE'; my $dump = 'MINION/ARKI/ARKI_dump';
 my $pool = '/MINION/ARKI/ARKI_pool'; my $g '/MINION/ARKI/ARKI_g';
+my $init = '/MINION/ARKI/ARKI_init';
 die "not a $target" unless -e $target; die "not a target dir" unless -d $dump;
 die "not a pool dir" unless -d $pool; die "not a g dir" unless -d $g;
 my $base = "http://archive.org/download";
@@ -23,24 +24,34 @@ my $pid = $daemon->Init() or die "no pid of init $pid";
 # USER AGENT ####################
 my $ua = uagent();
 # BATCH PROC ###################
-my $rule = File::Find::Rule->file()->start($target);
-while (defined(my $file = $rule->match)){
-	open(my $ifh, '<', $file) or die "Couldn't read $file\n";
-	my @list = readline $ifh; chomp @list;
-	foreach my $i (@list);
+#my $rule = File::Find::Rule->file()->start($target);
+#while (defined(my $file = $rule->match)){
+while (1) {
+unless (-e "ARKI_QUE") 
+	{ sleep 60; } 
+open(my $ifh, '<', $target) or die "Couldn't read $target\n";
+open(my $intfh, '<', $init) or die "Couldn't read $target\n";
+my @list = readline $ifh; chomp @list; 
+my $count = 0; 
+foreach my $i (@list) {
 # PAUSE #######################
-		if (-e "ARKI_pause")
-			{ pause(); }
-		print "$i  started\n";
-		my $url = "$base/$i/$i.pdf";
-		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
-   		my $murl = "$base/$i'_meta.xml'";
-    		my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i'_meta.xml'");
-		my $XS_staus = `XS $dump $pool $g` or die "cant XS $i";
-		print "$i  ended\n";
+	if (-e "ARKI_pause")
+		{ pause(); }
+	print "$i  started\n";
+	my $url = "$base/$i/$i.pdf";
+	my $response = $ua->get($url, ':content_file'=>"$dump/$i");
+   	my $murl = "$base/$i'_meta.xml'";
+    	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i'_meta.xml'");
+	my $XS_staus = `XS $dump $pool $g` or die "cant XS $i";
+	print "$i  ended\n"; $count++;
+	if ($count % 10 == 0) { 
+		open(my $initfh, '>', $target);
+		@item; 
+		close $fifh; 
 	}
-	close $ifh;
-	unlink $file or die "Cant delete after use: $file";
+}
+close $ifh;
+unlink $target or die "Cant delete after use: $target";
 } 
 # SUB ########################
 sub pause { 
