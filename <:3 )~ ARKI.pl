@@ -44,8 +44,8 @@ foreach my $i (@list) {
 	print "$i  ended\n"; $count++;
 	if ($count % 20 == 0) {
 		open(my $initfh, '>', $init);
-        foreach (@list)
-		    print $initfh "$_\n";
+        	foreach (@list)
+		    { print $initfh "$_\n"; }
 		close $initfh;
 	}
 }
