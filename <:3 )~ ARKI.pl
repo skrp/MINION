@@ -4,9 +4,9 @@ use Proc::Daemon;
 use LWP::UserAgent;
 use MKRX::XS;
 ################################
-# ARKI - scrape archive.org pdfs 
+# ARKI - scrape archive.org pdfs
 #       <:3 )~   ---skrp of MKRX
-my $target = '/MINION/ARKI/ARKI_QUE'; my $dump = 'MINION/ARKI/ARKI_dump';
+my $target = '/MINION/ARKI/ARKI_QUEUE'; my $dump = 'MINION/ARKI/ARKI_dump';
 my $pool = '/MINION/ARKI/ARKI_pool'; my $g '/MINION/ARKI/ARKI_g';
 my $init = '/MINION/ARKI/ARKI_init';
 die "not a $target" unless -e $target; die "not a target dir" unless -d $dump;
@@ -18,22 +18,19 @@ $daemon = Proc::Daemon->new(
 	child_STDOUT => 'ARKI_LOG',
 	child_STDERR => '+>>ARKI_DEBUG',
 	pid_file     => 'ARKI_PID',
-	exec_command => 'perl ARKI.pl',
 );
-my $pid = $daemon->Init() or die "no pid of init $pid";
+$daemon->Init();
 # USER AGENT ####################
 my $ua = uagent();
 # BATCH PROC ###################
-#my $rule = File::Find::Rule->file()->start($target);
-#while (defined(my $file = $rule->match)){
 while (1) {
-unless (-e "ARKI_QUE") 
-	{ sleep 60; } 
+unless (-e "ARKI_QUEUE")
+	{ sleep 60; }
 open(my $ifh, '<', $target) or die "Couldn't read $target\n";
 open(my $intfh, '<', $init) or die "Couldn't read $target\n";
-my @list = readline $ifh; chomp @list; 
+my @list = readline $ifh; chomp @list;
 unlink $target;
-my $count = 0; 
+my $count = 0;
 foreach my $i (@list) {
 # PAUSE #######################
 	if (-e "ARKI_pause")
@@ -45,22 +42,23 @@ foreach my $i (@list) {
     	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i'_meta.xml'");
 	my $XS_staus = `XS $dump $pool $g` or die "cant XS $i";
 	print "$i  ended\n"; $count++;
-	if ($count % 10 == 0) { 
+	if ($count % 10 == 0) {
 		open(my $initfh, '>', $init);
-		print $initfh @array;
-		close $initfh; 
+        foreach (@list)
+		    print $initfh "$_\n";
+		close $initfh;
 	}
 }
 close $ifh;
 unlink $target or die "Cant delete after use: $target";
-} 
+}
 # SUB ########################
-sub pause { 
+sub pause {
 	my $pausefile = "ARKI_pause";
 	open(my $pfh, '<', $pausefile) or die "no $pausefile";
 	my $timeout = readline $pfh; chomp $timeout;
 	print "sleeping for $timeout\n"; sleep $timeout;
-}	
+}
 sub uagent {
 	LWP::UserAgent->new(
 	my $s_ua = LWP::UserAgent->new(
