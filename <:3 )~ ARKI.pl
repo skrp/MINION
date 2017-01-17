@@ -26,10 +26,9 @@ my $ua = uagent();
 while (1) {
 unless (-e "ARKI_QUEUE")
 	{ sleep 60; }
-open(my $ifh, '<', $target) or die "Couldn't read $target\n";
-open(my $intfh, '<', $init) or die "Couldn't read $target\n";
-my @list = readline $ifh; chomp @list;
-unlink $target;
+open(my $intfh, '<', $init) or die "Couldn't read $initt\n";
+my @list = readline $intfh; chomp @list;
+close $intfh; unlink $init;
 my $count = 0;
 foreach my $i (@list) {
 # PAUSE #######################
@@ -48,9 +47,6 @@ foreach my $i (@list) {
 		    { print $initfh "$_\n"; }
 		close $initfh;
 	}
-}
-close $ifh;
-unlink $target or die "Cant delete after use: $target";
 }
 # SUB ########################
 sub pause {
