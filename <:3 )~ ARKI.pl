@@ -32,6 +32,7 @@ unless (-e "ARKI_QUE")
 open(my $ifh, '<', $target) or die "Couldn't read $target\n";
 open(my $intfh, '<', $init) or die "Couldn't read $target\n";
 my @list = readline $ifh; chomp @list; 
+unlink $target;
 my $count = 0; 
 foreach my $i (@list) {
 # PAUSE #######################
@@ -45,9 +46,9 @@ foreach my $i (@list) {
 	my $XS_staus = `XS $dump $pool $g` or die "cant XS $i";
 	print "$i  ended\n"; $count++;
 	if ($count % 10 == 0) { 
-		open(my $initfh, '>', $target);
-		@item; 
-		close $fifh; 
+		open(my $initfh, '>', $init);
+		print $initfh @array;
+		close $initfh; 
 	}
 }
 close $ifh;
