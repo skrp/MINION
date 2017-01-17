@@ -2,25 +2,24 @@
 use strict; use warnings;
 use Proc::Daemon;
 use LWP::UserAgent;
-use File::Find::Rule;
-# use MKRX::XS;
+use MKRX::XS;
 ################################
 # ARKI - scrape archive.org pdfs 
 #       <:3 )~   ---skrp of MKRX
 my $target = '/MINION/ARKI/ARKI_que'; my $dump = 'MINION/ARKI/ARKI_dump';
 my $pool = '/MINION/ARKI/ARKI_pool'; my $g '/MINION/ARKI/ARKI_g';
-die "not a target dir" unless -d $target; die "not a target dir" unless -d $dump;
+die "not a $target" unless -e $target; die "not a target dir" unless -d $dump;
 die "not a pool dir" unless -d $pool; die "not a g dir" unless -d $g;
 my $base = "http://archive.org/download";
 # DAEMONIZE #####################
-$daemon = Proc::Daemon->new();
-my $pid = $daemon->Init({
-    work_dir     => '/MINION/ARKI',
-    child_STDOUT => 'ARKI_LOG',
-    child_STDERR => '+>>ARKI_DEBUG',
-    pid_file     => 'ARKI_PID',
-    exec_command => 'perl ARKI.pl',
-}) or die "cant init daemon";
+$daemon = Proc::Daemon->new(
+	work_dir     => '/MINION/ARKI',
+	child_STDOUT => 'ARKI_LOG',
+	child_STDERR => '+>>ARKI_DEBUG',
+	pid_file     => 'ARKI_PID',
+	exec_command => 'perl ARKI.pl',
+);
+my $pid = $daemon->Init() or die "no pid of init $pid";
 # USER AGENT ####################
 my $ua = uagent();
 # BATCH PROC ###################
@@ -52,10 +51,10 @@ sub pause {
 }	
 sub uagent {
 	LWP::UserAgent->new(
-	my $ua = LWP::UserAgent->new(
+	my $s_ua = LWP::UserAgent->new(
 		agent => "Mozilla/50.0.2",
 		from => 'punknotdead@wikiark.org',
 		timeout => 45,
 	);
-	return $ua;
+	return $s_ua;
 }
