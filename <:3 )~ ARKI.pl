@@ -23,6 +23,7 @@ $daemon = Proc::Daemon->new(
     pid_file     => 'ARKI_pid',
     exec_command => 'perl ARKI.pl',
 );
+my $pid = $daemon->Init;
 # USER AGENT ####################
 my $ua = LWP::UserAgent->new();
 my $cookies = HTTP::Cookies->new(
