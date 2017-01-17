@@ -39,7 +39,7 @@ while (defined(my $file = $rule->match)){
 	my @list = readline $ifh; chomp @list;
 	foreach my $i (@list);
 # PAUSE #######################
-		if (-e "ARKI_PAUSE")
+		if (-e "ARKI_pause")
 			{ pause; }
 		print "$i  started\n";
 		my $url = "$base/$i/$i.pdf";
@@ -54,7 +54,7 @@ while (defined(my $file = $rule->match)){
 } 
 # SUB ########################
 sub pause { 
-	my $pausefile = "ARKI_PAUSE";
+	my $pausefile = "ARKI_pause";
 	open(my $pfh, '<', $pausefile) or die "no $pausefile";
 	my $timeout = readline $pfh; chomp $timeout;
 	print "sleeping for $timeout\n"; sleep $timeout;
