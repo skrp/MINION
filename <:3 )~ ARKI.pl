@@ -42,7 +42,7 @@ foreach my $i (@list) {
     	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i'_meta.xml'");
 	my $XS_staus = `XS $dump $pool $g` or die "cant XS $i";
 	print "$i  ended\n"; $count++;
-	if ($count % 10 == 0) {
+	if ($count % 20 == 0) {
 		open(my $initfh, '>', $init);
         foreach (@list)
 		    print $initfh "$_\n";
