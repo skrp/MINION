@@ -25,7 +25,7 @@ trans () {
 while read -r line
 do
   minion=${line%/}
-  mv $minion dump/;
+  mv "$minion" dump/;
 done < VULT_init
 rm VULT_init;
 } 
