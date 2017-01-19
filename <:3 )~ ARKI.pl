@@ -6,9 +6,8 @@ use MKRX::XS;
 ################################
 # ARKI - scrape archive.org pdfs
 #       <:3 )~   ---skrp of MKRX
-my $target = '/MINION/ARKI/ARKI_QUEUE'; my $dump = 'MINION/ARKI/ARKI_dump';
-my $pool = '/MINION/ARKI/ARKI_pool'; my $g = '/MINION/ARKI/ARKI_g';
-my $init = '/MINION/ARKI/ARKI_init';
+my $dump = 'MINION/ARKI/ARKI_dump'; my $pool = '/MINION/ARKI/ARKI_pool'; 
+my $g = '/MINION/ARKI/ARKI_g'; my $init = '/MINION/ARKI/ARKI_QUE';
 die "not a $target" unless -e $target; die "not a target dir" unless -d $dump;
 die "not a pool dir" unless -d $pool; die "not a g dir" unless -d $g;
 my $base = "http://archive.org/download";
@@ -24,9 +23,9 @@ $daemon->Init();
 my $ua = uagent();
 # BATCH PROC ###################
 while (1) {
-unless (-e "ARKI_QUEUE")
+unless (-e "$target")
 	{ sleep 60; }
-open(my $intfh, '<', $init) or die "Couldn't read $initt\n";
+open(my $intfh, '<', $init) or die "Couldn't read $init\n";
 my @list = readline $intfh; chomp @list;
 close $intfh; unlink $init;
 my $count = 0;
