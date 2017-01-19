@@ -46,6 +46,7 @@ foreach my $i (@list) {
 				{ print $finitfh "$_\n"; }
 			close $finitfh;
 		}
+		shift @list; $count++;
 }
 # SUB ########################
 sub pause { 
