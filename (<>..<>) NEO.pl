@@ -29,7 +29,7 @@ open(my $ifh, '<', $init) or die "Couldn't read $init\n";
 my $point = readline $ifh; chomp $point; close $ifh;
 while ($point < 127100000) {
 	sleep 1;
-	if (-e "ARKI_PAUSE")
+	if (-e "NEO_PAUSE")
 		{ pause(); }
 	$point++;
 	print "$point  started\n";
