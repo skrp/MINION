@@ -15,7 +15,7 @@ my $g = 'NEO_g';
 my $init = 'NEO_INIT';
 my $base = "https://searchcode.com/codesearch/raw/";
 # DAEMONIZE ################
-my $daemon = Proc::Daemon->new();
+my $daemon = Proc::Daemon->new(
     work_dir     => 'MINION/NEO',
     child_STDOUT => 'NEO_LOG',
     child_STDERR => '+>>NEO_DEBUG',
