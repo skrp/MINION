@@ -29,22 +29,22 @@ my @list = readline $tfh; chomp @list;
 close $tfh; unlink $target;
 my $count = 0;
 foreach my $i (@list) {
-		sleep 1;
-		if (-e "ARKI_PAUSE")
-			{ pause(); }
-		print "$i  started\n";
-		my $url = "$base/$i/$i.pdf";
-		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
-  		my $murl = "$base/$i".'_meta.xml';
-   		my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
-		print "$i  ended\n";
-		shift @list; $count++;
-		if ($count % 20 == 0) {
-			open(my $finitfh, '>', $init);
-			foreach (@list)
-				{ print $finitfh "$_\n"; }
-			close $finitfh;
-		}
+	sleep 1;
+	if (-e "ARKI_PAUSE")
+		{ pause(); }
+	print "$i  started\n";
+	my $url = "$base/$i/$i.pdf";
+	my $response = $ua->get($url, ':content_file'=>"$dump/$i");
+  	my $murl = "$base/$i".'_meta.xml';
+   	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
+	print "$i  ended\n";
+	shift @list; $count++;
+	if ($count % 20 == 0) {
+		open(my $finitfh, '>', $init);
+		foreach (@list)
+			{ print $finitfh "$_\n"; }
+		close $finitfh;
+	}
 }
 unlink $init;
 # SUB ########################
