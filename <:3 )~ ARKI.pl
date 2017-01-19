@@ -38,7 +38,6 @@ foreach my $i (@list) {
 		my $response = $ua->get($url, ':content_file'=>"$dump/$i".'.pdf');
   		my $murl = "$base/$i".'_meta.xml';
    		my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
-		`XS $dump $pool $g` or die "Can't XS";
 		print "$i  ended\n";
 		shift @list; $count++;
 		if ($count % 20 == 0) {
