@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-use strict; use warnings;
+use strict; use warnings; $|=1; $0='ARK';
 use Proc::Daemon;
 use LWP::UserAgent;
 ################################
