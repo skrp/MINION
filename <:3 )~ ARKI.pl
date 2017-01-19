@@ -40,13 +40,13 @@ foreach my $i (@list) {
    	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
 		`XS $dump $pool $g` or die "Can't XS";
 		print "$i  ended\n";
+		shift @list; $count++;
 		if ($count % 20 == 0) {
 			open(my $finitfh, '>', $init);
 			foreach (@list)
 				{ print $finitfh "$_\n"; }
 			close $finitfh;
 		}
-		shift @list; $count++;
 }
 # SUB ########################
 sub pause { 
