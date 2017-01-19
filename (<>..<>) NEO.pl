@@ -24,13 +24,13 @@ my $daemon = Proc::Daemon->new();
 $daemon->Init();
 # USER AGENT ###############
 my $ua = uagent();
-# SET UP ###################
-my $init = "init"; my $log = "log";
+# PROC ###################
 open(my $ifh, '<', $init) or die "Couldn't read $init\n";
-open(my $lfh, '>>', $log) or die "Couldn't read $log\n";
 my $point = readline $ifh; chomp $point; close $ifh;
-# LOOP #####################
 while ($point < 127100000) {
+	sleep 1;
+	if (-e "ARKI_PAUSE")
+		{ pause(); }
 	$point++;
 	print "$point  started\n";
 	my $url = "$base$point";
@@ -40,10 +40,10 @@ while ($point < 127100000) {
 		print "$point  ended\n";
 	}
 	else 
-		{ print $lfh "$point fail\n"; next; }
+		{ print "$point fail\n"; next; }
 # ACCOUNTING ###############
 	if ($point % 100 == 0) {
-		open(my $fifh, '>', $init);
+		open(my $fifh, '<', $init) or die "Couldn't read $init\n";
 		print $fifh "$point\n"; close $fifh;
 	}
 }
