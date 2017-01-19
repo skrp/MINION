@@ -12,8 +12,9 @@ $daemon = Proc::Daemon->new(
     child_STDOUT => 'IGOR_log',
     child_STDERR => '+>>IGOR_debug',
     pid_file     => 'IGOR_pid',
-    exec_command => 'perl IGOR.pl',
 );
+$daemon->Init();
+# 
 # SUB ####################
 sub countoff {
   my $target = '/MINION/';
