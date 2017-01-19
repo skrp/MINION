@@ -39,7 +39,7 @@ do
 		sleep 43200;
 		trans;
 		d=$( date +%d%m_%H%M%S )
-		XS "dump/" "." || printf "%s failed\n" "$d" >> VULTL_log;
+		XS "$path_to_minion""dump/" "$path_to_minion" || printf "%s failed\n" "$d" >> VULTL_log;
 		# pool/ & g/ are the final dump dirs
 	else
 		sleep 3600;
