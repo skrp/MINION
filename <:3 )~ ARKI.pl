@@ -35,9 +35,9 @@ foreach my $i (@list) {
 			{ pause(); }
 		print "$i  started\n";
 		my $url = "$base/$i/$i.pdf";
-		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
+		my $response = $ua->get($url, ':content_file'=>"$dump/$i".'.pdf');
   		my $murl = "$base/$i".'_meta.xml';
-   	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
+   		my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
 		`XS $dump $pool $g` or die "Can't XS";
 		print "$i  ended\n";
 		shift @list; $count++;
