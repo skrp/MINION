@@ -8,7 +8,8 @@ use LWP::UserAgent;
 # SETUP ########################
 my $target = 'ARKI_QUE'; 
 my $dump = 'ARKI_dump';
-my $pool = 'ARKI_pool'; 
+my $pool = 'ARKI_pool';
+my $shutdown = 'ARKI_SHUTDOWN';
 my $g = 'ARKI_g';
 my $init = 'ARKI_INIT';
 my $base = "http://archive.org/download";
@@ -30,6 +31,8 @@ close $tfh; unlink $target;
 my $count = 0;
 foreach my $i (@list) {
 	sleep 1;
+	if (-e "ARKI_SHUTDOWN")
+		{ shut(); }
 	if (-e "ARKI_PAUSE")
 		{ pause(); }
 	print "$i  started\n";
@@ -54,7 +57,14 @@ sub pause {
 	my $timeout = readline $pfh; chomp $timeout;
 	print "sleeping for $timeout\n"; sleep $timeout;
 }
-# USER AGENT ################
+sub shut {
+	my $shut = "ARKI_SHUTDOWN";
+	unlink $shut;
+	open(my $sinitfh, '>', $init);
+	foreach (@list)
+		{ print $sinitfh "$_\n"; }
+	exit;
+}
 sub uagent {
 	my $s_ua = LWP::UserAgent->new(
 		agent => "Mozilla/50.0.2", 
