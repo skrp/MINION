@@ -38,7 +38,7 @@ foreach my $i (@list) {
 		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
   		my $murl = "$base/$i".'_meta.xml';
    	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
-#		my $XS_status = `XS $dump $pool $g` or die "Can't XS";
+		`XS $dump $pool $g` or die "Can't XS";
 		print "$i  ended\n";
 		if ($count % 20 == 0) {
 			open(my $finitfh, '>', $init);
