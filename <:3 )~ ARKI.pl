@@ -19,7 +19,7 @@ my $daemon = Proc::Daemon->new(
     child_STDERR => '+>>ARKI_DEBUG',
     pid_file     => 'ARKI_PID',
 );
-$daemon->Init(); # or die "no pid of init";
+$daemon->Init();
 # USER AGENT ####################
 my $ua = uagent();
 # PROC ###################
@@ -36,7 +36,7 @@ foreach my $i (@list) {
 		my $url = "$base/$i/$i.pdf";
 		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
   		my $murl = "$base/$i".'_meta.xml';
-   	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
+   		my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
 		print "$i  ended\n";
 		shift @list; $count++;
 		if ($count % 20 == 0) {
@@ -63,4 +63,3 @@ sub uagent {
 	);
 	return $s_ua;
 }
-
