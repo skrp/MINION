@@ -6,17 +6,15 @@ use LWP::UserAgent;
 # ARKI - scrape archive.org pdfs 
 #       <:3 )~   ---skrp of MKRX
 # SETUP ########################
-my $init = '/OPN/MINION/ARKI/ARKI_QUE'; 
-my $dump = '/OPN/MINION/ARKI/ARKI_dump';
-my $pool = '/OPN/MINION/ARKI/ARKI_pool'; 
-my $g = '/OPN/MINION/ARKI/ARKI_g';
-die "no $init" unless -e $init;
-die "not a pool dir" unless -d $pool; 
-die "not a g dir" unless -d $g;
+my $target = 'ARKI_QUE'; 
+my $dump = 'ARKI_dump';
+my $pool = 'ARKI_pool'; 
+my $g = 'ARKI_g';
+my $init = 'ARKI_INIT';
 my $base = "http://archive.org/download";
 # DAEMONIZE #####################
 my $daemon = Proc::Daemon->new(
-    work_dir     => '/OPN/MINION/ARKI',
+    work_dir     => '/OPN/MINION/WARKI',
     child_STDOUT => 'ARKI_LOG',
     child_STDERR => '+>>ARKI_DEBUG',
     pid_file     => 'ARKI_PID',
@@ -26,18 +24,19 @@ $daemon->Init(); # or die "no pid of init";
 my $ua = uagent();
 # PROC ###################
 unless (-e $init) { sleep 60; }
-open(my $initfh, '<', $init) or die "Couldn't read $init\n";
-my @list = readline $initfh; chomp @list;
-close $initfh; unlink $init;
+open(my $tfh, '<', $target) or die "Couldn't read $target\n";
+my @list = readline $tfh; chomp @list;
+close $tfh; unlink $target;
 my $count = 0;
 foreach my $i (@list) {
+		sleep 1;
 		if (-e "ARKI_PAUSE")
 			{ pause(); }
 		print "$i  started\n";
 		my $url = "$base/$i/$i.pdf";
-		my $response = $ua->get($url, ':content_file'=>"$dump/$i".'.pdf');
+		my $response = $ua->get($url, ':content_file'=>"$dump/$i");
   		my $murl = "$base/$i".'_meta.xml';
-   		my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
+   	my $mresponse = $ua->get($url, ':content_file'=>"$dump/$i".'_meta.xml');
 		print "$i  ended\n";
 		shift @list; $count++;
 		if ($count % 20 == 0) {
@@ -47,6 +46,7 @@ foreach my $i (@list) {
 			close $finitfh;
 		}
 }
+unlink $init;
 # SUB ########################
 sub pause { 
 	my $pausefile = "ARKI_PAUSE";
