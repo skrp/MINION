@@ -1,7 +1,9 @@
 #!/usr/local/bin/perl
-use strict; use warnings;
+use strict; use warnings; $|=1; $0='NEO';
 use File::Find::Rule;
 use WWW::Mechanize;
+use Proc::Daemon;
+use LWP::UserAgent;
 #############################
 # NEO - scrape searchcode.com
 #   (<>..<>)  ---skry of MKRX
@@ -31,4 +33,20 @@ while ($point < 127100000) {
 		open(my $fifh, '>', $init);
 		print $fifh "$point\n"; close $fifh;
 	}
+}
+# SUB ########################
+sub pause { 
+	my $pausefile = "NEO_PAUSE";
+	open(my $pfh, '<', $pausefile) or die "no $pausefile";
+	my $timeout = readline $pfh; chomp $timeout;
+	print "sleeping for $timeout\n"; sleep $timeout;
+}
+# USER AGENT ################
+sub uagent {
+	my $s_ua = LWP::UserAgent->new(
+		agent => "Mozilla/50.0.2", 
+		from => 'punxnotdead@wikiark.org',
+		timeout => 45,
+	);
+	return $s_ua;
 }
