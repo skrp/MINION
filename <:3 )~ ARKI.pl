@@ -14,7 +14,7 @@ my $init = 'ARKI_INIT';
 my $base = "http://archive.org/download";
 # DAEMONIZE #####################
 my $daemon = Proc::Daemon->new(
-    work_dir     => '/OPN/MINION/WARKI',
+    work_dir     => 'MINION/ARKI',
     child_STDOUT => 'ARKI_LOG',
     child_STDERR => '+>>ARKI_DEBUG',
     pid_file     => 'ARKI_PID',
