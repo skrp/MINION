@@ -7,16 +7,29 @@ use LWP::UserAgent;
 #############################
 # NEO - scrape searchcode.com
 #   (<>..<>)  ---skry of MKRX
-# USER AGENT ################
-my ($dump) = @ARGV; $dump =~ s%/\z%%;
-die "not a dump dir" unless -d $dump;
-# SET UP ####################
+# SETUP #####################
+my $target = 'NEO_QUE'; 
+my $dump = 'NEO_dump';
+my $pool = 'NEO_pool'; 
+my $g = 'NEO_g';
+my $init = 'NEO_INIT';
 my $base = "https://searchcode.com/codesearch/raw/";
+# DAEMONIZE ################
+my $daemon = Proc::Daemon->new();
+    work_dir     => 'MINION/NEO',
+    child_STDOUT => 'NEO_LOG',
+    child_STDERR => '+>>NEO_DEBUG',
+    pid_file     => 'NEO_PID',
+);
+$daemon->Init();
+# USER AGENT ###############
+my $ua = uagent();
+# SET UP ###################
 my $init = "init"; my $log = "log";
 open(my $ifh, '<', $init) or die "Couldn't read $init\n";
 open(my $lfh, '>>', $log) or die "Couldn't read $log\n";
 my $point = readline $ifh; chomp $point; close $ifh;
-# LOOP ######################
+# LOOP #####################
 while ($point < 127100000) {
 	$point++;
 	print "$point  started\n";
@@ -28,13 +41,13 @@ while ($point < 127100000) {
 	}
 	else 
 		{ print $lfh "$point fail\n"; next; }
-# ACCOUNTING ################
+# ACCOUNTING ###############
 	if ($point % 100 == 0) {
 		open(my $fifh, '>', $init);
 		print $fifh "$point\n"; close $fifh;
 	}
 }
-# SUB ########################
+# SUB ######################
 sub pause { 
 	my $pausefile = "NEO_PAUSE";
 	open(my $pfh, '<', $pausefile) or die "no $pausefile";
