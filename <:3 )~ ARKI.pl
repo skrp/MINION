@@ -63,7 +63,7 @@ sub shut {
 	open(my $sinitfh, '>', $init);
 	foreach (@list)
 		{ print $sinitfh "$_\n"; }
-	exit;
+	die;
 }
 sub uagent {
 	my $s_ua = LWP::UserAgent->new(
