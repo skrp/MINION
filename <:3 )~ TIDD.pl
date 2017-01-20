@@ -31,7 +31,7 @@ close $tfh; unlink $target;
 my $count = 0;
 foreach my $i (@list) {
 		sleep 1;
-		if (-e "ARKI_SHUTDOWN")
+		if (-e "TIDD_SHUTDOWN")
 			{ shut(); }
 		if (-e "TIDD_PAUSE")
 			{ pause(); }
