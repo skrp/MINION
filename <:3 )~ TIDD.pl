@@ -56,7 +56,7 @@ sub pause {
 	print "sleeping for $timeout\n"; sleep $timeout;
 }
 sub shut {
-	my $shut = "ARKI_SHUTDOWN";
+	my $shut = "TIDD_SHUTDOWN";
 	unlink $shut;
 	open(my $sinitfh, '>', $init);
 	foreach (@list)
