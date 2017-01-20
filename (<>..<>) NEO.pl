@@ -8,11 +8,9 @@ use LWP::UserAgent;
 # NEO - scrape searchcode.com
 #   (<>..<>)  ---skry of MKRX
 # SETUP #####################
-my $target = 'NEO_QUE'; 
-my $dump = 'NEO_dump';
-my $pool = 'NEO_pool'; 
-my $g = 'NEO_g';
-my $init = 'NEO_INIT';
+my $target = 'NEO_QUE'; my $dump = 'NEO_dump';
+my $pool = 'NEO_pool'; my $g = 'NEO_g';
+my $init = 'NEO_INIT'; my $shutdown = 'ARKI_SHUTDOWN';
 my $base = "https://searchcode.com/codesearch/raw/";
 # DAEMONIZE ################
 my $daemon = Proc::Daemon->new(
@@ -29,6 +27,8 @@ open(my $ifh, '<', $init) or die "Couldn't read $init\n";
 my $point = readline $ifh; chomp $point; close $ifh;
 while ($point < 127100000) {
 	sleep 1;
+	if (-e "NEO_SHUTDOWN")
+		{ shut(); }
 	if (-e "NEO_PAUSE")
 		{ pause(); }
 	$point++;
@@ -54,7 +54,14 @@ sub pause {
 	my $timeout = readline $pfh; chomp $timeout;
 	print "sleeping for $timeout\n"; sleep $timeout;
 }
-# USER AGENT ################
+sub shut {
+	my $shut = "NEO_SHUTDOWN";
+	unlink $shut;
+	open(my $sinitfh, '>', $init);
+	foreach (@list)
+		{ print $sinitfh "$_\n"; }
+	die "Shutdown CLEAN";
+}
 sub uagent {
 	my $s_ua = LWP::UserAgent->new(
 		agent => "Mozilla/50.0.2", 
