@@ -5,6 +5,7 @@
 #       >++('>        -----skrp of MKRX
 path_to_minion=${1%/}
 # FUNCTIONS ###########################
+TASKLIST[0]="";
 list () {
 index=0
 while read -r line
