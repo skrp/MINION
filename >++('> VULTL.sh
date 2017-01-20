@@ -3,7 +3,7 @@
 #######################################
 # VULTL - vulture to archive data bones
 #       >++('>        -----skrp of MKRX
-path_to_minion="$1"
+path_to_minion=${1%/}
 # FUNCTIONS ###########################
 list () {
 index=0
@@ -15,7 +15,7 @@ done < VULTL_QUE # list minions
 rm VULT_QUE;
 }
 task () {
-path_to_minion=${1%/}
+path_to_minion="$1"
 for i in "${TASKLIST[@]}"
 do
   readlink -f "$path_to_minion"/"$i"/dump/* >> VULTL_init;
