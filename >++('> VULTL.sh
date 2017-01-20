@@ -11,8 +11,8 @@ while read -r line
 do
   TASKLIST[$index]=$line;
 	((index++));
-done < VULTL_target # list minions
-rm VULT_target;
+done < VULTL_QUE # list minions
+rm VULT_QUE;
 }
 task () {
 path_to_minion=${1%/}
@@ -32,7 +32,7 @@ rm VULT_init;
 # ACTION  #######################
 while true
 do
-	if [ -f VULTL_target ] 
+	if [ -f VULTL_QUE ] 
 	then
 		list;
 		task "$path_to_minion";
