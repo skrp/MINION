@@ -11,6 +11,7 @@ my $dump = 'TIDD_dump';
 my $pool = 'TIDD_pool'; 
 my $g = 'TIDD_g';
 my $init = 'TIDD_INIT';
+my $shutdown = 'TIDD_SHUTDOWN';
 my $base = "http://archive.org/compress";
 # DAEMONIZE #####################
 my $daemon = Proc::Daemon->new(
@@ -30,6 +31,8 @@ close $tfh; unlink $target;
 my $count = 0;
 foreach my $i (@list) {
 		sleep 1;
+		if (-e "ARKI_SHUTDOWN")
+			{ shut(); }
 		if (-e "TIDD_PAUSE")
 			{ pause(); }
 		print "$i  started\n";
@@ -52,7 +55,14 @@ sub pause {
 	my $timeout = readline $pfh; chomp $timeout;
 	print "sleeping for $timeout\n"; sleep $timeout;
 }
-# USER AGENT ################
+sub shut {
+	my $shut = "ARKI_SHUTDOWN";
+	unlink $shut;
+	open(my $sinitfh, '>', $init);
+	foreach (@list)
+		{ print $sinitfh "$_\n"; }
+	die;
+}
 sub uagent {
 	my $s_ua = LWP::UserAgent->new(
 		agent => "Mozilla/50.0.2", 
