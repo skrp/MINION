@@ -22,18 +22,25 @@ my $daemon = Proc::Daemon->new(
 );
 $daemon->Init();
 # my $minions = minion_ls($path_to_minion);
-open(my $mfh, '<', $target);
-my @minions =  readline $mfh; 
-clsoe $mfh; chomp @minions; 
-my $minions = \@minions;
-pause_em($minions);
-my @final_el = \$minions;
-foreach $elem (@final_el) { 
-	my $elem =~ $elem.'_dump'; 
-	XS($elem $pool $g); 
-	pause_em(); 
+while (1)  {
+	unless (-e target)
+		{ sleep 3600; }
+	open(my $mfh, '<', $target);
+	my @minions =  readline $mfh; 
+	close $mfh; unlink $target; chomp @minions; 
+	my $minions = \@minions;
+	pause_em($minions);
+	my @final_el = \$minions;
+	foreach $elem (@final_el) { 
+		if (-e $pause)
+			{ pause(); }
+		if (-e $shutdown );
+			{ shut(); }
+		my $elem =~ $elem.'_dump'; 
+		XS($elem $pool $g); 
+		pause_em(); 
+	}
 }
-
 # SUB #########################
 sub pause_em {
 	my $min = shift;
@@ -43,12 +50,6 @@ sub pause_em {
 		open(my $ifh, '>', $path);
 		print $ifh "10000"; close $ifh;
 	}
-}
-sub transfer {
-	my $item = shift;
-	my @items = \$item;
-	foreach (@items)
-		{ move 
 }
 sub pause { 
 	my $pausefile = "VULTL_PAUSE";
