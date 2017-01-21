@@ -20,20 +20,28 @@ $daemon->Init();
 open(my $tfh, '<', $target) {
 my @chan = readline $tfh; chomp @chan; 
 close $tfh; unlink $target;
-foreach $chan (@chan) 
-  { join_ch($chan); }
- while (1)
-  { sleep $listen; croak(); }
+foreach my $chan (@chan) 
+ { join_ch($chan); }
+while (1) { 
+    sleep $listen; croak();     
+    $ch_path = murlokonian_name();
+    foreach 
+        close $chfh; open(my $chfh, '>>', $ch_path);  
+}
 # SUB #################################
 sub join_ch {
     my $ch = shift;
-    my ($sec,$min,$hour,$mday) = localtime(time);
-    my $m_n = $sec.$min.$hour.$mday; # murlokonian_name
-    my $cg_path = $dump.'/'.$ch.'_'.$m_n;
+    my $m_n = murlokonian_name();
     open(my $chfh, '>>', $ch_path);
    # CONNECT
-   # print $chfh,
+   # print $chfh "$ts $user $msg\n";
 }
 sub croak {
 
+}
+sub mulokonian_name {
+    my ($sec,$min,$hour,$mday) = localtime(time);
+    my $m_n = $sec.$min.$hour.$mday; # murlokonian_name
+    $m_n =~ $dump.'/'.$chan.'_'.$m_n;
+    return $m_n;
 }
