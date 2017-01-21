@@ -1,5 +1,7 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
+use File::Find::Rule;
+use MKRX;
 #######################################
 # VULTL - vulture to archive data bones
 #       >++('>        -----skrp of MKRX
@@ -19,16 +21,42 @@ my $daemon = Proc::Daemon->new(
     pid_file     => 'VULTL_PID',
 );
 $daemon->Init();
-my @minions;
+my $minions = minion_ls($path_to_minion);
+pause_em($minions);
+my @final_el = \$minions;
+foreach $elem (@final_el) { 
+	my $elem =~ $elem.'_dump'; 
+	XS($elem $pool $g); 
+	pause_em(); 
+}
 
 # SUB #########################
 sub minion_ls {
-  opendir(DIR, $path_to_minion);
-  while (my $minion = readdir(DIR)) {
-    if ($minion eq 'VULTL') || $minion eq 'IGOR')
-      { next; }
-    else
-    { push @minions $minion; }
+	$path_2_minion = shift;
+	opendir(DIR, $path_2_minion);
+	while (my $minion = readdir(DIR)) {
+		if ($minion eq 'VULTL') || $minion eq 'IGOR')
+			{ next; }
+      		else
+      			{ push @minions $minion; }
+	}
+	my $minions = \@minions;
+	return $minions;
+}
+sub pause_em {
+	my $min = shift;
+	my @minions = \$min;
+	foreach my $p_em (@minions) {
+		my $path = $p_em.'_PAUSE';
+		open(my $ifh, '>', $path);
+		print $ifh "10000"; close $ifh;
+	}
+}
+sub transfer {
+	my $item = shift;
+	my @items = \$item;
+	foreach (@items)
+		{ move 
 }
 sub pause { 
 	my $pausefile = "VULTL_PAUSE";
