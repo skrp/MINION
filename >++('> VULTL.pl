@@ -37,10 +37,10 @@ while (1)  {
 			{ pause(); }
 		if (-e $shutdown );
 			{ shut(); }
-		my $elem =~ $elem.'_dump'; 
+		my $elem =~ $elem.'/'.$elem.'_dump'; 
 		XS($elem $pool $g); 
-		rmtree($elem);
 		pause_em(); 
+		rmtree($elem);
 	}
 }
 # SUB #########################
