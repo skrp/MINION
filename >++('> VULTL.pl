@@ -5,7 +5,7 @@ use MKRX;
 #######################################
 # VULTL - vulture to archive data bones
 #       >++('>        -----skrp of MKRX
-# SETUP ########################
+# SETUP ###############################
 my $target = 'VULTL_QUE'; 
 my $dump = 'VULTL_dump';
 my $pool = 'VULTL_pool';
@@ -13,7 +13,7 @@ my $shutdown = 'VULTL_SHUTDOWN';
 my $g = 'VULTL_g';
 my $init = 'VULTL_INIT';
 my $path_to_minion = '/Minion/';
-# DAEMONIZE #####################
+# DAEMONIZE ##########################
 my $daemon = Proc::Daemon->new(
     work_dir     => 'MINION/VULTL',
     child_STDOUT => 'VULTL_LOG',
@@ -42,11 +42,11 @@ while (1)  {
 		pause_em(); 
 		rmtree($elem);
 		my $un_pause = $elem.'/'.$elem.'_PAUSE'; 
-		unlink $un_pause;
+		unlink $un_pause; shift @minions;
 	}
 	my $rest = '345600'; sleep $rest; # day = 3600; 4 days
 }
-# SUB #########################
+# SUB ##############################
 sub pause_em {
 	my $min = shift;
 	my @minions = \$min;
