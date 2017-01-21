@@ -32,17 +32,17 @@ while (1)  {
 	pause_em($minions);
 	my @final_el = \$minions;
 	foreach $elem (@final_el) { 
-		pause_em();
+		pause_em($minions);
 		if (-e $pause)
 			{ pause(); }
 		if (-e $shutdown );
 			{ shut(); }
 		my $el_dump = $elem.'/'.$elem.'_dump'; 
 		XS($el_dump $pool $g); 
-		pause_em(); 
+		pause_em($minions); 
 		rmtree($elem);
 		my $un_pause = $elem.'/'.$elem.'_PAUSE'; 
-		unlink $un_pause; shift @minions;
+		unlink $un_pause; @minions = \$minion; shift @minions; $minions = \@minions;
 	}
 	my $rest = '345600'; sleep $rest; # day = 3600; 4 days
 }
