@@ -24,7 +24,7 @@ $daemon->Init();
 # my $minions = minion_ls($path_to_minion);
 while (1)  {
 	unless (-e target)
-		{ sleep 3600; }
+		{ sleep 7200; }
 	open(my $mfh, '<', $target);
 	my @minions =  readline $mfh; 
 	close $mfh; unlink $target; chomp @minions; 
