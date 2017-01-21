@@ -36,7 +36,7 @@ while (1)  {
 		if (-e $pause)
 			{ pause(); }
 		if (-e $shutdown );
-			{ shut(); }
+			{ shut(); }cd
 		my $el_dump = $elem.'/'.$elem.'_dump'; 
 		XS($el_dump $pool $g); 
 		pause_em($minions); 
