@@ -37,10 +37,12 @@ while (1)  {
 			{ pause(); }
 		if (-e $shutdown );
 			{ shut(); }
-		my $elem =~ $elem.'/'.$elem.'_dump'; 
-		XS($elem $pool $g); 
+		my $el_dump = $elem.'/'.$elem.'_dump'; 
+		XS($el_dump $pool $g); 
 		pause_em(); 
 		rmtree($elem);
+		my $un_pause = $elem.'/'.$elem.'_PAUSE'; 
+		unlink $un_pause;
 	}
 	my $rest = '345600'; sleep $rest; # day = 3600; 4 days
 }
