@@ -42,6 +42,7 @@ while (1)  {
 		pause_em(); 
 		rmtree($elem);
 	}
+	my $rest = '345600'; sleep $rest; # day = 3600; 4 days
 }
 # SUB #########################
 sub pause_em {
