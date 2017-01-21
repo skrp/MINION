@@ -5,12 +5,9 @@ use Proc::Daemon;
 # MURLOCKS - irc croak & listen 
 # (-(-_(-_-)_-)-)      ---skrp of MKRX
 # SETUP ###############################
-my ($sec,$min,$hour,$mday) = localtime(time);
-my $m_n = $sec.$min.$hour.$mday; # murlokonian_name
 my $target = 'MURLOCK_QUE'; my $dump = 'MURLOCK_dump';
 my $pool = 'MURLOCK_pool'; my $g = 'MURLOCK_g';
 my $init = 'MURLOCK_INIT'; my $shutdown = 'MURLOCK_SHUTDOWN';
-my $base = "https://searchcode.com/codesearch/raw/";
 # DAEMONIZE ##########################
 my $daemon = Proc::Daemon->new(
     work_dir     => 'MINION/MURLOCK',
@@ -29,7 +26,13 @@ foreach $chan (@chan)
   { sleep $listen; croak(); }
 # SUB #################################
 sub join_ch {
-
+    my $ch = shift;
+    my ($sec,$min,$hour,$mday) = localtime(time);
+    my $m_n = $sec.$min.$hour.$mday; # murlokonian_name
+    my $cg_path = $dump.'/'.$ch.'_'.$m_n;
+    open(my $chfh, '>>', $ch_path);
+   # CONNECT
+   # print $chfh,
 }
 sub croak {
 
