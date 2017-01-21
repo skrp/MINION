@@ -1,10 +1,12 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
 use Proc::Daemon;
+use Bot::BasicBot;
 #######################################
 # MURLOCKS - irc croak & listen 
 # (-(-_(-_-)_-)-)      ---skrp of MKRX
 # SETUP ###############################
+my $nick = ''; my $server = '';
 my $target = 'MURLOCK_QUE'; my $dump = 'MURLOCK_dump';
 my $pool = 'MURLOCK_pool'; my $g = 'MURLOCK_g';
 my $init = 'MURLOCK_INIT'; my $shutdown = 'MURLOCK_SHUTDOWN';
@@ -20,8 +22,18 @@ $daemon->Init();
 open(my $tfh, '<', $target) {
 my @chan = readline $tfh; chomp @chan; 
 close $tfh; unlink $target;
-foreach my $chan (@chan) 
- { join_ch($chan); }
+foreach my $chan (@chan) { 
+    my $bot = Bot::BasicBot->new(
+        server => "irc.$server.com",
+        port   => "6667",
+        channels => ['#'.$chan],
+        nick      => $nick,
+        alt_nicks => ["$nick_", "_$nick_"],
+        username  => $nick,
+        name      => $nick,
+  );
+  $bot->run();
+}
 while (1) { 
     sleep $listen; croak();     
     $ch_path = murlokonian_name();
