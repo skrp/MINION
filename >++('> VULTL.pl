@@ -32,12 +32,14 @@ while (1)  {
 	pause_em($minions);
 	my @final_el = \$minions;
 	foreach $elem (@final_el) { 
+		pause_em();
 		if (-e $pause)
 			{ pause(); }
 		if (-e $shutdown );
 			{ shut(); }
 		my $elem =~ $elem.'_dump'; 
 		XS($elem $pool $g); 
+		rmtree($elem);
 		pause_em(); 
 	}
 }
@@ -46,9 +48,9 @@ sub pause_em {
 	my $min = shift;
 	my @minions = \$min;
 	foreach my $p_em (@minions) {
-		my $path = $p_em.'_PAUSE';
+		my $path = $p_em.'/'.$p_em.'_PAUSE';
 		open(my $ifh, '>', $path);
-		print $ifh "10000"; close $ifh;
+		print $ifh "43200"; close $ifh;
 	}
 }
 sub pause { 
