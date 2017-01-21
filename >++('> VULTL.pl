@@ -21,7 +21,11 @@ my $daemon = Proc::Daemon->new(
     pid_file     => 'VULTL_PID',
 );
 $daemon->Init();
-my $minions = minion_ls($path_to_minion);
+# my $minions = minion_ls($path_to_minion);
+open(my $mfh, '<', $target);
+my @minions =  readline $mfh; 
+clsoe $mfh; chomp @minions; 
+my $minions = \@minions;
 pause_em($minions);
 my @final_el = \$minions;
 foreach $elem (@final_el) { 
@@ -31,18 +35,6 @@ foreach $elem (@final_el) {
 }
 
 # SUB #########################
-sub minion_ls {
-	$path_2_minion = shift;
-	opendir(DIR, $path_2_minion);
-	while (my $minion = readdir(DIR)) {
-		if ($minion eq 'VULTL') || $minion eq 'IGOR')
-			{ next; }
-      		else
-      			{ push @minions $minion; }
-	}
-	my $minions = \@minions;
-	return $minions;
-}
 sub pause_em {
 	my $min = shift;
 	my @minions = \$min;
