@@ -5,7 +5,7 @@ use WWW::Mechanize;
 ############################
 # GOOG - imgur viral scraper
 #    `o_0    ---skrp of MKRX
-my $num = 0; # scrape top images from today to Jan 2011
+my $num = 0; # scrape top 60 images from today to Jan 2011
 my $log = 'GOOG_LOG';
 open(my $lfh, '>>', $log);
 while ($num < 2218) { # farthest back is 2218 days
