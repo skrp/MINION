@@ -16,14 +16,11 @@ my $temp = 'temp';
 my $mech = WWW::Mechanize->new();
 my $response = $mech->get($url);
 $mech->save_content($temp);
-
 # FILTER #########################3
-print "filter time\n";
-open(my $tfh, '<', $temp) or die "fkn encoding";
+open(my $tfh, '<', $temp);
 my @content = readline $tfh; chomp @content; close $fh; unlink $temp;
 my $pre_base = '<img alt="" src="//i.imgur.com/';
 my $end = 'b.jpg" />';
-print "start time\n";
 foreach my $i (@content) {
         if ($i =~ /$pre_base/) {
                 $i =~ s/$pre_base//;
