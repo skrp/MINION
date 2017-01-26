@@ -2,6 +2,8 @@
 use strict; use warnings;
 use LWP;
 use WWW::Mechanize;
+# use WWW::Mechanize::PhantomJS
+# use WWW::Mechanize::Firefox
 ############################
 # GOOG - imgur viral scraper
 #    `o_0    ---skrp of MKRX
