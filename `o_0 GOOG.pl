@@ -1,13 +1,17 @@
 #!/usr/bin/perl
+use strict; use warnings;
 use LWP;
 use WWW::Mechanize;
-my $num = 162;
+############################
+# GOOG - imgur viral scraper
+#    `o_0    ---skrp of MKRX
+my $num = 0; # scrape top images from today to Jan 2011
 my $log = 'GOOG_LOG';
 open(my $lfh, '>>', $log);
-while ($num < 2218) {
+while ($num < 2218) { # farthest back is 2218 days
 my $o_url = 'http://imgur.com/gallery/hot/viral/page/';
 my $url = "$o_url$num";
-print "$lfh" "$num : $url\n";
+print "$lfh" "$url: page\n";
 my $temp = 'temp';
 my $mech = WWW::Mechanize->new();
 my $response = $mech->get($url);
@@ -25,12 +29,11 @@ foreach my $i (@content) {
                 $i =~ s/$pre_base//;
                 $i =~ s/$end//; $i =~ s/^\s+//;
                 my $item = "$i.jpg";
-#               print "$item\n";
+                print "$lfh" "$item: item\n";
                 my $here = "dump/$item";
                 print "starting: $item\n";
                 my $i_url = 'http://i.imgur.com/';
                 $n_url = "$i_url$item";
-        #       print "$n_url\n";
                 my $imech = WWW::Mechanize->new();
                 my $response = $imech->get($n_url);
                 $imech->save_content($here);
@@ -44,6 +47,4 @@ sub uagent {
                 timeout => 45,
         );
         return $s_ua;
-}
-$num++;
 }
