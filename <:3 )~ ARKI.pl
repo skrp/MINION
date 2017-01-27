@@ -8,9 +8,7 @@ use LWP::UserAgent;
 # SETUP ########################
 my $target = 'ARKI_QUE'; 
 my $dump = 'ARKI_dump';
-my $pool = 'ARKI_pool';
 my $shutdown = 'ARKI_SHUTDOWN';
-my $g = 'ARKI_g';
 my $init = 'ARKI_INIT';
 my $base = "http://archive.org/download";
 # DAEMONIZE #####################
