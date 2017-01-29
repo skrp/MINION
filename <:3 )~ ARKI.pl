@@ -22,7 +22,7 @@ $daemon->Init();
 # USER AGENT ####################
 my $ua = uagent();
 # PROC ###################
-unless (-e $init) { sleep 60; }
+unless (-e $target) { sleep 3600; }
 open(my $tfh, '<', $target) or die "Couldn't read $target\n";
 my @list = readline $tfh; chomp @list;
 close $tfh; unlink $target;
