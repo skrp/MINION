@@ -52,3 +52,4 @@ sub dive {
 }
 # if (ps $pid > 0) {  foreach (@log_line) { print "$_\n"; } }
 # main addr string in green. iteration in yellow. err in red.
+# MINION_MASTER
