@@ -2,7 +2,7 @@
 use strict; use warnings;
 use Proc::Daemon;
 use File::Find::Rule;
-##########################
+################ SUMMONS #
 # IGOR - minion taskmaster
 #   ($.$)  ---skrp of MKRX
 # start - stop - pause - ping_pid
