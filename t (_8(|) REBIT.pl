@@ -1,8 +1,8 @@
 #!/usr/local/bin/perl
-################### TOOL #
-# REBIT - iteration parser
+###################### TOOL #
+# REBIT - update master lists
 #   (_8(|) ---skrp of MKRX
-# - cur_iter - init_length - update_MASTER - cat_init
+# - update_MASTER
 my $dir = 'MINIONS/';
 my $old = "$minion".'_MASTER';
 my @list = readdir($dir);
@@ -29,6 +29,7 @@ foreach my $minion (@active) {
   foreach (@new_master)
   	{ print $newfp "$_\n"; }
 }
+# SUB ############################
 sub counter { # list $minion_dump 
   my ($mininon) = @_;
   my $minion_dump = "$minion".'_dump';
