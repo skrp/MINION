@@ -5,6 +5,7 @@ use File::Find::Rule;
 ##########################
 # IGOR - minion taskmaster
 #   ($.$)  ---skrp of MKRX
+# start - stop - pause - ping_pid
 my @cmds = qw(pause stat errchk dive countoff);
 # DAEMONIZE ##############
 $daemon = Proc::Daemon->new(
@@ -16,7 +17,7 @@ $daemon = Proc::Daemon->new(
 $daemon->Init();
 # 
 # SUB ####################
-sub countoff {
+sub ping_pid { 
   my $target = '/MINION/';
   my @workn;
   my @minions = File::Find::Rule->new
@@ -39,7 +40,14 @@ sub pause {
   $duration = $duartion*3600;
   print $mfh "$duration";
   close $mfh;
-  print "$minion_path successful\n";
+  print "$minion_path PAUSED\n";
+}
+sub shutdwn {
+  my ($minion) = @_;
+  my $minion_path = "/MINION/$minion/$minion'_SHUTDOWN'";
+  open(my $mfh, '>', $minion_path) or print "cant open $minion_path\n";
+  close $mfh;
+  print "$minion_path SHUTDOWN\n";
 }
 sub dive {
   my ($m_target) = @_;
