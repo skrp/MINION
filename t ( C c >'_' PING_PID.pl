@@ -5,8 +5,9 @@ use strict; use warnings;
 #  ( C c >'_'  ---skrp of MKRX
 # default list minnion | test
 # if argv test those only
-my $return = ping();
-print "$return\n";
+my (@minions) = @ARGV;
+foreach (@minions) 
+  { my $return = ping($_); print "$return\n"; }
 # SUB ########################
 sub ping {
   my ($minion) = @_;
