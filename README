@@ -2,6 +2,12 @@
 # MINION -summoning spells
 #   c[]    ---skrp of MKRX
 # picorsheneverfkdu https://ibin.co/38j1IoadTmGz.jpg
+# METHOD #################
+# scrape'n is over-time & many iterations
+1) build master_list
+2) cc demon
+3) task-bearing minions
+4) collector demons
 # DEMON KEYS #############
 _QUE    # demon_call work
 _INIT   # stateful que
