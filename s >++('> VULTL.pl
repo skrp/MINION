@@ -25,6 +25,7 @@ $daemon->Init();
 while (1)  {
 	unless (-e target)
 		{ sleep 7200; }
+	REBIT();
 	open(my $mfh, '<', $target);
 	my @minions =  readline $mfh; 
 	close $mfh; unlink $target; chomp @minions; 
