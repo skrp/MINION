@@ -1,6 +1,6 @@
 #!/usr/local/bin/bash
 # requires https://github.com/skrp/MKRX
-#######################################
+############################# SUMMONS #
 # VULTL - vulture to archive data bones
 #       >++('>        -----skrp of MKRX
 path_to_minion=${1%/}
