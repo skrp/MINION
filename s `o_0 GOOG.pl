@@ -56,14 +56,14 @@ while ($num < 2218) { # farthest back is 2218 days
 }
 # SUB ##########################
 sub pause {
-	my $pausefile = 'ARKI_PAUSE';
+	my $pausefile = 'GOOG_PAUSE';
 	open(my $pfh, '<', $pausefile);
 	my $timeout = readline $pfh; chomp $timeout;
 	print "sleeping for $timeout\n"; 
 	sleep $timeout;
 }
 sub shut {
-	my $shut = 'ARKI_SHUTDOWN';
+	my $shut = 'GOOG_SHUTDOWN';
 	unlink $shut;
 	open(my $sinitfh, '>', $init);
 #	foreach (@content)
