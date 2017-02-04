@@ -3,10 +3,10 @@ use strict; use warnings;
 use Proc::Daemon;
 use LWP;
 use WWW::Mechanize;
-############################
+#################### SUMMONS #
 # BOOG - imgur comment scraper
 #    `o_0    ---skrp of MKRX
-# SETUP ####################
+# SETUP ######################
 my $init = 'GOOB_INIT';
 my $dump = 'GOOB_dump';
 # DAEMONIZE ################
