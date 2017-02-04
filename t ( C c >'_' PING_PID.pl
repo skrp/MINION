@@ -6,6 +6,7 @@ use strict; use warnings;
 # default list minnion | test
 # if argv test those only
 my $return = ping();
+print "$return\n";
 # SUB ########################
 sub ping {
   my ($minion) = @_;
