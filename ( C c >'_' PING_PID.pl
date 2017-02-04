@@ -5,8 +5,13 @@ use strict; use warnings;
 #  ( C c >'_'  ---skrp of MKRX
 # default list minnion | test
 # if argv test those only
-
+my $return = ping();
+# SUB ########################
 sub ping {
-  my ($proc) = @_;
-  
+  my ($minion) = @_;
+  my $minon_path = "MINION/$minion/$minion".'_PID';
+  open($mfp, '<', $minion_path);
+  my $pid = readline $mfp; chomp $pid;
+  my $response = system(`ps $pid`);
+  return $response;
 }
