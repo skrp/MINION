@@ -13,6 +13,7 @@ sub ping {
   my $minon_path = "MINION/$minion/$minion".'_PID';
   open($mfp, '<', $minion_path);
   my $pid = readline $mfp; chomp $pid;
-  my $response = system(`ps $pid`);
+  my @all = system(`ps $pid`);
+  my $response = $all[1]; 
   return $response;
 }
