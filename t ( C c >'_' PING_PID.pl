@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
-##############################
+####################### TOOL #
 # PING_PID - test minion state
 #  ( C c >'_'  ---skrp of MKRX
 # default list minnion | test
