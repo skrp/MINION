@@ -4,6 +4,7 @@
 #   (_8(|) ---skrp of MKRX
 # - cur_iter - init_length - update_MASTER - cat_init
 my $dir = 'MINIONS/';
+my $old = "$minion".'_MASTER';
 my @list = readdir($dir);
 my @active;
 foreach my $minion (@list) {
@@ -18,12 +19,15 @@ foreach my $minion (@active) {
   my $countold = @old; my $countresponse = @response;
   my @new_master;
   my %tmp = map{$_ => undef} @response;
-  foreach my $p (@old) { 
-	  if (exists $tmp{$p}) 
-      { next; }
-	  else 
-      { push @new_master, $p; }
+  foreach my $p (@old) {
+  	if (exists $tmp{$p}) 
+		{ next; }
+	else 
+      		{ push @new_master, $p; }
   }
+  open(my $newfp, '>', $old);
+  foreach (@new_master)
+  	{ print $newfp "$_\n"; }
 }
 sub counter { # list $minion_dump 
   my ($mininon) = @_;
