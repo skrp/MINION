@@ -10,6 +10,12 @@ foreach my $minion (@list) {
   if (defined REBIT) 
     { push @active $minion; }
 }
+foreach my $minion (@active) {
+  my @response = up_MASTER($minion);
+  my $old = "$minion".'_MASTER';
+  open($mfp, '<', $old);
+  
+}
 sub counter { # list $minion_dump 
   my ($mininon) = @_;
   my $minion_dump = "$minion".'_dump';
