@@ -3,7 +3,7 @@ use strict; use warnings;
 use Proc::Daemon;
 use LWP;
 use WWW::Mechanize;
-############################
+################## SUMMONS #
 # GOOG - imgur viral scraper
 #    `o_0    ---skrp of MKRX
 # SETUP ####################
