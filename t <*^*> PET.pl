@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
-use MKRX;
+use MINION;
 ############################
 # PET - pause active minions
 #   <*^*>    ---skrp of MKRX
