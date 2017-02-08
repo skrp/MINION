@@ -22,7 +22,6 @@ _MASTER   # to work
 _HIT      # lifetime work
 _FAIL     # rework
 # TOOLSET ################################
-####### OUTPUT FORMAT : $iteration $minion
 PING_PID  # active demons
 REBIT     # update MASTER/HIT
 BURP      # dump MINION
@@ -36,3 +35,8 @@ CHIRP     # stdout MINION
 HICC      # stderr MINION
 KICK      # PID MINION
 PLUCK     # XS MINION
+# OUTPUT ##################################
+"$MINION $iteration $size(optional)\n"
+$MINION = normal ascii yellow
+$iteration = bold ascii red
+$size = GB red; MB green; KB white;
