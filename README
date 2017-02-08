@@ -20,5 +20,7 @@ _SHUTDOWN # call exit
 # TOOLSET ################
 PING_PID  # return active demons
 REBIT     # update MASTER HIT lists
-BURP      # list MINION current dump
-URPP      # list MINION current init
+BURP      # list MINION dump
+URPP      # list MINION init
+UURP      # list MINION HIT
+URPP      # list MINION MASTER
