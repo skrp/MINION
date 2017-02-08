@@ -21,17 +21,18 @@ _HIT      # lifetime work
 _FAIL     # rework
 # TOOLSET ################################
 PING_PID  # active demons
-REBIT     # update MASTER/HIT
-BURP      # MINION dump size
-URPP      # init MINION
-UURP      # MINION HIT size
-URPP      # MASTER MINION
-SUMM      # birth MINION
 SHUT      # kill MINION
 PET       # pause MINION
 CHIRP     # stdout MINION
 HICC      # stderr MINION
 KICK      # PID MINION
+BURP      # MINION dump
+URPP      # init MINION
+
+REBIT     # update MASTER/HIT
+UURP      # MINION HIT size
+URPP      # MASTER MINION
+SUMM      # birth MINION
 PLUCK     # XS MINION
 REIN      # bandwidth MINION
 # OUTPUT ##################################
