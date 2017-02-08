@@ -10,4 +10,4 @@ foreach $minion (@active) {
   my @contents = readline $dfh; chomp @contents; close $dfh;
   foreach (@contents)
     { print color('magenta'); print "$minion "; print color('bold yellow'); print "$_\n"; }
-  
+}
