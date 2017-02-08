@@ -4,14 +4,11 @@ use MKRX;
 # REBIT - update master lists
 #   (_8(|) ---skrp of MKRX
 # - update_MASTER
-my $dir = 'MINIONS/';
 my $old = "$minion".'_MASTER';
-my @list = readdir($dir);
+my @list = readdir('MINION/');
 my @active;
 foreach my $minion (@list) {
-  if (defined REBIT) 
-    { push @active $minion; }
-}
+  push @active $minion if defined REBIT; }
 foreach my $minion (@active) {
   my @response = up_MASTER($minion);
   my $old = "$minion".'_MASTER';
