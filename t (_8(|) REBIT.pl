@@ -5,10 +5,7 @@ use MKRX;
 #   (_8(|) ---skrp of MKRX
 # - update_MASTER
 my $old = "$minion".'_MASTER';
-my @list = readdir('MINION/');
-my @active;
-foreach my $minion (@list) {
-  push @active $minion if defined REBIT; }
+my @up = PING_PID(); chomp @up;
 foreach my $minion (@active) {
   my @response = up_MASTER($minion);
   my $old = "$minion".'_MASTER';
