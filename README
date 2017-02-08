@@ -4,8 +4,8 @@
 # picorsheneverfkdu https://ibin.co/38j1IoadTmGz.jpg
 # METHOD #################
 # scrape'n is over-time & many iterations
-1) build master_list
-2) cc demon
+1) populate MASTER
+2) overlord demon tools
 3) task-bearing minions
 4) collector demons
 # DEMON KEYS #############
@@ -17,10 +17,20 @@ _dump     # dump dir
 _QUE      # call work
 _PAUSE    # call sleep
 _SHUTDOWN # call exit
+_MASTER   # to work
+_HIT      # lifetime work
+_FAIL     # rework
 # TOOLSET ################
 PING_PID  # return active demons
-REBIT     # update MASTER HIT lists
-BURP      # list MINION dump
-URPP      # list MINION init
-UURP      # list MINION HIT
-URPP      # list MINION MASTER
+REBIT     # update MASTER HIT
+BURP      # dump MINION
+URPP      # init MINION
+UURP      # HIT MINION
+URPP      # MASTER MINION
+SUMM      # birth MINION
+SHUT      # kill MINION
+PET       # pause MINION
+CHIRP     # stdout MINION
+HICC      # stderr MINION
+KICK      # PID MINION
+PLUCK     # XS MINION
