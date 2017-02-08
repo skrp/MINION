@@ -1,14 +1,14 @@
-##########################
-# MINION -summoning spells
+###################################
+# MINION - scraper daemon framework
 #   c[]    ---skrp of MKRX
+# scraping work: over-time & many iterations & chronic
 # picorsheneverfkdu https://ibin.co/38j1IoadTmGz.jpg
-# METHOD #################
-# scrape'n is over-time & many iterations
+# METHOD #########################
 1) populate MASTER
 2) overlord demon tools
 3) task-bearing minions
 4) collector demons
-# DEMON KEYS #############
+# DEMON KEYS #####################
 _INIT     # stateful que
 _DEBUG    # stderr
 _LOG      # stdout
@@ -20,7 +20,7 @@ _SHUTDOWN # call exit
 _MASTER   # to work
 _HIT      # lifetime work
 _FAIL     # rework
-# TOOLSET ################
+# TOOLSET #######################
 PING_PID  # return active demons
 REBIT     # update MASTER HIT
 BURP      # dump MINION
