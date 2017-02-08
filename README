@@ -9,26 +9,16 @@
 3) task-bearing minions
 4) collector demons
 # DEMON KEYS #############
-_QUE    # demon_call work
-_INIT   # stateful que
-_DEBUG  # stderr
-_LOG    # stdout
-_PID    # status
-_dump   # dump dir
-_PAUSE    # demon_call sleep
-_SHUTDOWN # demon_call exit
-# ABSTRACT ###############
-critters daemonized to short lives as burden-bearers
-# CAVES 
-dump - gutters of the wayside
-pool - processed den
-g - history
-# SIGNS
-target - prey
-log - call
-init - hunt
-stats - urine markings
-masterlist - boneyard
-# SPELLS
-pause - sleep an hour
-hibernate - end iterations
+_INIT     # stateful que
+_DEBUG    # stderr
+_LOG      # stdout
+_PID      # status
+_dump     # dump dir
+_QUE      # call work
+_PAUSE    # call sleep
+_SHUTDOWN # call exit
+# TOOLSET ################
+PING_PID  # return active demons
+REBIT     # update MASTER HIT lists
+BURP      # list MINION current dump
+URPP      # list MINION current init
