@@ -6,9 +6,7 @@
 # METHOD #########################
 1) populate MASTER
 2) summon MINION
-3) ext_scrapers, int_scrapers, 
-4) command MINION
-4) collector demons
+3) command MINION
 # DEMON KEYS #####################
 _INIT     # stateful que
 _DEBUG    # stderr
@@ -24,9 +22,9 @@ _FAIL     # rework
 # TOOLSET ################################
 PING_PID  # active demons
 REBIT     # update MASTER/HIT
-BURP      # dump MINION
+BURP      # MINION dump size
 URPP      # init MINION
-UURP      # HIT MINION
+UURP      # MINION HIT size
 URPP      # MASTER MINION
 SUMM      # birth MINION
 SHUT      # kill MINION
@@ -37,6 +35,7 @@ KICK      # PID MINION
 PLUCK     # XS MINION
 # OUTPUT ##################################
 "$MINION $iteration $size(optional)\n"
+@ARGV[0] = print delay modifier
 $MINION = normal ascii yellow
 $iteration = bold ascii red
 $size = GB red; MB green; KB white;
