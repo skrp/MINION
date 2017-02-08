@@ -2,10 +2,10 @@
 use strict; use warnings;
 use File::Find::Rule;
 use MKRX;
-############################# SUMMONS #
-# VULTL - vulture to archive data bones
-#       >++('>        -----skrp of MKRX
-# SETUP ###############################
+####################### SUMMONS #
+# VULTL - internal MINION scraper
+#       >++('>    ---skrp of MKRX
+# SETUP #########################
 my $target = 'VULTL_QUE'; 
 my $dump = 'VULTL_dump';
 my $pool = 'VULTL_pool';
@@ -13,7 +13,7 @@ my $shutdown = 'VULTL_SHUTDOWN';
 my $g = 'VULTL_g';
 my $init = 'VULTL_INIT';
 my $path_to_minion = '/Minion/';
-# DAEMONIZE ##########################
+# DAEMONIZE #####################
 my $daemon = Proc::Daemon->new(
     work_dir     => 'MINION/VULTL',
     child_STDOUT => 'VULTL_LOG',
@@ -47,7 +47,7 @@ while (1)  {
 	}
 	my $rest = '345600'; sleep $rest; # day = 3600; 4 days
 }
-# SUB ##############################
+# SUB #########################
 sub pause_em {
 	my $min = shift;
 	my @minions = \$min;
