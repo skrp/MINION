@@ -33,6 +33,7 @@ CHIRP     # stdout MINION
 HICC      # stderr MINION
 KICK      # PID MINION
 PLUCK     # XS MINION
+REIN      # bandwidth MINION
 # OUTPUT ##################################
 "$MINION $iteration $size(optional)\n"
 @ARGV[0] = print delay modifier
