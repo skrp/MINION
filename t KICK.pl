@@ -5,9 +5,8 @@ use Term::ANSIColor;
 # KICK - print pid
 my (@active) = @ARGV;
 foreach $minion (@active) {
-  my $file = "$minion/$minion".'_DEBUG';
-  open(my $dfh, '<', $file);
-  my @contents = readline $dfh; chomp @contents; close $dfh;
-  foreach (@contents)
-    { print color('magenta'); print "$minion "; print color('bold yellow'); print "$_\n"; }
+  my $file = "$minion/$minion".'_PID';
+  open(my $pfh, '<', $file);
+  my $content = readline $pfh; chomp $content; close $pfh;
+  print color('magenta'); print "$minion "; print color('bold yellow'); print "$_\n";
 }
