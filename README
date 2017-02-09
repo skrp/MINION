@@ -4,8 +4,9 @@
 # scraping work: over-time & many iterations & chronic
 # https://ibin.co/38j1IoadTmGz.jpg
 # METHOD #########################
-1) populate MASTER
+1) populate MASTER work-set
 2) summon MINION
+3) update HIT worked-set
 3) command MINION
 # DEMON KEYS #####################
 _INIT     # stateful que
