@@ -4,6 +4,7 @@
 # scraping work: over-time & many iterations & chronic
 # https://ibin.co/38j1IoadTmGz.jpg
 # DEMON KEYS #####################
+limbo    # processing dir
 dump     # dump dir
 STATE    # stateful que
 DEBUG    # stderr
