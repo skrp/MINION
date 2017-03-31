@@ -4,7 +4,21 @@ use WWW::Mechanize;
 ####################### SUMMONS #
 # BART - deviantart acquisitioner
 #   :P <===       ---skrp of MKRX
-# SETUP #########################
+# SETUP ###############################
+my $work = 'MINION/' my $dump = 'dump';
+my $state = 'STATE'; my $debug = 'DEBUG';
+my $log = 'LOG'; my $pid = 'PID';
+my $que = 'QUE'; my $clean = 'CLEAN'
+my $pause = 'PAUSE'; my $shutdown = 'SHUT';
+# DAEMONIZE ##########################
+my $daemon = Proc::Daemon->new(
+    work_dir     => $work,
+    child_STDOUT => $log,
+    child_STDERR => +>>$debug,
+    pid_file     => $pid,
+);
+$daemon->Init();
+
 my $master = 'DART_MASTER';
 open(my $mfh, '<', $master);
 my @master = readline $mfh; chomp @master; close $mfh; 
