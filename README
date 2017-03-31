@@ -5,7 +5,7 @@
 # https://ibin.co/38j1IoadTmGz.jpg
 # DEMON KEYS #####################
 dump     # dump dir
-INIT     # stateful que
+STATE    # stateful que
 DEBUG    # stderr
 LOG      # stdout
 PID      # status
