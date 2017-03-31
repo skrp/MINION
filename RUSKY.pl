@@ -8,20 +8,20 @@ use MKRX::XS;
 ####################### SUMMONS #
 # RUSKY - scrape golibgen.io pdfs
 #     (__!__)     ---skrp of MKRX
-# DAEMONIZE #####################
-$daemon = Proc::Daemon->new(
-    work_dir     => '/MINION/RUSKY',
-    child_STDOUT => 'RUSKY_log',
-    child_STDERR => '+>>RUSKY_debug',
-    pid_file     => 'RUSKY_pid',
-    exec_command => 'perl RUSKY.pl',
+# SETUP ###############################
+my $work = 'MINION/' my $dump = 'dump';
+my $state = 'STATE'; my $debug = 'DEBUG';
+my $log = 'LOG'; my $pid = 'PID';
+my $que = 'QUE'; my $clean = 'CLEAN'
+my $pause = 'PAUSE'; my $shutdown = 'SHUT';
+# DAEMONIZE ##########################
+my $daemon = Proc::Daemon->new(
+    work_dir     => $work,
+    child_STDOUT => $log,
+    child_STDERR => +>>$debug,
+    pid_file     => $pid,
 );
-# SETUP #########################
-my $base = "http://golibgen.io/view.php?id=";
-my $dump = "RUSKY_dump";
-my $pool = "RUSKY_pool";
-my $g = "RUSKY_g";
-my $inital = "RUSKY_init";
+$daemon->Init();
 # INITIALIZE ####################
 open(my $ifh, '<', $inital) or die "cant open $inital";
 my $ttl = readline $ifh; chomp $ttl; close $ifh;
