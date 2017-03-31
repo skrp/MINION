@@ -4,8 +4,9 @@ use WWW::Mechanize;
 ####################### SUMMONS #
 # BART - deviantart acquisitioner
 #   :P <===       ---skrp of MKRX
-# SETUP ###############################
-my $work = 'MINION/' my $dump = 'dump';
+## SETUP ###############################
+my $work = 'MINION/';
+my $limbo = 'limbo'; my $dump = 'dump';
 my $state = 'STATE'; my $debug = 'DEBUG';
 my $log = 'LOG'; my $pid = 'PID';
 my $que = 'QUE'; my $clean = 'CLEAN'
