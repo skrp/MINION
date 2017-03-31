@@ -51,9 +51,9 @@ $size = GB-red MB-green KB-white
 2) QUE
 3) STATE
 -- run ---------------------------------------
-4) SCRAPE 
-  4a) MASTER
-        4a.1) HIT_NODE     4a.2) NODE
-5) PAUSE
-6) SHUT
-  6a) CLEAN   6b) NULL
+*) SCRAPE 
+  a) MASTER
+        a.1) HIT_NODE     a.2) NODE
+*) PAUSE
+4) SHUT
+  a) CLEAN   b) NULL
