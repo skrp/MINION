@@ -10,5 +10,6 @@ DEBUG    # stderr
 LOG      # stdout
 PID      # status
 QUE      # call work
+CLEAN    # start easy
 PAUSE    # call sleep
 SHUT # call exit
