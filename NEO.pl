@@ -7,17 +7,18 @@ use LWP::UserAgent;
 ################### SUMMONS #
 # NEO - scrape searchcode.com
 #   (<>..<>)  ---skry of MKRX
-# SETUP #####################
-my $target = 'NEO_QUE'; my $dump = 'NEO_dump';
-my $pool = 'NEO_pool'; my $g = 'NEO_g';
-my $init = 'NEO_INIT'; my $shutdown = 'ARKI_SHUTDOWN';
-my $base = "https://searchcode.com/codesearch/raw/";
-# DAEMONIZE ################
+# SETUP ###############################
+my $work = 'MINION/' my $dump = 'dump';
+my $state = 'STATE'; my $debug = 'DEBUG';
+my $log = 'LOG'; my $pid = 'PID';
+my $que = 'QUE'; my $clean = 'CLEAN'
+my $pause = 'PAUSE'; my $shutdown = 'SHUT';
+# DAEMONIZE ##########################
 my $daemon = Proc::Daemon->new(
-    work_dir     => 'MINION/NEO',
-    child_STDOUT => 'NEO_LOG',
-    child_STDERR => '+>>NEO_DEBUG',
-    pid_file     => 'NEO_PID',
+    work_dir     => $work,
+    child_STDOUT => $log,
+    child_STDERR => +>>$debug,
+    pid_file     => $pid,
 );
 $daemon->Init();
 # USER AGENT ###############
