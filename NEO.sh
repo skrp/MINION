@@ -12,4 +12,3 @@ do
 	echo $init > init;
 	printf  "%s done\n" "$init";
 done
-
