@@ -5,20 +5,21 @@ use LWP::UserAgent;
 ###################### SUMMONS #
 # ARKI - scrape archive.org pdfs 
 #       <:3 )~   ---skrp of MKRX
-# SETUP ########################
-my $target = 'ARKI_QUE'; 
-my $dump = 'ARKI_dump';
-my $shutdown = 'ARKI_SHUTDOWN';
-my $init = 'ARKI_INIT';
-my $base = "http://archive.org/download";
-# DAEMONIZE #####################
+# SETUP ###############################
+my $work = 'MINION/' my $dump = 'dump';
+my $state = 'STATE'; my $debug = 'DEBUG';
+my $log = 'LOG'; my $pid = 'PID';
+my $que = 'QUE'; my $clean = 'CLEAN'
+my $pause = 'PAUSE'; my $shutdown = 'SHUT';
+# DAEMONIZE ##########################
 my $daemon = Proc::Daemon->new(
-    work_dir     => 'MINION/ARKI',
-    child_STDOUT => '+>>ARKI_LOG',
-    child_STDERR => '+>>ARKI_DEBUG',
-    pid_file     => 'ARKI_PID',
+    work_dir     => $work,
+    child_STDOUT => $log,
+    child_STDERR => +>>$debug,
+    pid_file     => $pid,
 );
 $daemon->Init();
+my $base = "http://archive.org/download";
 # USER AGENT ####################
 my $ua = uagent();
 # PROC ###################
