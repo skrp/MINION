@@ -6,19 +6,21 @@ use Bot::BasicBot;
 # MURLOCKS - irc croak & listen 
 # (-(-_(-_-)_-)-)      ---skrp of MKRX
 # SETUP ###############################
-my $nick = ''; my $server = '';
-my $target = 'MURLOCK_QUE'; my $dump = 'MURLOCK_dump';
-my $pool = 'MURLOCK_pool'; my $g = 'MURLOCK_g';
-my $init = 'MURLOCK_INIT'; my $shutdown = 'MURLOCK_SHUTDOWN';
+my $work = 'MINION/' my $dump = 'dump';
+my $state = 'STATE'; my $debug = 'DEBUG';
+my $log = 'LOG'; my $pid = 'PID';
+my $que = 'QUE'; my $clean = 'CLEAN'
+my $pause = 'PAUSE'; my $shutdown = 'SHUT';
 # DAEMONIZE ##########################
 my $daemon = Proc::Daemon->new(
-    work_dir     => 'MINION/MURLOCK',
-    child_STDOUT => 'MURLOCK_LOG',
-    child_STDERR => '+>>MURLOCK_DEBUG',
-    pid_file     => 'MURLOCK_PID',
+    work_dir     => $work,
+    child_STDOUT => $log,
+    child_STDERR => +>>$debug,
+    pid_file     => $pid,
 );
 $daemon->Init();
 # START #############################
+my $nick = ''; my $server = '';
 open(my $tfh, '<', $target) {
 my @chan = readline $tfh; chomp @chan; 
 close $tfh; unlink $target;
