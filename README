@@ -3,57 +3,12 @@
 #   c[]             ---skrp of MKRX
 # scraping work: over-time & many iterations & chronic
 # https://ibin.co/38j1IoadTmGz.jpg
-# METHOD #########################
-0) scrape dumps
-1) populate MASTER work-set after test against HIT
-2) summon MINION
-3) update HIT worked-set
-3) command MINION
 # DEMON KEYS #####################
-_INIT     # stateful que
-_DEBUG    # stderr
-_LOG      # stdout
-_PID      # status
-_dump     # dump dir
-_QUE      # call work
-_PAUSE    # call sleep
-_SHUTDOWN # call exit
-_MASTER   # to work
-_HIT      # lifetime work
-_FAIL     # rework
-# TOOLSET ################################
-PING_PID  # active demons
-SHUT      # kill MINION
-PET       # pause MINION
-CHIRP     # stdout MINION
-HICC      # stderr MINION
-KICK      # PID MINION
-BURP      # MINION dump
-URPP      # init MINION
-
-REBIT     # update MASTER/HIT
-UURP      # MINION HIT size
-URPP      # MASTER MINION
-SUMM      # birth MINION
-PLUCK     # XS MINION
-REIN      # bandwidth MINION
-# OUTPUT ##################################
-"$MINION $iteration $size(optional)\n"
-@ARGV[0] = print delay modifier
-$MINION = normal ascii purple
-$iteration = bold ascii yellow
-$size = GB-red MB-green KB-white
-#############################################
-####  FLOW  #################################
--- load -------------------------------------
-1) INIT
-  1a) CLEAN   1b) NULL
-2) QUE
-3) STATE
--- run ---------------------------------------
-*) SCRAPE 
-  a) MASTER
-        a.1) HIT_NODE     a.2) NODE
-*) PAUSE
-4) SHUT
-  a) CLEAN   b) NULL
+dump     # dump dir
+INIT     # stateful que
+DEBUG    # stderr
+LOG      # stdout
+PID      # status
+QUE      # call work
+PAUSE    # call sleep
+SHUT # call exit
