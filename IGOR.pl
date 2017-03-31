@@ -10,9 +10,9 @@ my @cmds = qw(pause stat errchk dive countoff);
 # DAEMONIZE ##############
 $daemon = Proc::Daemon->new(
     work_dir     => '/MINION/IGOR',
-    child_STDOUT => 'IGOR_log',
-    child_STDERR => '+>>IGOR_debug',
-    pid_file     => 'IGOR_pid',
+    child_STDOUT => 'LOG',
+    child_STDERR => '+>>DEBUG',
+    pid_file     => 'PID',
 );
 $daemon->Init();
 # 
