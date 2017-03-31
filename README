@@ -4,7 +4,7 @@
 # scraping work: over-time & many iterations & chronic
 # https://ibin.co/38j1IoadTmGz.jpg
 # METHOD #########################
-0) scrape && filter
+0) scrape dumps
 1) populate MASTER work-set after test against HIT
 2) summon MINION
 3) update HIT worked-set
@@ -43,3 +43,17 @@ REIN      # bandwidth MINION
 $MINION = normal ascii purple
 $iteration = bold ascii yellow
 $size = GB-red MB-green KB-white
+#############################################
+####  FLOW  #################################
+-- load -------------------------------------
+1) INIT
+  1a) CLEAN   1b) NULL
+2) QUE
+3) STATE
+-- run ---------------------------------------
+4) SCRAPE 
+  4a) MASTER
+        4a.1) HIT_NODE     4a.2) NODE
+5) PAUSE
+6) SHUT
+  6a) CLEAN   6b) NULL
