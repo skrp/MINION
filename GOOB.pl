@@ -6,15 +6,18 @@ use WWW::Mechanize;
 #################### SUMMONS #
 # BOOG - imgur comment scraper
 #    `o_0    ---skrp of MKRX
-# SETUP ######################
-my $init = 'GOOB_INIT';
-my $dump = 'GOOB_dump';
-# DAEMONIZE ################
+# SETUP ###############################
+my $work = 'MINION/' my $dump = 'dump';
+my $state = 'STATE'; my $debug = 'DEBUG';
+my $log = 'LOG'; my $pid = 'PID';
+my $que = 'QUE'; my $clean = 'CLEAN'
+my $pause = 'PAUSE'; my $shutdown = 'SHUT';
+# DAEMONIZE ##########################
 my $daemon = Proc::Daemon->new(
-	work_dir => 'MINION/BOOG',
-	child_STDOUT => 'GOOB_LOG',
-	child_STDERR => '+>>GOOB_DEBUG',
-	pid_file => 'GOOB_PID',
+    work_dir     => $work,
+    child_STDOUT => $log,
+    child_STDERR => +>>$debug,
+    pid_file     => $pid,
 );
 $daemon->Init();
 # PROC #####################
