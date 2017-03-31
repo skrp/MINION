@@ -6,7 +6,8 @@ use LWP::UserAgent;
 # ARKI - scrape archive.org pdfs 
 #       <:3 )~   ---skrp of MKRX
 # SETUP ###############################
-my $work = 'MINION/' my $dump = 'dump';
+my $work = 'MINION/';
+my $limbo = 'limbo'; my $dump = 'dump';
 my $state = 'STATE'; my $debug = 'DEBUG';
 my $log = 'LOG'; my $pid = 'PID';
 my $que = 'QUE'; my $clean = 'CLEAN'
