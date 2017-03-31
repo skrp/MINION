@@ -6,19 +6,18 @@ use MKRX;
 # VULTL - internal MINION scraper
 #       >++('>    ---skrp of MKRX
 # SETUP #########################
-my $target = 'VULTL_QUE'; 
-my $dump = 'VULTL_dump';
-my $pool = 'VULTL_pool';
-my $shutdown = 'VULTL_SHUTDOWN';
-my $g = 'VULTL_g';
-my $init = 'VULTL_INIT';
-my $path_to_minion = '/Minion/';
-# DAEMONIZE #####################
+# SETUP ###############################
+my $work = 'MINION/' my $dump = 'dump';
+my $state = 'STATE'; my $debug = 'DEBUG';
+my $log = 'LOG'; my $pid = 'PID';
+my $que = 'QUE'; my $clean = 'CLEAN'
+my $pause = 'PAUSE'; my $shutdown = 'SHUT';
+# DAEMONIZE ##########################
 my $daemon = Proc::Daemon->new(
-    work_dir     => 'MINION/VULTL',
-    child_STDOUT => 'VULTL_LOG',
-    child_STDERR => '+>>VULTL_DEBUG',
-    pid_file     => 'VULTL_PID',
+    work_dir     => $work,
+    child_STDOUT => $log,
+    child_STDERR => +>>$debug,
+    pid_file     => $pid,
 );
 $daemon->Init();
 # my $minions = minion_ls($path_to_minion);
