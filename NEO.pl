@@ -4,6 +4,7 @@ use File::Find::Rule;
 use WWW::Mechanize;
 use Proc::Daemon;
 use LWP::UserAgent;
+use LWP::Protocols::https;
 ################### SUMMONS #
 # NEO - scrape searchcode.com
 #   (<>..<>)  ---skry of MKRX
