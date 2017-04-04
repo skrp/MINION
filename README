@@ -4,13 +4,13 @@
 # scraping work: over-time & many iterations & chronic
 # https://ibin.co/38j1IoadTmGz.jpg
 # DEMON KEYS #####################
-limbo    # processing dir
 dump     # dump dir
-STATE    # stateful que
 DEBUG    # stderr
 LOG      # stdout
 PID      # status
-QUE      # call work
-CLEAN    # start easy
-PAUSE    # call sleep
+BAG      # 24hr workloads
+QUE      # current workload
+PROG     # current progress
+CLEAN    # start automatic
 SHUT     # call exit
+PAUSE    # call sleep
