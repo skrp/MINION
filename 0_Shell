@@ -5,7 +5,7 @@ process respected as life
 bestowed with independence, voice, communications, work
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # BIRTH ##################
-code
+SOUL
 fork
 daemonize
 # INHERIT ################
@@ -30,5 +30,9 @@ AGE - hour measurements
 every loop check hour
   create STATE
   DIARY
+    post
+    feed
+    respond
   SUICIDE?
-  
+  SLEEP?
+SOUL
