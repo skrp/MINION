@@ -1,8 +1,12 @@
 #!/usr/local/bin/perl
 use strict; use warnings; $|=1; $0='ARKI';
 use Proc::Daemon;
-use LWP::UserAgent;
+# SEED ###################
+my $SOUL;
+my $apartment = shift @rooms;
 # BIRTH ##################
+my $workdir = '.';
+
 SOUL
 fork
 daemonize
