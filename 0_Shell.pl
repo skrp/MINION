@@ -25,8 +25,7 @@ my $embryo = Proc::Daemon->new(
 );
 $embryo->Init() or die "STILLBORN\n";
 # INHERIT ############################
-
-my $t = localtime; my $bday = 
+my $bday = TIME();
 # LIVE ###############################
 while (1)
 {
@@ -39,6 +38,7 @@ while (1)
   open($qfh, '<', $QUE);
   my @QUE = readline $qfh; chomp @QUE;
   close $qfh; unlink $QUE;
+  my $stime = TIME(); print "start $stime\n";
   my $variable = shift; print "variable $variable\n";
   my $count = @QUE; print "count $count\n";
   foreach my $i (@QUE)
@@ -49,6 +49,7 @@ while (1)
     shift @QUE; $count--;
     print "ended $i\n"; print "count $count\n";
   }
+  my $dtime = TIME(); print "done $dtime\n";
   open($Wfh, '>', $DONE);
 }
 # SUB ##############################
@@ -59,7 +60,7 @@ sub SLEEP()
   print "timeout $timeout\n"; sleep $timeout;
   close $Sfh; unlink $SLEEP;
 }
-sub time(){
+sub TIME(){
   my $t = localtime; 
   my $m = split(/\s+/, $t)[1]; my $d = split(/\s+/, $t)[2]; 
   my $H = split(/\s+/, $t)[3]; my $h = split(/\:/, $H)[0];
