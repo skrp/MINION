@@ -25,14 +25,14 @@ my $embryo = Proc::Daemon->new(
 );
 $embryo->Init() or die "STILLBORN\n";
 # INHERIT ############################
-my $bday = TIME();
+my $btime = TIME(); print "HELLOWORLD $btime\n"; 
 # LIVE ###############################
 while (1)
 {
   if (-e $SUICIDE)
-    { unlink $SUICIDE; print "FKTHEWORLD\n"; exit; }
+    { unlink $SUICIDE; my $xtime = TIME(); print "FKTHEWORLD $xtime\n"; exit; }
   if (-e $SLEEP)
-    { SLEEP(); }
+    { my $ztime = TIME(); print "sleep $ztime\n"; SLEEP(); }
   if (-ne $QUE)
     { sleep 3600; }
   open($qfh, '<', $QUE);
