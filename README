@@ -14,3 +14,17 @@ PROG     # current progress
 CLEAN    # start automatic
 SHUT     # call exit
 PAUSE    # call sleep
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+/home/spawn/
+/home/spawn/
+/home/host/
+/home/hive/arki_283/FACE (useragent, protocol, age, name,rep)
+/home/hive/arki_283/PID
+/home/hive/arki_283/BUG
+/home/hive/arki_283/LOG
+/home/hive/arki_283/QUE
+/home/hive/arki_283/SLEEP
+/home/hive/arki_283/SUICIDE
+/home/hive/arki_283/POST
+/home/hive/arki_283/WORD
+/home/hive/arki_283/CODE(popkrip)
