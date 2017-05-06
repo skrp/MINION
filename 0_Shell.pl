@@ -14,6 +14,7 @@ my $BUG = 'BUG'; my $LOG = 'LOG';
 my $PID = 'PID'; my $QUE = 'QUE';
 my $POST = 'POST'; my $WORD = 'WORD';
 my $SLEEP  = 'SLEEP'; my $SUICIDE = 'SUICIDE';
+my $RATE = '100';
 mkdir $home or die "HOME FAIL\n";
 # BIRTH ###############################
 my $embryo = Proc::Daemon->new(
@@ -29,11 +30,7 @@ my $btime = TIME(); print "HELLOWORLD $btime\n";
 # LIVE ###############################
 while (1)
 {
-  if (-e $SUICIDE)
-    { unlink $SUICIDE; my $xtime = TIME(); print "FKTHEWORLD $xtime\n"; exit; }
-  if (-e $SLEEP)
-    { my $ztime = TIME(); print "sleep $ztime\n"; SLEEP(); }
-  if (-ne $QUE)
+  unless (-e $QUE)
     { sleep 3600; }
   open($qfh, '<', $QUE);
   my @QUE = readline $qfh; chomp @QUE;
@@ -43,14 +40,28 @@ while (1)
   my $count = @QUE; print "count $count\n";
   foreach my $i (@QUE)
   {
+    if (-e $SUICIDE)
+      { unlink $SUICIDE; my $xtime = TIME(); print "FKTHEWORLD $xtime\n"; exit; }
+    if (-e $SLEEP)
+      { my $ztime = TIME(); print "sleep $ztime\n"; SLEEP(); }
     print "started $i\n";
- # CODE #############################
- # CLEAN ############################
+#######################################################################
+## CODE #############################
+
+#######################################################################
+## CLEAN ############################
     shift @QUE; $count--;
     print "ended $i\n"; print "count $count\n";
+    if ($count % $RATE == 0)
+    {
+# RATE ##############################
+      POST(); WORD();
+    }
   }
   my $dtime = TIME(); print "done $dtime\n";
   open($Wfh, '>', $DONE);
+  POST();
+  WORD();
 }
 # SUB ##############################
 sub SLEEP()
@@ -61,9 +72,26 @@ sub SLEEP()
   close $Sfh; unlink $SLEEP;
 }
 sub TIME(){
-  my $t = localtime; 
-  my $m = split(/\s+/, $t)[1]; my $d = split(/\s+/, $t)[2]; 
+  my $t = localtime;
+  my $m = split(/\s+/, $t)[1]; my $d = split(/\s+/, $t)[2];
   my $H = split(/\s+/, $t)[3]; my $h = split(/\:/, $H)[0];
   my $time = $m . '_' . $d . '_' . $h;
   return $time;
+}
+sub POST()
+{
+  
+}
+sub WORD()
+{
+  if ($a_q == '1')
+    { append_que(); }
+  if ($s_q == '1')
+    { open($Sfh, '>', $SLEEP); print "$Sfh" "$cmd{s_q}"); }  # hash{$cmd} = $value
+}
+sub append_que()
+{
+  my @newQUE = shift;
+  foreach (@newQUE)
+    { push @QUE, $_; }
 }
