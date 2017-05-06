@@ -16,8 +16,8 @@ SHUT     # call exit
 PAUSE    # call sleep
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 /home/spawn/
-/home/spawn/
 /home/host/
+/home/sonar/
 /home/hive/arki_283/FACE (useragent, protocol, age, name,rep)
 /home/hive/arki_283/PID
 /home/hive/arki_283/BUG
@@ -39,3 +39,4 @@ WORD: fifo in
 CODE: popkrip
 SLEEP: sleep cmd
 SUICIDE: kill cmd
+***********************************
