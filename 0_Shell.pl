@@ -66,7 +66,7 @@ while (1)
   my $dtime = TIME(); print "done $dtime\n";
   open($Wfh, '>', $DONE);
   POST();
-  WORD();
+  WORD(); Wread();
 }
 # SUB ##############################
 sub SLEEP()
@@ -99,17 +99,26 @@ sub WORD()
   my $key = popkrip(); my $ua = useragent();
   my $res = $ua->get("$cc/i/$key", ':content_file'=>$WORD);
 }
-sub read()
+sub Wread()
 {
   my $key = shift;
-  open($Wfh, '<', "$dump/$key");
-  my @cmds = readline $Wfh; chomp @cmds; close $Wfh;
+  open($Rfh, '<', "$dump/$key");
+  my @cmds = readline $Rfh; chomp @cmds; close $Rfh;
   my $cmd = @cmds[0]; my $value = @cmds[1];
 # (suicide, $boolean) (sleep, $x) (append, $key) (orders, $key)
-  if ($a_q == '1')
-    { my $status = append_que(); return $status; }
-  if ($s_q == '1')
-    { open($Sfh, '>', $SLEEP); print "$Sfh" "$cmd{s_q}"); }  # hash{$cmd} = $value
+  if ($cmd == 'suicide')
+  if ($cmd == 'sleep')
+    { open($Sfh, '>', $SLEEP); print "$Sfh" "$cmd{s_q}"); }
+  if ($cmd == 'append')
+  {
+    open(my $Wfh, '<', $WORD);
+    my @aQUE = readline $Wfh;
+    chomp @aQUE; close $Wfh;
+    foreach (@aQUE)
+      { push @QUE, $_; }
+  }
+  if ($cmd == 'orders')
+    { cp $WORD que/$value; }
 }
 sub append_que()
 {
