@@ -96,9 +96,13 @@ sub WORD()
 {
   my $key = popkrip(); my $ua = useragent();
   my $res = $ua->get("$cc/i/$key", ':content_file'=>"$dump/$key");
-  my $req = HTTP::Request->new(GET => "$cc/i/$key");
-  my $res = $ua->request($req);
-  my $cont =
+}
+sub read()
+{
+  my $key = shift;
+  open($Wfh, '<', "$dump/$key");
+  my @cmds = readline $Wfh; chomp @cmds; close $Wfh;
+# (sleep, $x) (append, $key) (orders, $key)
   if ($a_q == '1')
     { my $status = append_que(); return $status; }
   if ($s_q == '1')
