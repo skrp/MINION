@@ -43,6 +43,8 @@ while (1)
   my $stime = TIME(); print "start $stime\n";
   my $variable = shift; print "variable $variable\n";
   my $count = @QUE; print "count $count\n"; my $ttl = $count;
+#-----------------------------------------------------------
+#-----------------------------------------------------------
   foreach my $i (@QUE)
   {
     if (-e $SUICIDE)
@@ -50,24 +52,24 @@ while (1)
     if (-e $SLEEP)
       { SLEEP(); }
     print "started $i\n";
-#######################################################################
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ## CODE #############################
 
-#######################################################################
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ## CLEAN ############################
     shift @QUE; $count--;
     print "ended $i\n"; print "count $count\n";
+# RATE ##############################
     if ($count % $RATE == 0)
     {
-# RATE ##############################
       my $current = gmtime();
       $FACE[0] = (($current - $born) / 60);
       open($Rfh, '<', $REP); $FACE[2] = readline $Rfh;
       $FACE[3] = $variable . '_' . $count . '/' . $ttl;
       POST(@FACE);
       WORD(); Wread();
-    }
-  }
+    }#---------------------------------------------------
+  }#-----------------------------------------------------
   my $dtime = TIME(); print "done $dtime\n";
   open($Wfh, '>', $DONE);
 }
