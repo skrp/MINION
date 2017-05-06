@@ -1,6 +1,7 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
 use Proc::Daemon;
+use LWP::UserAgent;
 use IO::Socket;
 ###############
 # SUMMON SCROLL
@@ -14,7 +15,7 @@ my $BUG = 'BUG'; my $LOG = 'LOG';
 my $PID = 'PID'; my $QUE = 'QUE';
 my $POST = 'POST'; my $WORD = 'WORD';
 my $SLEEP  = 'SLEEP'; my $SUICIDE = 'SUICIDE';
-my $RATE = '100';
+my $RATE = '100'; my $KEYS = 'KEYS';
 mkdir $home or die "HOME FAIL\n";
 # BIRTH ###############################
 my $embryo = Proc::Daemon->new(
@@ -55,7 +56,8 @@ while (1)
     if ($count % $RATE == 0)
     {
 # RATE ##############################
-      POST(); WORD();
+      POST($FACE);
+      WORD();
     }
   }
   my $dtime = TIME(); print "done $dtime\n";
@@ -80,7 +82,13 @@ sub TIME(){
 }
 sub POST()
 {
-  
+  my $data = shift;
+  my $ua = useragent();
+  my $req = HTTP::Request->new(POST => $domain/$key)
+  $req->content($data);
+  print "response ";
+  print $ua->request($req)->as_string;
+  print "\n";
 }
 sub WORD()
 {
@@ -94,4 +102,17 @@ sub append_que()
   my @newQUE = shift;
   foreach (@newQUE)
     { push @QUE, $_; }
+}
+sub pop_krip()
+{
+  open($Kfh, '>', $KEYS);
+  my @list = readline $Kfh; chomp @list;
+  my $key = shift @list; print $Kfh @list;
+  close $Kfh; return $key;
+}
+sub useragent()
+{
+  my $ua = LWP::UserAgent->new(
+  );
+  return $ua;
 }
