@@ -112,8 +112,8 @@ sub Wread()
   open($Rfh, '<', "$dump/$key");
   my @cmds = readline $Rfh; chomp @cmds; close $Rfh;
   my $cmd = @cmds[0]; my $value = @cmds[1];
-# (suicide, $boolean) (sleep, $x) (append, $key) (orders, $key)
-  if ($cmd == 'suicide')
+# (suicide, $boolean) (sleep, $x) (append, $WORD) (orders, $WORD)
+  if ($cmd == 'suicide' && $value == '1')
     { SUICIDE(); }
   if ($cmd == 'sleep')
     { open($Sfh, '>', $SLEEP); print "$Sfh" "$value"; close $Sfh; SLEEP(); }
