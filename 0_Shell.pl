@@ -33,12 +33,12 @@ my $btime = TIME(); print "HELLOWORLD $btime\n";
 # LIVE ###############################
 while (1)
 {
-  unless (-e $QUE)
-    { sleep 3600; }
   @ls = `ls que`; my $QUE = @ls[0];
   open($qfh, '<', "que/$QUE");
   my @QUE = readline $qfh; chomp @QUE;
   close $qfh; unlink $QUE;
+  unless (defined $QUE[1])
+    { sleep 3600; }
   my $stime = TIME(); print "start $stime\n";
   my $variable = shift; print "variable $variable\n";
   my $count = @QUE; print "count $count\n";
@@ -97,7 +97,7 @@ sub POST()
 sub WORD()
 {
   my $key = popkrip(); my $ua = useragent();
-  my $res = $ua->get("$cc/i/$key", ':content_file'=>"$dump/$key");
+  my $res = $ua->get("$cc/i/$key", ':content_file'=>$WORD);
 }
 sub read()
 {
