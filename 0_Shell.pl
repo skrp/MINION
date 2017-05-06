@@ -114,8 +114,9 @@ sub Wread()
   my $cmd = @cmds[0]; my $value = @cmds[1];
 # (suicide, $boolean) (sleep, $x) (append, $key) (orders, $key)
   if ($cmd == 'suicide')
+    { SUICIDE(); }
   if ($cmd == 'sleep')
-    { open($Sfh, '>', $SLEEP); print "$Sfh" "$cmd{s_q}"); }
+    { open($Sfh, '>', $SLEEP); print "$Sfh" "$value"; close $Sfh; SLEEP(); }
   if ($cmd == 'append')
   {
     open(my $Wfh, '<', $WORD);
@@ -126,12 +127,6 @@ sub Wread()
   }
   if ($cmd == 'orders')
     { cp $WORD que/$value; }
-}
-sub append_que()
-{
-  my @newQUE = shift;
-  foreach (@newQUE)
-    { push @QUE, $_; }
 }
 sub popkrip()
 {
