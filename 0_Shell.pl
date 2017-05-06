@@ -31,6 +31,7 @@ $embryo->Init() or die "STILLBORN\n";
 # FACE (age, name, rep)
 my $born = gmtime();
 my $btime = TIME(); print "HELLOWORLD $btime\n";
+@FACE[1] = $name;
 # LIVE ###############################
 while (1)
 {
@@ -62,7 +63,9 @@ while (1)
 # RATE ##############################
       my $current = gmtime();
       @FACE[0] = (($current - $born) / 60);
-      POST($FACE); POST($variable);
+      open($Rfh, '<', $REP); $FACE[2] = readline $Rfh;
+      my $status = $variable . '_' . $count;
+      POST(@FACE); POST($status);
       WORD(); Wread();
     }
   }
