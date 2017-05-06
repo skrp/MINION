@@ -1,8 +1,7 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
 use Proc::Daemon;
-use LWP::UserAgent;
-use IO::Socket;
+use LWP::UserAgent; use IO::Socket;
 ###############
 # SUMMON SCROLL
 ###############
@@ -10,9 +9,9 @@ use IO::Socket;
 # EMBRYO ##############################
 my $name = ''; my $cc = '';
 my $DONE = 'DONE'; my $dump = 'dump';
-my $FACE = 'FACE'; open($Ffh, '>', $FACE) or die "FACE FAIL\n"
+my @FACE; open($Ffh, '>', $FACE) or die "FACE FAIL\n"
 my $home = '/home/hive/$name'; my $HOLE = 'HOLE';
-my $BUG = 'BUG'; my $LOG = 'LOG';
+my $BUG = 'BUG'; my $LOG = 'LOG'; my $REP = 'REP';
 my $PID = 'PID'; my $que = 'que';
 my $POST = 'POST'; my $WORD = 'WORD';
 my $SLEEP  = 'SLEEP'; my $SUICIDE = 'SUICIDE';
@@ -29,6 +28,8 @@ my $embryo = Proc::Daemon->new(
 );
 $embryo->Init() or die "STILLBORN\n";
 # INHERIT ############################
+# FACE (age, name, rep)
+my $born = gmtime();
 my $btime = TIME(); print "HELLOWORLD $btime\n";
 # LIVE ###############################
 while (1)
@@ -59,14 +60,14 @@ while (1)
     if ($count % $RATE == 0)
     {
 # RATE ##############################
+      my $current = gmtime();
+      @FACE[0] = (($current - $born) / 60);
       POST($FACE); POST($variable);
-      WORD();
+      WORD(); Wread();
     }
   }
   my $dtime = TIME(); print "done $dtime\n";
   open($Wfh, '>', $DONE);
-  POST();
-  WORD(); Wread();
 }
 # SUB ##############################
 sub SUICIDE()
