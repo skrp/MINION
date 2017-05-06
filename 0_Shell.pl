@@ -29,11 +29,11 @@ $embryo->Init() or die "STILLBORN\n";
 # LIVE ###############################
 while (1)
 {
-  if (-e "SUICIDE")
-    { print "FKTHEWORLD\n"; exit; }
-  if (-e "SLEEP")
-    { sleep(); }
-  if (-ne "QUE")
+  if (-e $SUICIDE)
+    { unlink $SUICIDE; print "FKTHEWORLD\n"; exit; }
+  if (-e $SLEEP)
+    { SLEEP(); }
+  if (-ne $QUE)
     { sleep 3600; }
   open($qfh, '<', $QUE);
   my @QUE = readline $qfh; chomp @QUE;
@@ -49,4 +49,12 @@ while (1)
     print "ended $i\n"; print "count $count\n";
   }
   open($Wfh, '>', $WAIT);
+}
+# SUB ##############################
+sub SLEEP()
+{
+  open(my $Sfh, '<', $SLEEP);
+  my $timeout = readline $pfh; chomp $timeout;
+  print "timeout $timeout\n"; sleep $timeout;
+  close $Sfh; unlink $SLEEP;
 }
