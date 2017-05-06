@@ -25,7 +25,7 @@ my $embryo = Proc::Daemon->new(
 );
 $embryo->Init() or die "STILLBORN\n";
 # INHERIT ############################
-my $btime = TIME(); print "HELLOWORLD $btime\n"; 
+my $btime = TIME(); print "HELLOWORLD $btime\n";
 # LIVE ###############################
 while (1)
 {
