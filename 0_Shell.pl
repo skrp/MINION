@@ -13,11 +13,12 @@ my $DONE = 'DONE'; my $dump = 'dump';
 my $FACE = 'FACE'; open($Ffh, '>', $FACE) or die "FACE FAIL\n"
 my $home = '/home/hive/$name'; my $HOLE = 'HOLE';
 my $BUG = 'BUG'; my $LOG = 'LOG';
-my $PID = 'PID'; my $QUE = 'QUE';
+my $PID = 'PID'; my $que = 'que';
 my $POST = 'POST'; my $WORD = 'WORD';
 my $SLEEP  = 'SLEEP'; my $SUICIDE = 'SUICIDE';
 my $RATE = '100'; my $KEYS = 'KEYS';
-mkdir $home or die "HOME FAIL\n";
+mkdir $home or die "home FAIL\n"; mkdir $que or die "que FAIL\n";
+mkdir $dump or die "dump FAIL\n";
 # BIRTH ###############################
 my $embryo = Proc::Daemon->new(
   work_dir => $home,
@@ -34,7 +35,8 @@ while (1)
 {
   unless (-e $QUE)
     { sleep 3600; }
-  open($qfh, '<', $QUE);
+  @ls = `ls que`; my $QUE = @ls[0];
+  open($qfh, '<', "que/$QUE");
   my @QUE = readline $qfh; chomp @QUE;
   close $qfh; unlink $QUE;
   my $stime = TIME(); print "start $stime\n";
