@@ -28,3 +28,14 @@ PAUSE    # call sleep
 /home/hive/arki_283/POST
 /home/hive/arki_283/WORD
 /home/hive/arki_283/CODE(popkrip)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FACE: age, name, rep
+PROTO: useragent (handles socket responses)
+BUG: debug
+LOG: output
+QUE: work
+POST: fifo out
+WORD: fifo in
+CODE: popkrip
+SLEEP: sleep cmd
+SUICIDE: kill cmd
