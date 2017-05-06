@@ -102,7 +102,8 @@ sub read()
   my $key = shift;
   open($Wfh, '<', "$dump/$key");
   my @cmds = readline $Wfh; chomp @cmds; close $Wfh;
-# (sleep, $x) (append, $key) (orders, $key)
+  my $cmd = @cmds[0]; my $value = @cmds[1];
+# (suicide, $boolean) (sleep, $x) (append, $key) (orders, $key)
   if ($a_q == '1')
     { my $status = append_que(); return $status; }
   if ($s_q == '1')
@@ -124,6 +125,7 @@ sub popkrip()
 sub useragent()
 {
   my $ua = LWP::UserAgent->new(
+# AGENT ##########################
   );
   return $ua;
 }
