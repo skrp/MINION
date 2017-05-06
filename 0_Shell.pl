@@ -7,7 +7,7 @@ use IO::Socket;
 ###############
 # NAME - purpose
 # EMBRYO ##############################
-my $name = ''; my $WAIT = 'WAIT';
+my $name = ''; my $DONE = 'DONE';
 my $FACE = 'FACE'; open($Ffh, '>', $FACE) or die "FACE FAIL\n"
 my $home = '/home/hive/$name'; my $HOLE = 'HOLE';
 my $BUG = 'BUG'; my $LOG = 'LOG';
@@ -26,6 +26,7 @@ my $embryo = Proc::Daemon->new(
 $embryo->Init() or die "STILLBORN\n";
 # INHERIT ############################
 
+my $t = localtime; my $bday = 
 # LIVE ###############################
 while (1)
 {
@@ -48,7 +49,7 @@ while (1)
     shift @QUE; $count--;
     print "ended $i\n"; print "count $count\n";
   }
-  open($Wfh, '>', $WAIT);
+  open($Wfh, '>', $DONE);
 }
 # SUB ##############################
 sub SLEEP()
@@ -57,4 +58,11 @@ sub SLEEP()
   my $timeout = readline $pfh; chomp $timeout;
   print "timeout $timeout\n"; sleep $timeout;
   close $Sfh; unlink $SLEEP;
+}
+sub time(){
+  my $t = localtime; 
+  my $m = split(/\s+/, $t)[1]; my $d = split(/\s+/, $t)[2]; 
+  my $H = split(/\s+/, $t)[3]; my $h = split(/\:/, $H)[0];
+  my $time = $m . '_' . $d . '_' . $h;
+  return $time;
 }
