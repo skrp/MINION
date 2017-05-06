@@ -28,10 +28,10 @@ my $embryo = Proc::Daemon->new(
 );
 $embryo->Init() or die "STILLBORN\n";
 # INHERIT ############################
-# FACE (age, name, rep)
+# FACE (age, name, rep, status)
 my $born = gmtime();
 my $btime = TIME(); print "HELLOWORLD $btime\n";
-@FACE[1] = $name;
+$FACE[1] = $name;
 # LIVE ###############################
 while (1)
 {
@@ -43,7 +43,7 @@ while (1)
     { sleep 3600; }
   my $stime = TIME(); print "start $stime\n";
   my $variable = shift; print "variable $variable\n";
-  my $count = @QUE; print "count $count\n";
+  my $count = @QUE; print "count $count\n"; my $ttl = $count;
   foreach my $i (@QUE)
   {
     if (-e $SUICIDE)
@@ -62,10 +62,10 @@ while (1)
     {
 # RATE ##############################
       my $current = gmtime();
-      @FACE[0] = (($current - $born) / 60);
+      $FACE[0] = (($current - $born) / 60);
       open($Rfh, '<', $REP); $FACE[2] = readline $Rfh;
-      my $status = $variable . '_' . $count;
-      POST(@FACE); POST($status);
+      $FACE[3] = $variable . '_' . $count . '/' . $ttl;
+      POST(@FACE);
       WORD(); Wread();
     }
   }
