@@ -45,9 +45,9 @@ while (1)
   foreach my $i (@QUE)
   {
     if (-e $SUICIDE)
-      { unlink $SUICIDE; my $xtime = TIME(); print "FKTHEWORLD $xtime\n"; exit; }
+      { SUICIDE(); }
     if (-e $SLEEP)
-      { my $ztime = TIME(); print "sleep $ztime\n"; SLEEP(); }
+      { SLEEP(); }
     print "started $i\n";
 #######################################################################
 ## CODE #############################
@@ -69,12 +69,21 @@ while (1)
   WORD(); Wread();
 }
 # SUB ##############################
+sub SUICIDE()
+{
+  unlink $SUICIDE;
+  my $xtime = TIME(); print "FKTHEWORLD $xtime\n";
+  exit;
+}
 sub SLEEP()
 {
   open(my $Sfh, '<', $SLEEP);
+
   my $timeout = readline $pfh; chomp $timeout;
-  print "timeout $timeout\n"; sleep $timeout;
+  my $ztime = TIME(); print "sleep $ztime\n";
+  print "timeout $timeout\n";
   close $Sfh; unlink $SLEEP;
+  sleep $timeout;
 }
 sub TIME()
 {
