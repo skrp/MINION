@@ -78,10 +78,8 @@ sub SUICIDE()
 sub SLEEP()
 {
   open(my $Sfh, '<', $SLEEP);
-
-  my $timeout = readline $pfh; chomp $timeout;
-  my $ztime = TIME(); print "sleep $ztime\n";
-  print "timeout $timeout\n";
+  my $timeout = readline $Sfh; chomp $timeout;
+  my $ztime = TIME(); print "sleep $ztime $timeout\n";
   close $Sfh; unlink $SLEEP;
   sleep $timeout;
 }
