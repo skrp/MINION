@@ -4,7 +4,7 @@ use LWP::UserAgent;
 # missing computer
 my $base = 'https://arxiv.org/';
 my $showbase = '?show=';
-open($Ufh, '>>', 'url_file');
+open(my $Ufh, '>>', 'url_file');
 my @list = (
     'stat',
     'q-fin',
@@ -64,7 +64,7 @@ foreach my $ilist (@list)
     }
 }
 # SUB ###############################
-sub uagent()
+sub uagent
 {
 	my $s_ua = LWP::UserAgent->new(
 		agent => "Mozilla/50.0.2",
