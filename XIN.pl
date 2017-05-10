@@ -35,10 +35,10 @@ foreach my $ilist (@list)
             my $dy = sprintf("%02d", $y);
             my $dim = sprintf("%02d", $im);
             my $itag = $dy.$dim;
-            my $ibase = $base."list/$ilist/".$itag;
+            my $url = $base."list/$ilist/".$itag;
             my $num = get_num($url);
             next if ($num < 1);
-            my $final_list = "$ibase.$showbase.$num";
+            my $final_list = "$url.$showbase.$num";
             print $Ufh "$final_list\n";
             $im++;
         }
@@ -53,10 +53,10 @@ foreach my $ilist (@list)
             my $dy = sprintf("%02d", $y);
             my $dim = sprintf("%02d", $im);
             my $itag = $dy.$dim;
-            my $ibase = $base."list/$ilist/".$itag;
+            my $url = $base."list/$ilist/".$itag;
             my $num = get_num($url);
             next if ($num < 1);
-            my $final_list = "$ibase.$showbase.$num";
+            my $final_list = "$url.$showbase.$num";
             rint $Ufh "$final_list\n";
             $im++;
         }
@@ -76,8 +76,8 @@ sub get_num
 {
     my ($url) = shift;
     my $ua = uagent();
-    my $req = $ua->get($url, ':content_file'=>"tmp.html");
-	my $btag1 = '<h2>No listing '; my $btag2 = '<p>Sadly, the requested ';
+    my $req = $ua->get($url, ':content_file'=>'tmp.html');
+    my $btag1 = '<h2>No listing '; my $btag2 = '<p>Sadly, the requested ';
     my $numtag1 = '<small>[ total of '; my $numtag2 = ' entries:  <b>';
     open(my$Tfh, '<', 'tmp.html');
     my @content = readline $Tfh; chomp @content;
