@@ -37,10 +37,10 @@ foreach my $ilist (@list)
             my $itag = $dy.$dim;
             my $url = $base."list/$ilist/".$itag;
             my $num = get_num($url);
+	    $im++;
             next if ($num < 1);
             my $final_list = "$url.$showbase.$num";
             print $Ufh "$final_list\n";
-            $im++;
         }
         $y++;
     }
@@ -55,10 +55,10 @@ foreach my $ilist (@list)
             my $itag = $dy.$dim;
             my $url = $base."list/$ilist/".$itag;
             my $num = get_num($url);
+	    $im++;
             next if ($num < 1);
             my $final_list = "$url.$showbase.$num";
-            rint $Ufh "$final_list\n";
-            $im++;
+            print $Ufh "$final_list\n";
         }
         $y++;
     }
