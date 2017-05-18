@@ -39,7 +39,7 @@ my $btime = TIME(); print "HELLOWORLD $btime\n";
 while (1)
 {
   my @ls = `ls que`; my $QUE = @ls[0];
-  unless (defined $QUE)
+  if (not defined $QUE)
     { sleep 3600; next; }
   open($qfh, '<', "que/$QUE") or die "cant open que/$QUE\n";
   my @QUE = readline $qfh; chomp @QUE;
