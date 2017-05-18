@@ -38,12 +38,12 @@ my $btime = TIME(); print "HELLOWORLD $btime\n";
 # WORK ###############################
 while (1)
 {
-  @ls = `ls que`; my $QUE = @ls[0];
-  open($qfh, '<', "que/$QUE");
+  my @ls = `ls que`; my $QUE = @ls[0];
+  unless (defined $QUE)
+    { sleep 3600; next; }
+  open($qfh, '<', "que/$QUE") or die "cant open que/$QUE\n";
   my @QUE = readline $qfh; chomp @QUE;
   close $qfh; unlink $QUE;
-  unless (defined $QUE[1])
-    { sleep 3600; }
   my $stime = TIME(); print "start $stime\n";
   my $variable = shift; print "variable $variable\n";
   my $count = @QUE; print "count $count\n"; my $ttl = $count;
