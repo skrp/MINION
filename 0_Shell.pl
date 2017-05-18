@@ -1,21 +1,27 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
-use Proc::Daemon;
-use LWP::UserAgent; use IO::Socket;
-###############
+use Proc::Daemon; use IO::Socket;
+use LWP::UserAgent;
+#####################################
 # SUMMON SCROLL
-###############
-# NAME - purpose
-# EMBRYO ##############################
-my $name = ''; my $cc = '';
-my $DONE = 'DONE'; my $dump = 'dump';
-my $home = '/home/hive/$name'; my $HOLE = 'HOLE';
-my $BUG = 'BUG'; my $LOG = 'LOG'; my $REP = 'REP';
-my $PID = 'PID'; my $que = 'que'; my @FACE;
+# INIT ##############################
+my $name = ''; my $cc = ''; #???????????????????????????
+# DIR 
+my $home = "/home/hive/$name"; 
+my $dump = "$home/dump"; my $que = "$home/que";
+# FILES
+my $HOLE = 'HOLE'; my $BUG = 'BUG'; 
+my $LOG = 'LOG'; my $mPID = 'PID'; 
+# ATTR
+my @FACE; my $REP = 'REP'; my $RATE = '100';
+# FIFO
 my $POST = 'POST'; my $WORD = 'WORD';
+# SIG-FILE
 my $SLEEP  = 'SLEEP'; my $SUICIDE = 'SUICIDE';
-my $RATE = '100'; my $KEYS = 'KEYS';
-mkdir $home or die "home FAIL\n"; mkdir $que or die "que FAIL\n";
+my $DONE = 'DONE';
+# PREP ################################
+mkdir $home or die "home FAIL\n"; 
+mkdir $que or die "que FAIL\n";
 mkdir $dump or die "dump FAIL\n";
 # BIRTH ###############################
 my $embryo = Proc::Daemon->new(
@@ -23,15 +29,13 @@ my $embryo = Proc::Daemon->new(
   child_STDOUT = "+>>$LOG",
   child_STDERR = "+>>$BUG",
   child_STDIN = $HOLE,
-  pid_file = $PID
+  pid_file = $mPID
 );
 $embryo->Init() or die "STILLBORN\n";
 # INHERIT ############################
-# FACE (age, name, rep, status)
 my $born = gmtime();
 my $btime = TIME(); print "HELLOWORLD $btime\n";
-$FACE[1] = $name;
-# LIVE ###############################
+# WORK ###############################
 while (1)
 {
   @ls = `ls que`; my $QUE = @ls[0];
@@ -63,6 +67,7 @@ while (1)
     if ($count % $RATE == 0)
     {
       my $current = gmtime();
+      # FACE (age, name, rep, status)
       $FACE[0] = (($current - $born) / 60);
       open($Rfh, '<', $REP); $FACE[2] = readline $Rfh;
       $FACE[3] = $variable . '_' . $count . '/' . $ttl;
