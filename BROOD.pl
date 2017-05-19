@@ -13,7 +13,7 @@ while(1)
   if (not defined $line)
     { sleep 500; next; }
   my @set = split(/\s+/, $line);
-  my $set_name = gen();
+  my $set_name = gen(); regen($set_name);
 # DIR 
   my $home = "hive/$set_name"; my $dump = "$home/dump"; my $que = "$home/que";
 # FILES
@@ -33,9 +33,15 @@ while(1)
 # FN ################################
 sub gen
 {
-  open(my $Gfh, '<', 'GENERATION') or die "read GENERATION fail\n";
+  open(my $Gfh, '<', 'GENERATION') or die "GENERATION fail\n";
   my $set_name = readline $Gfh; close $Gfh; 
-  return $set_name and ;
+  return $set_name;
+}
+sub regen
+{
+  my ($set_name) = shift; $set_name++;
+  open(my $Gfh, '>', 'GENERATION') or die "REGENERATION fail\n";
+  print $Gfh "$set_name"; close $Gfh; 
 }
 sub TIME
 {
