@@ -8,8 +8,11 @@ my $LOG = 'LOG'; open(my $Bfh, '>>', $LOG) or die "cant open LOG\n";
 my $WORD = 'WORD'; mkfifo($WORD, 0770) or die "mkfifo WORD fail\n";
 my $POST = 'POST'; mkfifo($POST, 0770) or die "mkfifo POST fail\n";
 while(1)
-  my $line = <$WORD> or sleep 500;
-  my ($name) = @ARGV; 
+{
+  my $line = <$WORD>;
+  sleep 500 if not defined $line;
+  my @set = split(/\s+/, $line);
+  my $set_name = 
 # DIR 
   my $home = "hive/$name"; 
   my $dump = "$home/dump"; my $que = "$home/que";
@@ -30,6 +33,11 @@ while(1)
   my $btime = TIME(); print $Bfh "$name $btime\n";
 }
 # FN ################################
+sub gen
+{
+  open(my $Gfh, '<', 'GENERATION') or die "read GENERATION fail\n";
+  my $set_name = readline $Gfh; close $Gfh;
+}
 sub TIME
 {
   my $t = localtime;
