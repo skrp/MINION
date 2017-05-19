@@ -1,11 +1,14 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
-use Proc::Daemon;
+use Proc::Daemon; use POSIX qw(mkfifo);
 #####################################
 # BROODLORD
 # INIT ##############################
-open(my $Bfh, '>>', LOG) or die "cant open LOG\n";
+my $LOG = 'LOG'; open(my $Bfh, '>>', $LOG) or die "cant open LOG\n";
+my $WORD = 'WORD'; mkfifo($WORD, 0770) or die "mkfifo WORD fail\n";
+my $POST = 'POST'; mkfifo($POST, 0770) or die "mkfifo POST fail\n";
 while(1)
+  my $line = <$WORD> or sleep 500;
   my ($name) = @ARGV; 
 # DIR 
   my $home = "hive/$name"; 
