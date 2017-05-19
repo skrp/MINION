@@ -10,24 +10,22 @@ my $POST = 'POST'; mkfifo($POST, 0770) or die "mkfifo POST fail\n";
 while(1)
 {
   my $line = <$WORD>;
-  sleep 500 if not defined $line;
+  if (not defined $line)
+    { sleep 500; next; }
   my @set = split(/\s+/, $line);
-  my $set_name = 
+  my $set_name = gen();
 # DIR 
-  my $home = "hive/$name"; 
-  my $dump = "$home/dump"; my $que = "$home/que";
+  my $home = "hive/$set_name"; my $dump = "$home/dump"; my $que = "$home/que";
 # FILES
   my $BUG = "BUG"; my $LOG = "LOG"; my $mPID = 'PID'; 
 # PREP ################################
-  mkdir $home or die "home FAIL\n"; 
-  mkdir $que or die "que FAIL\n";
-  mkdir $dump or die "dump FAIL\n";
+  mkdir $home or die "home FAIL\n"; mkdir $que or die "que FAIL\n"; mkdir $dump or die "dump FAIL\n";
 # BIRTH ###############################
   my $embryo = Proc::Daemon->new(
     work_dir => $home,
     child_STDOUT => "+>>$LOG",
     child_STDERR => "+>>$BUG",
-    pid_file => "$mPID",
+    pid_file => $mPID,
   );
   $embryo->Init() or die "STILLBORN\n";
   my $btime = TIME(); print $Bfh "$name $btime\n";
@@ -36,7 +34,8 @@ while(1)
 sub gen
 {
   open(my $Gfh, '<', 'GENERATION') or die "read GENERATION fail\n";
-  my $set_name = readline $Gfh; close $Gfh;
+  my $set_name = readline $Gfh; close $Gfh; 
+  return $set_name and ;
 }
 sub TIME
 {
