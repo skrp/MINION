@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
-use Proc::Daemon; use IO::Socket;
+use Proc::Daemon; use POSIX qw(mkfifo);
 #####################################
 # SUMMON SCROLL
 # INIT ##############################
@@ -9,13 +9,12 @@ my ($name) = @ARGV;
 my $home = "hive/$name"; 
 my $dump = "$home/dump"; my $que = "$home/que";
 # FILES
-my $BUG = "BUG"; 
-my $LOG = "LOG"; 
-my $mPID = 'PID'; 
+my $BUG = "BUG"; my $LOG = "LOG"; my $mPID = 'PID'; 
 # ATTR
 my @FACE; my $REP = "REP"; my $RATE = '100';
 # FIFO
-my $POST = "POST"; my $WORD = "WORD";
+my $POST = "POST"; 
+my $WORD = "WORD";
 # SIG-FILE
 my $SLEEP  = "SLEEP"; my $SUICIDE = "SUICIDE";
 my $DONE = "DONE";
