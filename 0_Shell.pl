@@ -4,20 +4,21 @@ use Proc::Daemon; use IO::Socket;
 #####################################
 # SUMMON SCROLL
 # INIT ##############################
-my $name = ''; my $cc = ''; #???????????????????????????
+my ($name) = @ARGV; 
 # DIR 
-my $home = "/home/hive/$name"; 
+my $home = "hive/$name"; 
 my $dump = "$home/dump"; my $que = "$home/que";
 # FILES
-my $HOLE = 'HOLE'; my $BUG = 'BUG'; 
-my $LOG = 'LOG'; my $mPID = 'PID'; 
+my $BUG = "BUG"; 
+my $LOG = "LOG"; 
+my $mPID = 'PID'; 
 # ATTR
-my @FACE; my $REP = 'REP'; my $RATE = '100';
+my @FACE; my $REP = "REP"; my $RATE = '100';
 # FIFO
-my $POST = 'POST'; my $WORD = 'WORD';
+my $POST = "POST"; my $WORD = "WORD";
 # SIG-FILE
-my $SLEEP  = 'SLEEP'; my $SUICIDE = 'SUICIDE';
-my $DONE = 'DONE';
+my $SLEEP  = "SLEEP"; my $SUICIDE = "SUICIDE";
+my $DONE = "DONE";
 # PREP ################################
 mkdir $home or die "home FAIL\n"; 
 mkdir $que or die "que FAIL\n";
@@ -25,10 +26,9 @@ mkdir $dump or die "dump FAIL\n";
 # BIRTH ###############################
 my $embryo = Proc::Daemon->new(
   work_dir => $home,
-  child_STDOUT = "+>>$LOG",
-  child_STDERR = "+>>$BUG",
-  child_STDIN = $HOLE,
-  pid_file = $mPID
+  child_STDOUT => "+>>$LOG",
+  child_STDERR => "+>>$BUG",
+  pid_file => "$mPID",
 );
 $embryo->Init() or die "STILLBORN\n";
 # INHERIT ############################
@@ -37,10 +37,10 @@ my $btime = TIME(); print "HELLOWORLD $btime\n";
 # WORK ###############################
 while (1)
 {
-  my @ls = `ls que`; my $QUE = @ls[0];
+  my @ls = `ls que`; my $QUE = $ls[0];
   if (not defined $QUE)
     { sleep 3600; next; }
-  open($qfh, '<', "que/$QUE") or die "cant open que/$QUE\n";
+  open(my $qfh, '<', "que/$QUE") or die "cant open que/$QUE\n";
   my @QUE = readline $qfh; chomp @QUE;
   close $qfh; unlink $QUE;
   my $stime = TIME(); print "start $stime\n";
@@ -67,12 +67,12 @@ while (1)
       # FACE (age, name, rep, status)
       $FACE[0] = $name;
       $FACE[1] = (($current - $born) / 60);
-      open($Rfh, '<', $REP); $FACE[2] = readline $Rfh;
-      $FACE[3] = $variable . '_' . $count . '/' . $ttl;
+      open(my $Rfh, '<', $REP); $FACE[2] = readline $Rfh;
+      $FACE[3] = $set_name . '_' . $count . '/' . $ttl;
     }
   }
   my $dtime = TIME(); print "done $dtime\n";
-  open($Wfh, '>', $DONE);
+  open(my $Wfh, '>', $DONE);
 }
 # SUB ##############################
 sub SUICIDE
@@ -92,8 +92,9 @@ sub SLEEP
 sub TIME
 {
   my $t = localtime;
-  my $m = split(/\s+/, $t)[1]; my $d = split(/\s+/, $t)[2];
-  my $H = split(/\s+/, $t)[3]; my $h = split(/\:/, $H)[0];
-  my $time = $m . '_' . $d . '_' . $h;
+  my $mon = (split(/\s+/, $t))[1];
+  my $day = (split(/\s+/, $t))[2];
+  my $hour = (split(/\s+/, $t))[3];
+  my $time = $mon.'_'.$day.'_'.$hour;
   return $time;
 }
