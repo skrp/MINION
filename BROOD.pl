@@ -2,18 +2,20 @@
 use strict; use warnings;
 use Proc::Daemon;
 #####################################
-# SUMMON SCROLL
+# BROODLORD
 # INIT ##############################
-my ($name) = @ARGV; 
+open(my $Bfh, '>>', LOG) or die "cant open LOG\n";
+while(1)
+  my ($name) = @ARGV; 
 # DIR 
-my $home = "hive/$name"; 
-my $dump = "$home/dump"; my $que = "$home/que";
+  my $home = "hive/$name"; 
+  my $dump = "$home/dump"; my $que = "$home/que";
 # FILES
-my $BUG = "BUG"; my $LOG = "LOG"; my $mPID = 'PID'; 
+  my $BUG = "BUG"; my $LOG = "LOG"; my $mPID = 'PID'; 
 # PREP ################################
-mkdir $home or die "home FAIL\n"; 
-mkdir $que or die "que FAIL\n";
-mkdir $dump or die "dump FAIL\n";
+  mkdir $home or die "home FAIL\n"; 
+  mkdir $que or die "que FAIL\n";
+  mkdir $dump or die "dump FAIL\n";
 # BIRTH ###############################
   my $embryo = Proc::Daemon->new(
     work_dir => $home,
@@ -22,7 +24,7 @@ mkdir $dump or die "dump FAIL\n";
     pid_file => "$mPID",
   );
   $embryo->Init() or die "STILLBORN\n";
-  my $btime = TIME(); print "$name $btime\n";
+  my $btime = TIME(); print $Bfh "$name $btime\n";
 }
 # FN ################################
 sub TIME
