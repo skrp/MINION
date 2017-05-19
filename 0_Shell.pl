@@ -65,18 +65,17 @@ while (1)
     {
       my $current = gmtime();
       # FACE (age, name, rep, status)
-      $FACE[0] = (($current - $born) / 60);
+      $FACE[0] = $name;
+      $FACE[1] = (($current - $born) / 60);
       open($Rfh, '<', $REP); $FACE[2] = readline $Rfh;
       $FACE[3] = $variable . '_' . $count . '/' . $ttl;
-      POST(@FACE);
-      WORD(); Wread();
-    }#---------------------------------------------------
-  }#-----------------------------------------------------
+    }
+  }
   my $dtime = TIME(); print "done $dtime\n";
   open($Wfh, '>', $DONE);
 }
 # SUB ##############################
-sub SUICID
+sub SUICIDE
 {
   unlink $SUICIDE;
   my $xtime = TIME(); print "FKTHEWORLD $xtime\n";
