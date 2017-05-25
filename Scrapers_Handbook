@@ -1,0 +1,17 @@
+################################
+# SCRAPERS - the internet rapers
+# HANDBOOK of the 
+# Village Hidden 
+#     in the
+#      1337
+################################
+# PATTERNS
+1) learn how data is structured
+2) find the patterns
+3) verify those patterns in the html source
+# SCRAPE LINKS
+4) from the patterns the link sources will emerge
+5) use a proxy as these are high-traffic & obvious but low bandwidth/storage
+6) parse these files to scrape deeper for links or achive final url
+# SCRAPE FILES
+7) once the final url is found over-time-scrape from server high bandwidth/storage needs
