@@ -45,11 +45,11 @@ while (1)
     print $Lfh "started $i\n";
 #####################################
 ## CODE #############################
-   print $Lfh "$i\n";
+    print $Lfh "$i\n";
 #####################################
 ## CLEAN ############################
     shift @QUE; $count--;
-    print $Lfh "ended $i\n";
+    # print $Lfh "ended $i\n"; #### DEBUG
 # RATE ##############################
     if ($count % $RATE == 0)
     {
