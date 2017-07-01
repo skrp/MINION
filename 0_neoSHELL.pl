@@ -13,7 +13,8 @@ my $embryo = Proc::Daemon->new(
 );
 my $pid = $embryo->Init() or die "STILLBORN\n";
 # LOCATION
-my $name = "/tmp/$pid";
+my $gravestone = "/graveyard/"$name"."tar";
+my $name = "/tmp/$pid"";
 my $dump = "$name"."_dump";
 my $code = "$name"."_code";
 my $tar = "$name"."_tar";
@@ -65,9 +66,11 @@ while (1)
     }
   }
   my $dtime = TIME(); print $Lfh "done $dtime\n";
+
+  `XS $dump /otto/pool`;
   `ls $dump > $rep`;
-#  `XS $dump /otto/pool`;
-  `tar -cf $tar $name`;
+  `rm -r $dump`; 
+  `tar -cf $gravestone $name*`;
   my $xxtime = TIME(); print $Lfh "farewell $xxtime\n";
 }
 # SUB ##############################
