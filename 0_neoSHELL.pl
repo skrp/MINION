@@ -5,7 +5,7 @@ use Proc::Daemon; use POSIX qw(mkfifo);
 # SUMMON SCROLL
 # INIT ##############################
 # ATTR
-my @FACE; my $REP = "REP"; my $RATE = '100';
+my @FACE; my $RATE = '100';
 # BIRTH ###############################
 my $embryo = Proc::Daemon->new(
   work_dir => "/tmp/",
@@ -17,10 +17,10 @@ my $dump = "$name"."_dump";
 my $que = "$name"."_que";
 my $code = "$name"."_code";
 my $tar = "$name"."_tar";
-my $log = "$name"."_log"
+my $log = "$name"."_log";
 my $rep = "$name"."_rep";
-my $sleep = "$name"."_SLEEP";
-my $suicide = "$name". "_SUICIDE";
+my $SLEEP = "$name"."_SLEEP";
+my $SUICIDE = "$name"."_SUICIDE";
 my $wfifo = "/tmp/HOST";
 mkdir $dump or die "dump FAIL\n";
 open(my $Lfh, '>>', $log);
@@ -32,7 +32,7 @@ while (1)
 {
   open(my $qfh, '<', $que) or die "cant open que\n";
   my @QUE = readline $qfh; chomp @QUE;
-  close $qfh; unlink $QUE;
+  close $qfh;
   my $stime = TIME(); print $Lfh "start $stime\n";
   my $set_name = shift; print $Lfh "set $set_name\n";
   my $count = @QUE; print $Lfh "count $count\n"; my $ttl = $count;
@@ -57,8 +57,9 @@ while (1)
       # FACE (age, name, rep, status)
       $FACE[0] = $name;
       $FACE[1] = (($current - $born) / 60);
-      open(my $Rfh, '<', $REP); $FACE[2] = readline $Rfh;
       $FACE[3] = $set_name . '_' . $count . '/' . $ttl;
+      open(my $wffh, '>', $wfifo);
+      print $wffh "@FACE";
     }
   }
   my $dtime = TIME(); print $Lfh "done $dtime\n";
