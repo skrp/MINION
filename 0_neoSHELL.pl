@@ -1,7 +1,6 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
 use Proc::Daemon;
-use File::stat;
 #####################################
 # SUMMON SCROLL
 # INIT ##############################
@@ -46,9 +45,7 @@ while (1)
     print $Lfh "started $i\n";
 #####################################
 ## CODE #############################
-   my $st = stat($i); my $total = $st->size;
-   print $Lfh "$i $total\n";
-#    `SB $i /otto/sea`; # MKRX STANDARD BLOCK
+   print $Lfh "$i\n";
 #####################################
 ## CLEAN ############################
     shift @QUE; $count--;
