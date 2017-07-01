@@ -1,10 +1,11 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
-use Proc::Daemon; use POSIX qw(mkfifo);
+use Proc::Daemon;
+use File::stat;
 #####################################
 # SUMMON SCROLL
 # INIT ##############################
-# ATTR
+my ($que) = @ARGV;
 my @FACE; my $RATE = '100';
 # BIRTH ###############################
 my $embryo = Proc::Daemon->new(
@@ -14,7 +15,6 @@ my $pid = $embryo->Init() or die "STILLBORN\n";
 # LOCATION
 my $name = "/tmp/$pid";
 my $dump = "$name"."_dump";
-my $que = "$name"."_que";
 my $code = "$name"."_code";
 my $tar = "$name"."_tar";
 my $log = "$name"."_log";
@@ -45,7 +45,9 @@ while (1)
     print $Lfh "started $i\n";
 #####################################
 ## CODE #############################
-    `SB $i /otto/sea`; # MKRX STANDARD BLOCK
+   my $st = stat($i); my $total = $st->size;
+   print $Lfh "$i $total\n";
+#    `SB $i /otto/sea`; # MKRX STANDARD BLOCK
 #####################################
 ## CLEAN ############################
     shift @QUE; $count--;
@@ -64,7 +66,7 @@ while (1)
   }
   my $dtime = TIME(); print $Lfh "done $dtime\n";
   `ls $dump > $rep`;
-  `XS $dump /otto/pool`;
+#  `XS $dump /otto/pool`;
   `tar -cf $tar $name`;
   my $xxtime = TIME(); print $Lfh "farewell $xxtime\n";
 }
