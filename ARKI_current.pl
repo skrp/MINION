@@ -7,6 +7,7 @@ use LWP::UserAgent;
 ######################################################
 # DEMON - daemon summoning scroll
 # https://raw.githubusercontent.com/skrp/UNIX/master/get_archive.org_meta
+# https://raw.githubusercontent.com/skrp/UNIX/master/rm_JSON_archive.org
 # INIT ###############################################
 my ($que, $path) = @ARGV;
 if (not defined $que) { die ('NO ARGV1 que'); }
