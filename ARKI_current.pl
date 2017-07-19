@@ -113,7 +113,7 @@ sub uagent
 }
 # API ###########################################################
 sub arki
-{
+{ # archive.org pdf scraper 
 	my ($i) = @_;
 	sleep 1;
 	my $ua = uagent();
