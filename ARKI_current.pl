@@ -6,7 +6,7 @@ use File::stat; use List::Util qw(any);
 use LWP::UserAgent;
 ######################################################
 # DEMON - daemon summoning scroll
-
+# https://raw.githubusercontent.com/skrp/UNIX/master/get_archive.org_meta
 # INIT ###############################################
 my ($que, $path) = @ARGV;
 if (not defined $que) { die ('NO ARGV1 que'); }
