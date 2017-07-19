@@ -1,0 +1,14 @@
+#!/usr/local/bin/bash
+# FreeBSD Locals Only
+
+
+dump='/tmp/'
+log='log'
+num=0
+
+while [ $num -lt 100000 ]
+do
+  printf "%s\n" "$num" >> $log;
+  fetch -o $dump http://$url/$num.mp4;
+  ((num++));
+done
