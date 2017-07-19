@@ -1,11 +1,20 @@
 #!/usr/local/bin/bash
 # FreeBSD Locals Only
 
+# USAGE ##############
+if (( $# != 2 ))
+then
+	printf"\nUsage: \n";
+	printf "ARG1 - URL to Scrape\n";
+	printf "ARG2 - Dir to Dump\n";
+	exit 1;
+fi
 
-dump='/tmp/'
-log='log'
+url=$1
+dump=$2
+log="$dump/log"
+
 num=0
-
 while [ $num -lt 100000 ]
 do
   printf "%s\n" "$num" >> $log;
