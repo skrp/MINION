@@ -7,6 +7,8 @@
 # https://raw.githubusercontent.com/skrp/UNIX/master/get_numbers_from_html
 # https://raw.githubusercontent.com/skrp/UNIX/master/numbers_from_html.pl
 # https://raw.githubusercontent.com/skrp/UNIX/master/fetch_from_list
+# NEXT TO RUN ###########
+# https://raw.githubusercontent.com/skrp/UNIX/master/scrape_html_url
 use strict; use warnings;
 use LWP::UserAgent;
 use LWP::Protocol::https;
