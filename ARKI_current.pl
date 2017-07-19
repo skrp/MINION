@@ -12,7 +12,7 @@ use LWP::UserAgent;
 my ($que, $path) = @ARGV;
 if (not defined $que) { die ('NO ARGV1 que'); }
 if (not defined $path) { die ('NO ARGV2 dir'); }
-if (substr($path, -1) eq "/")
+if (substr($path, -1) ne "/")
 	{ $path .= '/'; }
 
 # DIRS ###############################################
