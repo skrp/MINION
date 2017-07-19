@@ -27,7 +27,7 @@ chdir('/tmp/');
 my $RATE = 100; 
 my $count = 0;
 
-my $dump = "$name"."_dump/";
+my $dump = '/tmp/'."$name"."_dump/";
 my $log = "$name"."_log";
 my $SLEEP = "$name"."_SLEEP"; 
 my $SUICIDE = "$name"."_SUICIDE";
