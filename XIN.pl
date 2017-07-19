@@ -1,4 +1,12 @@
 #!/usr/local/bin/perl
+########################
+# XIN  - arxiv scraper
+
+# PREP ##################
+# scrape iterations
+# https://raw.githubusercontent.com/skrp/UNIX/master/get_numbers_from_html
+# https://raw.githubusercontent.com/skrp/UNIX/master/numbers_from_html.pl
+# https://raw.githubusercontent.com/skrp/UNIX/master/fetch_from_list
 use strict; use warnings;
 use LWP::UserAgent;
 use LWP::Protocol::https;
