@@ -116,7 +116,7 @@ sub XS
 	my ($file) = shift;
 	my ($sha) = file_digest($file) or die "couldn't sha $file";
 	File::Copy::copy($file, "$path/pool/$sha");
-	my $cur = "$dump/g/g$sha";
+	my $cur = "$path/g/g$sha";
 	open(my $fh, '>>', $cur) or die "Meta File Creation FAIL $file";
 	printf $fh "%s\n%s\n%s\n%s\n", 
 		xsname($file),
