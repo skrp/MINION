@@ -33,13 +33,14 @@ my $RATE = 100;
 my $count = 0;
 
 my $dump = '/tmp/'."$name"."_dump/";
-my $log = "$name"."_log";
+my $log = $path.$name;
 my $SLEEP = "$name"."_SLEEP"; 
 my $SUICIDE = "$name"."_SUICIDE";
 
 mkdir $dump or die "dump FAIL\n";
 open(my $Lfh, '>>', $log);
 $Lfh->autoflush(1);
+print $Lfh "$$\n";
 
 my $fail = $path.'ARKI_FAIL';
 open(my $Ffh, '>>', $fail);
@@ -47,7 +48,6 @@ $Ffh->autoflush(1);
 
 my $born = gmtime();
 my $btime = TIME(); print $Lfh "HELLOWORLD $btime\n";
-
 # WORK ################################################
 while (1)
 {
@@ -77,7 +77,6 @@ while (1)
 	}
 }
 my $dtime = TIME(); print $Lfh "FKTHEWRLD $dtime\n";
-tombstone();
 # API ###########################################################
 sub arki
 {
@@ -111,13 +110,6 @@ sub arki
 	XS($mfile) && unlink($mfile);
 }
 # SUB ###########################################################
-sub tombstone
-{
-	my $xxtime = TIME(); print $Lfh "farewell $xxtime\n";
-	my $tombstone = $path.'graveyard/'."$name";
-	close $Lfh; 
-	copy($log, $tombstone);
-}
 sub SUICIDE
 {
 	unlink $SUICIDE;
