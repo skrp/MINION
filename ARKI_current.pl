@@ -112,7 +112,7 @@ sub uagent
 }
 sub XS
 {
-	my ($file, $path) = shift;
+	my ($file) = shift;
 	my $magic = File::LibMagic->new();
 	my ($sha) = file_digest($file) or die "couldn't sha $file";
 	File::Copy::copy($file, "$path/pool/$sha");
