@@ -100,7 +100,12 @@ sub arki
 		if (-f $file) 
 			{ print $Lfh "YAY $i\n"; }
 		else 
-			{ print $Lfh "FAIL $i\n"; print $Ffh "$i\n"; }
+		{ 
+			unlink($mfile);
+			print $Lfh "FAIL $i\n";  
+			print $Ffh "$i\n";
+			next;
+		}
 	}
 	XS($file) && unlink($file);
 	XS($mfile) && unlink($mfile);
