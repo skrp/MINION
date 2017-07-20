@@ -48,27 +48,31 @@ my $born = gmtime();
 my $btime = TIME(); print $Lfh "HELLOWORLD $btime\n";
 
 # WORK ################################################
-open(my $qfh, '<', $que) or die "cant open que\n";
-my @QUE = readline $qfh; chomp @QUE;
-print "$$ $dump $path\n";
-
-my $ttl = @QUE; 
-print $Lfh "ttl $ttl\n"; 
-
-foreach my $i (@QUE)
+while (1)
 {
-	if (-e $SUICIDE)
-    		{ SUICIDE(); }
-	if (-e $SLEEP)
-    		{ SLEEP(); }
-	sleep 5;
-	print $Lfh "started $i\n";
-	arki($i);
-	$count++;
-	if ($count % 100 == 0)
-	{ 
-		print $Lfh "$$ $count : $ttl\n"; 
+	if (-e $que)
+		{ open(my $qfh, '<', $que); }
+	else
+		{ sleep 3600; next; }
+	my @QUE = readline $qfh; chomp @QUE;
 
+	my $ttl = @QUE; 
+	print $Lfh "ttl $ttl\n"; 
+
+	foreach my $i (@QUE)
+	{
+		if (-e $SUICIDE)
+    			{ SUICIDE(); }
+		if (-e $SLEEP)
+ 	   		{ SLEEP(); }
+		sleep 5;
+		print $Lfh "started $i\n";
+		arki($i);
+		$count++;
+		if ($count % 100 == 0)
+		{ 
+			print $Lfh "$$ $count : $ttl\n"; 
+		}
 	}
 }
 my $dtime = TIME(); print $Lfh "FKTHEWRLD $dtime\n";
