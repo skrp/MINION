@@ -34,6 +34,11 @@ my $SUICIDE = "$name"."_SUICIDE";
 mkdir $dump or die "dump FAIL\n";
 open(my $Lfh, '>>', $log);
 $Lfh->autoflush(1);
+
+my $fail = $path.'ARKI_FAIL';
+open(my $Ffh, '>>', $fail);
+$Ffh->autoflush(1);
+
 my $born = gmtime();
 my $btime = TIME(); 
 print $Lfh "HELLOWORLD $btime\n";
@@ -177,7 +182,7 @@ sub arki
 		if (-f $file) 
 			{ print $Lfh "YAY $i\n"; }
 		else 
-			{ print $Lfh "FAIL $i\n"; }
+			{ print $Lfh "FAIL $i\n"; print $Ffh "$i\n"; }
 	}
 	XS($file) && unlink($file);
 	XS($mfile) && unlink($mfile);
