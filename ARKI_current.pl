@@ -37,7 +37,6 @@ $Lfh->autoflush(1);
 my $born = gmtime();
 my $btime = TIME(); 
 print $Lfh "HELLOWORLD $btime\n";
-
 # WORK ################################################
 open(my $qfh, '<', $que) or die "cant open que\n";
 my @QUE = readline $qfh; chomp @QUE;
@@ -152,7 +151,8 @@ sub file_mime_encoding {
 	return $enc;
 }
 sub xssize {
-	my $size = [ stat $_[0] ]->[7];
+	my ($file) = @_;
+	my $size = -s $file;
 	return $size;
 }
 # API ###########################################################
