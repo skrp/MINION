@@ -114,7 +114,6 @@ sub uagent
 sub XS
 {
 	my ($file) = shift;
-	my $magic = File::LibMagic->new();
 	my ($sha) = file_digest($file) or die "couldn't sha $file";
 	File::Copy::copy($file, "$path/pool/$sha");
 	my $cur = "$dump/g/g$sha";
@@ -144,6 +143,7 @@ sub xspath {
 }
 sub file_mime_encoding {
 	my ($file) = @_;
+	my $magic = File::LibMagic->new();
 	my $info = $magic->info_from_filename($file);
 	my $des = $info->{description};
 	$des =~ s#[/ ]#.#g;
