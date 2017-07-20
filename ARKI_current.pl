@@ -3,6 +3,7 @@ use strict; use warnings;
 use File::Path; use File::Copy;
 use Digest::SHA qw(sha256_hex); use File::Find::Rule;
 use File::stat; use List::Util qw(any);
+use File::LibMagic;
 use LWP::UserAgent;
 ######################################################
 # DEMON - daemon summoning scroll
