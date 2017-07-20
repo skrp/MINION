@@ -10,8 +10,7 @@ use File::LibMagic; use LWP::UserAgent;
 
 # INIT ###############################################
 my ($path) = @ARGV;
-if (not defined $que) { die ('NO ARGV1 que_file_name'); }
-if (not defined $path) { die ('NO ARGV2 dir'); }
+if (not defined $path) { die ('NO ARGV1 dir'); }
 if (substr($path, -1) ne "/")
 	{ $path .= '/'; }
 
