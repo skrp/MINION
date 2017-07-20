@@ -126,24 +126,24 @@ sub XS
 	}
 }
 sub file_digest {
-	my ($filename) = @_;
+	my ($file) = @_;
 	my $digester = Digest::SHA->new('sha256');
-	$digester->addfile( $filename, 'b' );
+	$digester->addfile( $file, 'b' );
 	return $digester->hexdigest;
 }
 sub xsname {
-	my ($filename) = @_;
-	$filename =~ s#^.*/##;
-	return $filename;
+	my ($file) = @_;
+	$file =~ s#^.*/##;
+	return $file;
 }
 sub xspath {
-	my ($filename) = @_;
-	$filename =~ s#/#_#g;
-	return $filename; 
+	my ($file) = @_;
+	$file =~ s#/#_#g;
+	return $file; 
 }
 sub file_mime_encoding {
-	my ($filename) = @_;
-	my $info = $magic->info_from_filename($filename);
+	my ($file) = @_;
+	my $info = $magic->info_from_filename($file);
 	my $des = $info->{description};
 	$des =~ s#[/ ]#.#g;
 	$des =~ s/,/_/g;
