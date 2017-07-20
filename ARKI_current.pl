@@ -51,12 +51,10 @@ my $btime = TIME(); print $Lfh "HELLOWORLD $btime\n";
 while (1)
 {
 	unless (-e $que)
-	{
-		sleep 3600; next;
-	}
+		{ sleep 3600; next; }
+		
 	open(my $qfh, '<', $que);
 	my @QUE = readline $qfh; chomp @QUE;
-
 	my $ttl = @QUE; 
 	print $Lfh "ttl $ttl\n"; 
 
