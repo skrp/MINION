@@ -6,8 +6,7 @@ use File::stat; use List::Util qw(any);
 use LWP::UserAgent;
 ######################################################
 # DEMON - daemon summoning scroll
-# first step: https://raw.githubusercontent.com/skrp/UNIX/master/get_archive.org_meta
-# second step : https://raw.githubusercontent.com/skrp/UNIX/master/rm_JSON_archive.org
+
 # INIT ###############################################
 my ($que, $path) = @ARGV;
 if (not defined $que) { die ('NO ARGV1 que'); }
@@ -42,7 +41,7 @@ print $Lfh "HELLOWORLD $btime\n";
 # WORK ################################################
 open(my $qfh, '<', $que) or die "cant open que\n";
 my @QUE = readline $qfh; chomp @QUE;
-print "$$\n";
+print "$$ $dump $path\n";
 
 my $ttl = @QUE; 
 print $Lfh "ttl $ttl\n"; 
@@ -53,19 +52,21 @@ foreach my $i (@QUE)
     		{ SUICIDE(); }
 	if (-e $SLEEP)
     		{ SLEEP(); }
+	sleep 5;
 	print $Lfh "started $i\n";
 	arki($i);
 	$count++;
 	if ($count % 100 == 0)
 	{ 
 		print $Lfh "$$ $count : $ttl\n"; 
-		`XS $dump $path` or die "Fail XS";
-		rmtree($dump);
-		mkdir $dump;
+#		`XS $dump $path` or die "Fail XS";
+#		rmtree($dump);
+#		mkdir $dump;
 	}
 }
 my $dtime = TIME(); print $Lfh "FKTHEWRLD $dtime\n";
 tombstone();
+`XS $dump $path`;
 # SUB ###########################################################
 sub tombstone
 {
@@ -114,7 +115,7 @@ sub uagent
 }
 # API ###########################################################
 sub arki
-{ # archive.org pdf scraper 
+{
 	my ($i) = @_;
 	sleep 1;
 	my $ua = uagent();
