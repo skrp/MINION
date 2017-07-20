@@ -123,7 +123,6 @@ sub XS
 		xspath($file),
 		xssize($file),
 		file_mime_encoding($file);
-	}
 }
 sub file_digest {
 	my ($file) = @_;
