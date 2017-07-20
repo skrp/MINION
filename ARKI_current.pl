@@ -9,8 +9,8 @@ use File::LibMagic; use LWP::UserAgent;
 # DEMON - daemon summoning scroll
 
 # INIT ###############################################
-my ($que, $path) = @ARGV;
-if (not defined $que) { die ('NO ARGV1 que'); }
+my ($path) = @ARGV;
+if (not defined $que) { die ('NO ARGV1 que_file_name'); }
 if (not defined $path) { die ('NO ARGV2 dir'); }
 if (substr($path, -1) ne "/")
 	{ $path .= '/'; }
@@ -26,6 +26,7 @@ my $pid = $embryo->Init() or die "STILLBORN\n";
 chdir('/tmp/');
 
 # PREP ###############################################
+my $que = '/tmp/que_'.$$;
 my $base = 'http://archive.org/download';
 my $name = name();
 my $RATE = 100; 
