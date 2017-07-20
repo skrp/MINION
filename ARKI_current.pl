@@ -133,12 +133,12 @@ sub file_digest {
 }
 sub xsname {
 	my ($file) = @_;
-	$file =~ s#^.*/##;
+	$file =~ s?^.*/??;
 	return $file;
 }
 sub xspath {
 	my ($file) = @_;
-	$file =~ s#/#_#g;
+	$file =~ s?/?_?g;
 	return $file; 
 }
 sub file_mime_encoding {
@@ -146,10 +146,10 @@ sub file_mime_encoding {
 	my $magic = File::LibMagic->new();
 	my $info = $magic->info_from_filename($file);
 	my $des = $info->{description};
-	$des =~ s#[/ ]#.#g;
+	$des =~ s?[/ ]?.?g;
 	$des =~ s/,/_/g;
 	my $md = $info->{mime_type};
-	$md =~ s#[/ ]#.#g;
+	$md =~ s?[/ ]?.?g;
 	my $enc = sprintf("%s %s %s", $des, $md, $info->{encoding}); 
 	return $enc;
 }
