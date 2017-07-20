@@ -78,6 +78,33 @@ while (1)
 }
 my $dtime = TIME(); print $Lfh "FKTHEWRLD $dtime\n";
 tombstone();
+# API ###########################################################
+sub arki
+{
+	my ($i) = @_;
+	sleep 1;
+	my $ua = uagent();
+	my $file = "$dump"."$i.pdf";
+	my $mfile = "$dump"."$i".'_meta.xml';
+	my $url = "$base/$i/$i.pdf";
+	my $murl = "$base/$i/$i".'_meta.xml';	
+	my $resp = $ua->get($url, ':content_file'=>$file); 
+	my $mresp = $ua->get($murl, ':content_file'=>$mfile);
+	if (-f $file) 
+		{ print $Lfh "YAY $i\n"; }
+	else
+	{ 
+		my $eresp = $ua->get("$base/$i", ':content_file'=>"$dump/tmp");
+		my $redo = `grep pdf $dump/tmp | sed 's?</a>.*??' | sed 's/.*>//'`;
+		my $rresp = $ua->get("$base/$i/$redo", ':content_file'=>$file);
+		if (-f $file) 
+			{ print $Lfh "YAY $i\n"; }
+		else 
+			{ print $Lfh "FAIL $i\n"; print $Ffh "$i\n"; }
+	}
+	XS($file) && unlink($file);
+	XS($mfile) && unlink($mfile);
+}
 # SUB ###########################################################
 sub tombstone
 {
@@ -169,31 +196,4 @@ sub xssize {
 	my ($file) = @_;
 	my $size = -s $file;
 	return $size;
-}
-# API ###########################################################
-sub arki
-{
-	my ($i) = @_;
-	sleep 1;
-	my $ua = uagent();
-	my $file = "$dump"."$i.pdf";
-	my $mfile = "$dump"."$i".'_meta.xml';
-	my $url = "$base/$i/$i.pdf";
-	my $murl = "$base/$i/$i".'_meta.xml';	
-	my $resp = $ua->get($url, ':content_file'=>$file); 
-	my $mresp = $ua->get($murl, ':content_file'=>$mfile);
-	if (-f $file) 
-		{ print $Lfh "YAY $i\n"; }
-	else
-	{ 
-		my $eresp = $ua->get("$base/$i", ':content_file'=>"$dump/tmp");
-		my $redo = `grep pdf $dump/tmp | sed 's?</a>.*??' | sed 's/.*>//'`;
-		my $rresp = $ua->get("$base/$i/$redo", ':content_file'=>$file);
-		if (-f $file) 
-			{ print $Lfh "YAY $i\n"; }
-		else 
-			{ print $Lfh "FAIL $i\n"; print $Ffh "$i\n"; }
-	}
-	XS($file) && unlink($file);
-	XS($mfile) && unlink($mfile);
 }
