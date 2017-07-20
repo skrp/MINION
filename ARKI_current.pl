@@ -1,5 +1,6 @@
 #!/usr/local/bin/perl
 use strict; use warnings;
+use Proc::Daemon;
 use File::Path; use File::Copy;
 use Digest::SHA qw(sha256_hex); use File::Find::Rule;
 use File::stat; use List::Util qw(any);
@@ -18,6 +19,10 @@ if (substr($path, -1) ne "/")
 # graveyard/ : tombstone()
 # g/ : XS()
 # pool/ : XS()
+
+# BIRTH ##############################################
+my $embryo = Proc::Daemon->new(work_dir => "/tmp/");
+my $pid = $embryo->Init() or die "STILLBORN\n";
 
 # PREP ###############################################
 my $base = 'http://archive.org/download';
@@ -40,8 +45,8 @@ open(my $Ffh, '>>', $fail);
 $Ffh->autoflush(1);
 
 my $born = gmtime();
-my $btime = TIME(); 
-print $Lfh "HELLOWORLD $btime\n";
+my $btime = TIME(); print $Lfh "HELLOWORLD $btime\n";
+
 # WORK ################################################
 open(my $qfh, '<', $que) or die "cant open que\n";
 my @QUE = readline $qfh; chomp @QUE;
