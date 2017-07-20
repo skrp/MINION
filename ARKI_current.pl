@@ -23,11 +23,11 @@ if (substr($path, -1) ne "/")
 # BIRTH ##############################################
 my $embryo = Proc::Daemon->new(work_dir => "/tmp/");
 my $pid = $embryo->Init() or die "STILLBORN\n";
+chdir('/tmp/');
 
 # PREP ###############################################
 my $base = 'http://archive.org/download';
 my $name = name();
-chdir('/tmp/');
 my $RATE = 100; 
 my $count = 0;
 
