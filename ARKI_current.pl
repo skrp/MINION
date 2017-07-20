@@ -177,7 +177,7 @@ sub arki
 		if (-f $file) 
 			{ print $Lfh "YAY $i\n"; }
 		else 
-			{ print $Lfh "FAIL $i\n"; next; }
+			{ print $Lfh "FAIL $i\n"; }
 	}
 	XS($file) && unlink($file);
 	XS($mfile) && unlink($mfile);
