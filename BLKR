@@ -1,6 +1,9 @@
 ############################
 # BLKR - core engine
-
+# HOST #####################
+# 0.015 sec per block
+# 0.015 * 12,000,000 = 180k sec = 50 hrs
+# NFS ######################
 # .08 sec per block
 # .08 sec * 12,000,000 = 960k sec = 11 days per terabyte
 
