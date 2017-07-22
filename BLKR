@@ -4,6 +4,7 @@
 my $size = 128000;
 # .0035sec * 12,000,000 = 43k sec = 12 hrs per terabyte
 # USB3 8T time: { } 
+# WCPU 30% SIZE 58304K
 #    vs
 # raidz2 time: { }
 # 99999 size ############
