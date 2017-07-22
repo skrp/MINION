@@ -24,7 +24,7 @@ my $pid = $embryo->Init() or die "STILLBORN\n";
 chdir('/tmp/');
 
 # PREP ###############################################
-my $que = $$.'/tmp/que_';
+my $que = '/tmp/que_'.$$;
 my $base = 'http://archive.org/download';
 my $name = name();
 my $RATE = 100; 
