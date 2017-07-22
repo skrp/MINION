@@ -29,6 +29,7 @@ chdir('/tmp/');
 
 # PREP ###############################################
 open(my $Rfh, '>>', 'ROSTER');
+$Rfh->autoflush(1);
 print $Rfh "$$\n";
 
 my $que = '/tmp/que_'.$$;
