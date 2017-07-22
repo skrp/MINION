@@ -19,8 +19,8 @@ if (substr($path, -1) ne "/")
 # pool/ : XS()
 
 # BIRTH ##############################################
-my $embryo = Proc::Daemon->new(work_dir => '/tmp/');
-my $pid = $embryo->Init() or die "STILLBORN\n";
+my $daemon = Proc::Daemon->new(work_dir => '/tmp/');
+$daemon->Init() or die "STILLBORN\n";
 chdir('/tmp/');
 
 # PREP ###############################################
