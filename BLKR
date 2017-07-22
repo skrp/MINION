@@ -1,3 +1,9 @@
+############################
+# BLKR - core engine
+
+# .08 sec per block
+# .08 sec * 12,000,000 = 960k sec = 11 days per terabyte
+
 sub blkr
 {
 	my ($i) = @_;
@@ -23,4 +29,11 @@ sub blkr
 
 	my $elapsed = gettimeofday()-$istart;
 	print "$i : $cunt : $elapsed \n";	
+}
+sub key
+{
+	my ($i, $bsha) = @_;
+	my $kpath = $path.'key/'.$i;
+	open(my $kfh, '>>', "$kpath");
+	print $kfh "$bsha\n";
 }
