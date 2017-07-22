@@ -3,7 +3,7 @@
 # zfs blk size 128k #####################
 my $size = 128000;
 # .0035sec * 12,000,000 = 43k sec = 12 hrs per terabyte
-# USB3 8T time: { } 
+# USB3 8T time: { real-26.10m, user-5.16m, sys-3.29m } 
 # WCPU 30% SIZE 58304K
 #    vs
 # raidz2 time: { }
