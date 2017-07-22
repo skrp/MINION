@@ -6,7 +6,7 @@ my $size = 128000;
 # USB3 8T time: { real-26.10m, user-5.16m, sys-3.29m } 
 # WCPU 30% SIZE 58304K
 #    vs
-# raidz2 time: { }
+# raidz2 time: { real-134.31m, user-5.18m, sys-3.28m }
 # WCPU 6% SIZE 58304K
 # 99999 size ############
 # 0.015 sec per block
