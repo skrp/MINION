@@ -21,8 +21,9 @@ if (substr($path, -1) ne "/")
 # BIRTH ##############################################
 my $embryo = Proc::Daemon->new(
   work_dir => '/tmp/',
-  child_STDOUT => "+>>$log",
-  child_STDERR => "+>>$log",
+  child_STDIN => '/dev/null',
+  child_STDOUT => '/dev/null',
+  child_STDERR => '/dev/null'
 );
 my $pid = $embryo->Init() or die "STILLBORN\n";
 chdir('/tmp/');
