@@ -3,6 +3,11 @@
 #   c[]             ---skrp of MKRX
 # scraping work: over-time & many iterations & chronic
 # https://ibin.co/38j1IoadTmGz.jpg
+
+# MINIONS ########################
+These are examples of diverse scraping methods I have employed.
+I treat each target individually to maximize efficency/delays for the servers & the scraper.
+
 # DEMON KEYS #####################
 dump     # dump dir
 DEBUG    # stderr
